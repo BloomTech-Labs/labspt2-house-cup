@@ -48,14 +48,14 @@ class App extends Component {
    
     const { silentAuth } = auth;
     if (localStorage.getItem('isLoggedIn') === 'true') {
-      silentAuth();
+         silentAuth();
     }
     
     axios.get('http://localhost:5000/users')
       .then(response => {
         // console.log(response.data.data.allUsers)
         this.setState({userData: response.data.data.allUsers})
-        console.log('success', response);
+        // console.log('success', response);
       })
       .catch(err => console.log(err));
 
@@ -98,9 +98,13 @@ class App extends Component {
                         houseList={this.state.testData}
                         /> 
           }/>
-       <Route   exact 
+        <Route  exact 
                 path = '/admin/schools/:id'
                 render={(props) => <Houses {...props} /> }/>
+        <Route  exact 
+                path = '/admin/schools/:id/update' 
+                render={(props) => <ModifySchoolPage {...props} />} />    
+
         <SecuredRoute exact 
                       path = '/admin/billing'
                       component={BillingPage}/>
@@ -116,8 +120,6 @@ class App extends Component {
                       path = '/admin/analytics' 
                       HouseData={this.state.houseData}
                       component={AdminAnalyticsPage} />
-
-
       </div>
     );
   }

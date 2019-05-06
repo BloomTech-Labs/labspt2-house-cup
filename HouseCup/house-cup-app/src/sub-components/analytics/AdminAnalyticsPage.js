@@ -7,18 +7,40 @@ import auth from '../../utils/Auth.js';
 import dummyData from './dummy.js';
 import axios from 'axios';
 
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }
+];
+
 export default class AdminAnalyticsPage extends Component {
   constructor(props) {
     super(props);
-     this.state = dummyData
+     this.state = {
+        graphData: dummyData,
+        selectedOption: null,
+        data: null     
+                    
+      }
   }
-  
-  renderGraphs = () => {
+
+handleChange = (selectedOption) => {
+    const year = selectedOption["label"]
+    const yearData = this.state.graphData.data[year]
+    this.setState({ 
+        selectedOption: selectedOption,
+        data: yearData
+       });
+    console.log(`Option selected:`, selectedOption["label"]);
+}
+
+renderGraphs = () => {
     this.setState({
       options: this.state.options,
-      date: [...this.state.data]
+      data: [...this.state.data]
     })
-  }
+}
+
 componentDidMount() {
   window.addEventListener('resize', this.renderGraphs);
   const {getAccessToken} = auth;
@@ -37,20 +59,23 @@ componentDidMount() {
    window.addEventListener('resize', this.renderGraphs);
  }
   render() {
-    
+      const { selectedOption } = this.state;
     return (
       <div className="analytics">
         <SideMenu />
         <div className="graphs">
            <form className="select" onSubmit={this.handleSubmit}>
-             <Select options={this.state.years} />      
+                <Select value={selectedOption}
+                        defaultValue={{ label: "2019", value: "2019" }}
+                        onChange={this.handleChange}
+                        options={this.state.graphData.years} />     
             </form>
            
           <Graph>
             <Chart 
                 chartType="LineChart"
                 data={this.state.data}
-                options={this.state.options}
+                options={this.state.graphData.options}
                 loader={<div>Loading Chart</div>}
                 className="chart"
                 max-width={"100%"}
