@@ -20,7 +20,7 @@ import Callback from './Callback.js';
 import SecuredRoute from './sub-components/SecuredRoute';
 //Auth0.js
 // import NavBar from './sub-components/NavBar';
-import BillingPage from './sub-components/billingPage';
+import BillingPage from './sub-components/BillingPage';
 //About.js
 import About from './sub-components/About';
 import schoolsTestData from './mock data/schools';
