@@ -2,14 +2,28 @@ import React, { Component } from 'react';
 import SideMenu from './SideMenu';
 
 class Settings extends Component {
-  constructor(props) {
-		 super(props);
-		 this.state ={
-				email:'',
-				password: '',
-				newPassword:'',
+		constructor(props) {
+			super(props);
+			this.state ={
+					email:'',
+					password: '',
+					newPassword:'',
+			};
+		}
 
-		 };
+	componentDidMount() {
+
+
+	}
+
+	handleInput = (event) => {
+     this.setState({
+			   [event.target.name]: event.target.value
+		 })
+	}
+	handleSubmit = (event) => {
+			event.preventDefault();
+			
 	}
 	render() {
 		return (
