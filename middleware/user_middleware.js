@@ -1,6 +1,7 @@
 const { User } = require('../Models');
 const bcrypt = require('bcryptjs');
 const { generateToken } = require('../auth/jwt');
+const  request = require("request");
 
 function inputValidation(req, res, next) {
   const { firstName, lastName, email, password } = req.body;
@@ -122,6 +123,27 @@ function provideAccess(req, res, next) {
   //still need to implement using passport.js
 }
 
+function getTokenFromAuth0(req,res,next) {
+  const options = { 
+      method: 'POST',
+      url: 'https://venky-yagatilee.auth0.com/oauth/token',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      form: {
+            grant_type: 'client_credentials',
+            client_id: '46Ngw5RelPCvdaCoKrqPvIWyvgFQBqvx',
+            client_secret: 'S6yQ3xtx-DYjRLPBt20MWzHG6wEUFXHZGUtSf__mAfR5fD80r4qgT134CO5Ocqu3',
+            audience: 'https://venky-yagatilee.auth0.com/api/v2/'
+        } 
+   };
+
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+          console.log(`Line 141`, body);
+         
+        });
+        next();
+}
+
 module.exports = {
   inputValidation,
   isUserRegistered,
@@ -130,4 +152,5 @@ module.exports = {
   findUser,
   checkPassword,
   provideAccess,
+  getTokenFromAuth0
   };

@@ -42,6 +42,12 @@ renderGraphs = () => {
 }
 
 componentDidMount() {
+  const length = this.state.graphData.years.length;
+  const year = this.state.graphData.years[length-1]
+  this.setState({
+     selectedOption: this.state.graphData.years[length-1],
+     data: this.state.graphData.data[year.label]
+  })
   window.addEventListener('resize', this.renderGraphs);
   const {getAccessToken} = auth;
   const headers = {Authorization : `Bearer ${getAccessToken()}`}
@@ -60,14 +66,16 @@ componentDidMount() {
  }
   render() {
       const { selectedOption } = this.state;
+      const length = this.state.graphData.years.length;
     return (
       <div className="analytics">
         <SideMenu />
         <div className="graphs">
            <form className="select" onSubmit={this.handleSubmit}>
                 <Select value={selectedOption}
-                        defaultValue={{ label: "2019", value: "2019" }}
-                        onChange={this.handleChange}
+                        name= "selectedOption"
+                        defaultValue={this.state.graphData.years[length-1]}
+                        onChange={(value) => this.handleChange(value)}
                         options={this.state.graphData.years} />     
             </form>
            
@@ -76,7 +84,7 @@ componentDidMount() {
                 chartType="LineChart"
                 data={this.state.data}
                 options={this.state.graphData.options}
-                loader={<div>Loading Chart</div>}
+                loader={<div className='loading'>...Loading Chart</div>}
                 className="chart"
                 max-width={"100%"}
                 height={"480px"}

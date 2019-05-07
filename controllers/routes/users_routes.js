@@ -10,11 +10,14 @@ const {
   findUser,
   checkPassword,
   provideAccess,
+  getTokenFromAuth0,
 } = require("../../middleware/user_middleware");
 const {jwtCheck} = require('../../auth/Express-jwt');
 
 
+
 router.get("/", (req, res, next) => {
+  getTokenFromAuth0();
   User.findAll({
     include: [{ model: School, include: [House]}],
     attributes: ["name", "email"]
@@ -61,7 +64,7 @@ router.get("/:id", (req, res) => {
 router.post( "/register",
   jwtCheck,
   (req, res) => {
-    console.log(`Line 64`, req.user.sub)
+    console.log(`Line 64`, req.user)
     req.body.user_id = req.user.sub;    
     const userId = req.body.user_id;
     const userObj = req.body;
@@ -95,6 +98,9 @@ router.post( "/register",
     });     
   }
 );
+
+// Update user details
+
 
 
 

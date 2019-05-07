@@ -10,7 +10,7 @@ class Auth {
         redirectUri: 'http://localhost:3000/callback',
         audience: 'https://labspt2-housecup.herokuapp.com/',
         responseType: 'token id_token',
-        scope: 'openid profile email'
+        scope: 'openid profile'
       }); 
         this.getProfile = this.getProfile.bind(this);
         this.getIdToken = this.getIdToken.bind(this);

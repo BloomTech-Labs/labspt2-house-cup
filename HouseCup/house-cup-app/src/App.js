@@ -108,14 +108,12 @@ class App extends Component {
         <SecuredRoute exact 
                       path = '/admin/billing'
                       component={BillingPage}/>
-        <SecuredRoute exact 
-                      path = '/admin/settings' 
-                      render={(props) => <SettingsPage/>}/>
+        
         <SecuredRoute path='/about'
                       component={About} />
         <SecuredRoute exact 
                       path = '/admin/settings'
-                      render={(props) => <SettingsPage/>}/>
+                      component={SettingsPage}/>
         <SecuredRoute exact 
                       path = '/admin/analytics' 
                       HouseData={this.state.houseData}
