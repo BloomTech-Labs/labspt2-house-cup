@@ -1,4 +1,3 @@
-@import url("//use.fontawesome.com/releases/v5.6.1/css/all.css'");
 html {
   font-size: 62.5%;
   /* Now 10px = 1rem! */
@@ -10,7 +9,7 @@ button {
   padding: 0;
   font: inherit;
   cursor: pointer;
-  outline: inherit;
+  outline: none;
 }
 @font-face {
   font-family: 'BigJohnPRO-Bold';
@@ -157,6 +156,7 @@ html {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  margin-top: 40px;
 }
 .landing-page .landing-page-block-3 .schools-list .school-box .school {
   margin-top: 0;
@@ -585,25 +585,46 @@ html {
   width: 100%;
   font-family: 'BigJohnPRO-Regular';
 }
+.schools-page .schools-container .schools-page-header {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.schools-page .schools-container .schools-page-header .schools-page-welcome {
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: #DA2E05;
+  font-family: 'BigJohnPRO-Bold';
+  margin-bottom: 60px;
+}
 .schools-page .schools-container .schools-list {
-  width: 100%;
-  min-height: 100vh;
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
   margin-top: 80px;
   justify-content: space-evenly;
 }
 .schools-page .schools-container .schools-list .school-card {
   width: 260px;
   height: 360px;
+  color: #F1EFEA;
   border-radius: 8px;
-  font-size: 2.8rem;
+  font-size: 2.6rem;
+  background-color: #5271c2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px;
+}
+.schools-page .schools-container .schools-list .school-card .menu-button {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
-  color: #F1EFEA;
-  background-color: #5271c2;
+}
+.schools-page .schools-container .schools-list .school-card .from {
+  font-size: 2.5rem;
 }
 .schools-page .schools-container .new-school-collapse {
   display: flex;
@@ -618,6 +639,7 @@ html {
   opacity: 0.8;
   transition-duration: 0.2s;
   margin: 0 auto;
+  cursor: pointer;
 }
 .schools-page .schools-container .new-school-collapse:hover {
   opacity: 1;
@@ -1017,135 +1039,3 @@ html {
     padding: 0px;
   }
 }
-
-
-/* *****************
-Setting page styles -- Below this line
-******************   */
-@import "https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900";
-
-.settings {
-  align-items: center;
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  width: 100vw;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.settings h1 {
-    color:yellow;
-    margin-bottom: 60px;
-    font-family: cursive;
-}
-.Modal {
-  background: #3E363F;
-  border-radius: 2px;
-  padding: 20px;
-  width: 320px;
-  height:400px;
-}
-
-.Input {
-  display: flex;
-  flex-direction: row-reverse;
-  border-bottom: 1.5px solid #ffff00ec;
-  padding-bottom: 18px;
-  margin-bottom: 35px;
-}
-.Input  {
-  outline: none;
-  border: 0;
-  color:red;
-  background: transparent;
-  font-family: "Lato", sans-serif;
-  flex: 1 0 auto;
-  font-size: 16px;
-  font-weight: 800;
-}
-.Input:focus ~ label {
-  opacity: 1;
-}
-.Input label {
-  font-size: 13px;
-  font: '900 17px "Font Awesome 5 Free"';
-  opacity: .1;
-  transition: opacity .5s ease;
-}
-.Input label::before {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #FFFCE8;  
-  height: 30px;  
-  width: 30px;
-  
-   
-}
-
-
-input[type='text'] ~ label::before {
-  
-  font-family: "Font Awesome 5 Free";
-  content: "\f007";
-  font-weight: 900;
-}
- input[type='email'] ~ label::before {
- 
-  font-family: "Font Awesome 5 Free";
-  content: "\f1fa";
-  font-weight: 900;
-}
- input[type='password'] ~ label::before {
-  
-  font-family: "Font Awesome 5 Free";
-  content: "\f023";
-  font-weight: 900;
-}
-
-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: #DD403A;
-  border: 0;
-  border-radius: 3px;
-  color: white;
-  font-family: "Lato", sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  text-transform: uppercase;  
-  margin-top: 20px;
-  outline: none;
-  padding: 18px 9px 18px 11px;  
-  
-}
-
-button:hover {
-  transform: scale(1.02);
-}
-button:active {
-  transform: scale(0.99);
-}
-
-/* .example-enter {
-  margin-top: 30px;
-  opacity: .01;
-}
-.example-enter.example-enter-active {
-  margin-top: 0px;
-  opacity: 1;
-  transition: opacity .5s ease, margin .5s ease;
-}
-
-.example-leave {
-  margin-top: 0px;
-  opacity: 1;
-}
-.example-leave.example-leave-active {
-  margin-top: -30px;
-  opacity: .01;
-  transition: opacity .3s ease, margin .5s ease;
-} */

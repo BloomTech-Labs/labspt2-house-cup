@@ -48,34 +48,34 @@ class SchoolsPage extends Component {
 
 
 
- addSchool = (e) => {
-            e.preventDefault();
-            const { getAccessToken } = auth;
-            const newSchool = {
-                name:this.state.newSchoolName,
-                city:this.state.newSchoolCity
-            }
-           
-            if(newSchool) {
-            const headers = { Authorization: `Bearer ${getAccessToken()}` };    
-            axios.post('http://localhost:5000/schools', newSchool, {headers} )
-                 .then( school => {
-                        let newSchool = school.data.data.newSchool;
-                        this.setState({
-                            schoolsList: [...this.state.schoolsList, newSchool]
-                        })
-                     }).catch(err => {
-                        console.log(err);
-                    });
-          } else {
-              console.log(`Please add newSchool`);
-          }
-            console.log(`school ${this.state.newSchoolName} added!`);
-           
-            this.setState({
-                newSchoolName:'',
-                newSchoolCity: ''
-            });
+    addSchool = (e) => {
+        e.preventDefault();
+        const { getAccessToken } = auth;
+        const newSchool = {
+            name: this.state.newSchoolName,
+            city: this.state.newSchoolCity
+        }
+
+        if (newSchool) {
+            const headers = { Authorization: `Bearer ${getAccessToken()}` };
+            axios.post('http://localhost:5000/schools', newSchool, { headers })
+                .then(school => {
+                    let newSchool = school.data.data.newSchool;
+                    this.setState({
+                        schoolsList: [...this.state.schoolsList, newSchool]
+                    })
+                }).catch(err => {
+                    console.log(err);
+                });
+        } else {
+            console.log(`Please add newSchool`);
+        }
+        console.log(`school ${this.state.newSchoolName} added!`);
+
+        this.setState({
+            newSchoolName: '',
+            newSchoolCity: ''
+        });
     }
 
     handleSchoolInput = (e) => {
@@ -93,27 +93,32 @@ class SchoolsPage extends Component {
             <div className='schools-page'>
                 <SideMenu {...this.props} />
                 <div className='schools-container'>
-                    <div className={ this.state.newSchool ? 'new-school new-school-expand' : 'new-school new-school-collapse'} onClick={this.newSchoolToggle.bind(this)}>
-                        <h2 className='new-school-txt'>Add New School</h2>
-                        <div className='add-school-inputs'>
-                            <form 
-                            className={this.state.newSchool ? 'new-school-form' : 'hidden'}
-                            onSubmit={this.addSchool} 
-                            onClick={event => event.stopPropagation()}>
-                                <input
-                                    className='new-school-input'
-                                    placeholder='name' name='newSchoolName'
-                                    value={this.state.newSchoolName}
-                                    onChange={this.handleSchoolInput} />
-                                <input
-                                    className='new-school-input'
-                                    placeholder='city'
-                                    name='newSchoolCity'
-                                    value={this.state.newSchoolCity}
-                                    onChange={this.handleSchoolInput}></input>
-                                {/* <input className='schoolDescription' placeholder='description' name='newSchoolDescription' onChange={this.handleSchoolInput}></input> */}
-                                <button className='new-school-button'>+</button>
-                            </form>
+                    <div className='schools-page-header'>
+                        <div>
+                            <h2 className='schools-page-welcome'>Welcome to your schools admin page</h2>
+                        </div>
+                        <div className={this.state.newSchool ? 'new-school new-school-expand' : 'new-school new-school-collapse'} onClick={this.newSchoolToggle.bind(this)}>
+                            <h2 className='new-school-txt'>Add New School</h2>
+                            <div className='add-school-inputs'>
+                                <form
+                                    className={this.state.newSchool ? 'new-school-form' : 'hidden'}
+                                    onSubmit={this.addSchool}
+                                    onClick={event => event.stopPropagation()}>
+                                    <input
+                                        className='new-school-input'
+                                        placeholder='name' name='newSchoolName'
+                                        value={this.state.newSchoolName}
+                                        onChange={this.handleSchoolInput} />
+                                    <input
+                                        className='new-school-input'
+                                        placeholder='city'
+                                        name='newSchoolCity'
+                                        value={this.state.newSchoolCity}
+                                        onChange={this.handleSchoolInput}></input>
+                                    {/* <input className='schoolDescription' placeholder='description' name='newSchoolDescription' onChange={this.handleSchoolInput}></input> */}
+                                    <button className='new-school-button'>+</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div className='schools-list'>
@@ -121,14 +126,10 @@ class SchoolsPage extends Component {
                             return (
                                 <div className='school-card'>
                                     <NavLink to={`/admin/schools/${school.id}`} className='menu-button' activeClassName="activeMenu" style={{ textDecoration: "none", color: "inherit" }}>
-                                        <h2 className='school-name'>{school.name}</h2>
-                                        <h4 className='school-name'>{school.city}</h4>
+                                        <h2>{school.name}</h2>
+                                        <h2 className='from'>from</h2>
+                                        <h2>{school.city}</h2>
                                     </NavLink>
-                                    <button>
-                                        <NavLink to={`/admin/schools/${school.id}/update`}>
-                                            Update:
-                                        </NavLink>
-                                    </button>
                                 </div>
                             )
                         })}
