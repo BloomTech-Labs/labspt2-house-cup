@@ -354,10 +354,29 @@ html {
   font-family: 'BigJohnPRO-Regular';
   font-size: 2.4rem;
 }
-.admin-main-page {
+.houses-page {
   display: flex;
 }
-.admin-main-page .new-house-collapse {
+.houses-page .houses-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Lato';
+  width: 80%;
+}
+.houses-page .houses-container .houses-page-header {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.houses-page .houses-container .houses-page-header .houses-page-welcome {
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: #DA2E05;
+  font-family: 'BigJohnPRO-Bold';
+  margin-bottom: 60px;
+}
+.houses-page .houses-container .new-house-collapse {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -371,10 +390,10 @@ html {
   transition-duration: 0.2s;
   margin: 0 auto;
 }
-.admin-main-page .new-house-collapse:hover {
+.houses-page .houses-container .new-house-collapse:hover {
   opacity: 1;
 }
-.admin-main-page .new-house-expand {
+.houses-page .houses-container .new-house-expand {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -387,18 +406,18 @@ html {
   font-size: 1.3rem;
   transition-duration: 0.2s;
 }
-.admin-main-page .new-house-expand .new-house-txt {
+.houses-page .houses-container .new-house-expand .new-house-txt {
   margin: 0 27px;
 }
-.admin-main-page .new-house-expand .add-house-inputs {
+.houses-page .houses-container .new-house-expand .add-house-inputs {
   width: 70%;
 }
-.admin-main-page .new-house-expand .add-house-inputs .new-house-form {
+.houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-.admin-main-page .new-house-expand .add-house-inputs .new-house-form .new-house-input {
+.houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .new-house-input {
   color: white;
   height: 30px;
   width: 40%;
@@ -410,13 +429,13 @@ html {
   padding: 0 10px;
   font-size: 1.5rem;
 }
-.admin-main-page .new-house-expand .add-house-inputs .new-house-form .new-house-input:focus {
+.houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .new-house-input:focus {
   outline: none;
 }
-.admin-main-page .new-house-expand .add-house-inputs .new-house-form input::placeholder {
+.houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form input::placeholder {
   color: #D0CAAD;
 }
-.admin-main-page .new-house-expand .add-house-inputs .new-house-form .new-house-button {
+.houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .new-house-button {
   width: 28px;
   height: 28px;
   display: flex;
@@ -428,34 +447,34 @@ html {
   border-radius: 100%;
   padding: none;
 }
-.admin-main-page .hidden {
+.houses-page .houses-container .hidden {
   display: none;
 }
-.admin-main-page .housecard-container {
-  font-family: 'Lato';
-  min-height: 100vh;
+.houses-page .houses-container .houses-list {
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
   margin-top: 80px;
   justify-content: space-evenly;
 }
-.admin-main-page .housecard-container .housecard {
+.houses-page .houses-container .houses-list .housecard {
   cursor: pointer;
   background-color: transparent;
   width: 260px;
   height: 360px;
   perspective: 1000px;
+  margin: 40px;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner {
+.houses-page .houses-container .houses-list .housecard .housecard-inner {
   position: relative;
-  width: 250px;
-  height: 350px;
+  width: 260px;
+  height: 360px;
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-front,
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-front,
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back {
   color: white;
   position: absolute;
   width: 100%;
@@ -464,7 +483,7 @@ html {
   border-radius: 8px;
   box-shadow: 10px 10px 15px #d0caad;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .point-total {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .point-total {
   font-size: 8rem;
   margin: auto;
   padding-top: 80px;
@@ -477,41 +496,41 @@ html {
   /*here flat shadow*/
   text-shadow: 10px 10px 15px #5a5a5a, 0 -2px 1px #fff;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .points-txt {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .points-txt {
   font-size: 2.8rem;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-front {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-front {
   z-index: 2;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-front .house-name {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-front .house-name {
   font-size: 3rem;
   height: 40px;
   margin-top: 40px;
   margin-bottom: 0;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner #housecard-front-1 {
+.houses-page .houses-container .houses-list .housecard .housecard-inner #housecard-front-1 {
   background-color: #DA2E05;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner #housecard-front-2 {
+.houses-page .houses-container .houses-list .housecard .housecard-inner #housecard-front-2 {
   background-color: #094DA8;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner #housecard-front-3 {
+.houses-page .houses-container .houses-list .housecard .housecard-inner #housecard-front-3 {
   background-color: #025211;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner #housecard-front-4 {
+.houses-page .houses-container .houses-list .housecard .housecard-inner #housecard-front-4 {
   background-color: #ECA00D;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back {
   transform: rotateY(180deg);
   background-color: #5271c2;
   cursor: initial;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area {
   height: 130px;
   display: flex;
   flex-direction: column;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area .choose {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area .choose {
   text-align: left;
   padding-left: 19px;
   font-size: 1.6rem;
@@ -519,15 +538,15 @@ html {
   margin-top: 10px;
   margin-bottom: 6px;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-1,
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-2 {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-1,
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-2 {
   margin-bottom: 8px;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-1 .increment-number,
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-2 .increment-number {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-1 .increment-number,
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-2 .increment-number {
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -539,21 +558,21 @@ html {
   border-radius: 2px;
   transition-duration: 0.2s;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-1 .increment-number:hover,
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-2 .increment-number:hover {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-1 .increment-number:hover,
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-2 .increment-number:hover {
   background-color: white;
   color: #5271c2;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-1 .active-number,
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-2 .active-number {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-1 .active-number,
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area .increment-number-container .row-2 .active-number {
   background-color: white;
   color: #5271c2;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area .points-button-container {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area .points-button-container {
   display: flex;
   justify-content: space-between;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area .points-button-container .points-button {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area .points-button-container .points-button {
   margin: 0 19px;
   background-color: #F1EFEA;
   color: #5271c2;
@@ -568,22 +587,24 @@ html {
   z-index: 1;
   transition-duration: 0.2s;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-increment-area .points-button-container .points-button:hover {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-increment-area .points-button-container .points-button:hover {
   background-color: white;
 }
-.admin-main-page .housecard-container .housecard .housecard-inner .housecard-back .point-total {
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .point-total {
   padding-top: 30px;
   cursor: default;
   width: 100%;
 }
-.admin-main-page .housecard-container .flip .housecard-inner {
+.houses-page .houses-container .houses-list .flip .housecard-inner {
   transform: rotateY(180deg);
+}
+.schools-page {
+  display: flex;
 }
 .schools-page .schools-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  font-family: 'BigJohnPRO-Regular';
+  font-family: 'Lato';
 }
 .schools-page .schools-container .schools-page-header {
   padding: 20px;
@@ -605,7 +626,8 @@ html {
   margin-top: 80px;
   justify-content: space-evenly;
 }
-.schools-page .schools-container .schools-list .school-card {
+.schools-page .schools-container .schools-list .menu-button .school-card {
+  flex-direction: column;
   width: 260px;
   height: 360px;
   color: #F1EFEA;
@@ -617,13 +639,7 @@ html {
   align-items: center;
   margin: 40px;
 }
-.schools-page .schools-container .schools-list .school-card .menu-button {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-}
-.schools-page .schools-container .schools-list .school-card .from {
+.schools-page .schools-container .schools-list .menu-button .school-card .from {
   font-size: 2.5rem;
 }
 .schools-page .schools-container .new-school-collapse {
@@ -983,12 +999,6 @@ html {
   .admin-main-page .housecard-container .housecards {
     margin: auto;
   }
-}
-/*SchoolsPage (C.Juelfs)*/
-.schools-page {
-  height: inherit;
-  display: flex;
-  flex-direction: row;
 }
 .schools-page .side-menu {
   display: flex;

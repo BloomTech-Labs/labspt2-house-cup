@@ -15,17 +15,14 @@ class SchoolsPage extends Component {
             houseList: [],
             newSchool: false,
             newSchoolName: '',
-            newSchoolCity: '',
-            newSchoolDescription: '',
+            newSchoolCity: ''
         }
     }
     componentDidMount() {
         axios.get('http://localhost:5000/schools')
             .then(response => {
                 if (response) {
-                    // console.log(response.data.data.schools)
                     this.setState({ schoolsList: response.data.data.schools })
-                    // console.log(`Line 30`,this.state.schoolsList);
                 } else {
                     console.log(`There is no response from the server`);
                 }
@@ -33,20 +30,6 @@ class SchoolsPage extends Component {
             .catch(err => console.log(err))
 
     }
-    // addUser = e => {
-    //     axios.post('http://localhost:5000/users/register', {
-    //         email: this.state.authProfile.email,
-    //         password: this.state.authPassword,
-    //     })
-    //         .then(response => {
-    //             console.log(response);
-    //             // this.setState({
-    //             //     schoolsList: response.data.data
-    //             // })
-    //         })
-    // }
-
-
 
     addSchool = (e) => {
         e.preventDefault();
@@ -124,13 +107,13 @@ class SchoolsPage extends Component {
                     <div className='schools-list'>
                         {this.state.schoolsList.map((school) => {
                             return (
-                                <div className='school-card'>
-                                    <NavLink to={`/admin/schools/${school.id}`} className='menu-button' activeClassName="activeMenu" style={{ textDecoration: "none", color: "inherit" }}>
+                                <NavLink to={`/admin/schools/${school.id}`} className='menu-button' activeClassName="activeMenu" style={{ textDecoration: "none", color: "inherit" }}>
+                                    <div className='school-card'>
                                         <h2>{school.name}</h2>
                                         <h2 className='from'>from</h2>
                                         <h2>{school.city}</h2>
-                                    </NavLink>
-                                </div>
+                                    </div>
+                                </NavLink>
                             )
                         })}
                     </div>

@@ -197,6 +197,7 @@ html {
                 justify-content: space-between;
                 align-items: center;
                 margin-top: 40px;
+
                 .school {
                     margin-top: 0;
                     font-family: 'BigJohnPRO-Bold';
@@ -433,276 +434,299 @@ html {
     }
 }
 
-.admin-main-page {
+.houses-page {
     display: flex;
 
-    .new-house-collapse {
+    .houses-container {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: @theme-color-tomato;
-        height: 55px;
-        width: 205px;
-        border-radius: 100px;
-        color: @theme-color-white;
-        font-size: 1.3rem;
-        opacity: 0.8;
-        transition-duration: 0.2s;
-        margin: 0 auto;
+        flex-direction: column;
+        font-family: 'Lato';
+        width: 80%;
 
-        &:hover {
-            opacity: 1;
-        }
-    }
+        .houses-page-header {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-    .new-house-expand {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        margin: 0 auto;
-
-        background-color: @theme-color-tomato;
-        height: 55px;
-        width: 870px;
-        border-radius: 100px;
-        color: @theme-color-white;
-        font-size: 1.3rem;
-        transition-duration: 0.2s;
-
-        .new-house-txt {
-            margin: 0 27px;
+            .houses-page-welcome {
+                font-size: 3.5rem;
+                font-weight: 400;
+                color: @theme-color-tomato;
+                font-family: 'BigJohnPRO-Bold';
+                margin-bottom: 60px;
+            }
         }
 
-        .add-house-inputs {
-            width: 70%;
+        .new-house-collapse {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: @theme-color-tomato;
+            height: 55px;
+            width: 205px;
+            border-radius: 100px;
+            color: @theme-color-white;
+            font-size: 1.3rem;
+            opacity: 0.8;
+            transition-duration: 0.2s;
+            margin: 0 auto;
 
-            .new-house-form {
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
+            &:hover {
+                opacity: 1;
+            }
+        }
 
-                .new-house-input {
-                    color: white;
-                    height: 30px;
-                    width: 40%;
-                    margin-bottom: 5px;
-                    margin-left: 20px;
-                    background-color: transparent;
-                    border: none;
-                    border-bottom: 1px solid white;
-                    padding: 0 10px;
-                    font-size: 1.5rem;
+        .new-house-expand {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 0 auto;
 
-                    &:focus {
-                        outline: none;
-                    }
-                }
+            background-color: @theme-color-tomato;
+            height: 55px;
+            width: 870px;
+            border-radius: 100px;
+            color: @theme-color-white;
+            font-size: 1.3rem;
+            transition-duration: 0.2s;
 
-                input::placeholder {
-                    color: @theme-color-beige;
-                }
+            .new-house-txt {
+                margin: 0 27px;
+            }
 
-                .new-house-button {
-                    width: 28px;
-                    height: 28px;
+            .add-house-inputs {
+                width: 70%;
+
+                .new-house-form {
                     display: flex;
-                    margin-left: 20px;
-                    justify-content: center;
+                    justify-content: space-around;
                     align-items: center;
-                    font-size: 2rem;
-                    background-color: @theme-color-yellow;
-                    border-radius: 100%;
-                    padding: none;
+
+                    .new-house-input {
+                        color: white;
+                        height: 30px;
+                        width: 40%;
+                        margin-bottom: 5px;
+                        margin-left: 20px;
+                        background-color: transparent;
+                        border: none;
+                        border-bottom: 1px solid white;
+                        padding: 0 10px;
+                        font-size: 1.5rem;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    input::placeholder {
+                        color: @theme-color-beige;
+                    }
+
+                    .new-house-button {
+                        width: 28px;
+                        height: 28px;
+                        display: flex;
+                        margin-left: 20px;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 2rem;
+                        background-color: @theme-color-yellow;
+                        border-radius: 100%;
+                        padding: none;
+                    }
                 }
             }
         }
-    }
 
-    .hidden {
-        display: none;
-    }
+        .hidden {
+            display: none;
+        }
 
-    .housecard-container {
-        font-family: 'Lato';
-        min-height: 100vh;
-        display: flex;
-        align-items: flex-start;
-        margin-top: 80px;
-        justify-content: space-evenly;
+        .houses-list {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-top: 80px;
+            justify-content: space-evenly;
 
-        .housecard {
-            cursor: pointer;
-            background-color: transparent;
-            width: 260px;
-            height: 360px;
-            perspective: 1000px;
+            .housecard {
+                cursor: pointer;
+                background-color: transparent;
+                width: 260px;
+                height: 360px;
+                perspective: 1000px;
+                margin: 40px;
 
-            .housecard-inner {
-                position: relative;
-                width: 250px;
-                height: 350px;
-                text-align: center;
-                transition: transform 0.8s;
-                transform-style: preserve-3d;
-
-                .housecard-front,
-                .housecard-back {
-                    color: white;
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    backface-visibility: hidden;
-                    border-radius: 8px;
-                    box-shadow: 10px 10px 15px rgba(@theme-color-beige);
-                }
-
-                .point-total {
-                    font-size: 8rem;
-                    margin: auto;
-                    padding-top: 80px;
-                    padding-bottom: 20px;
-                    height: 80px;
-                    width: 100%;
+                .housecard-inner {
+                    position: relative;
+                    width: 260px;
+                    height: 360px;
                     text-align: center;
-                    overflow: hidden;
-                    mix-blend-mode: hard-light;
-                    /*here flat shadow*/
-                    text-shadow: 10px 10px 15px rgba(90, 90, 90, 1), 0 -2px 1px #fff;
-                }
+                    transition: transform 0.8s;
+                    transform-style: preserve-3d;
 
-                .points-txt {
-                    font-size: 2.8rem;
-                }
-
-                .housecard-front {
-                    z-index: 2;
-
-                    .house-name {
-                        font-size: 3rem;
-                        height: 40px;
-                        margin-top: 40px;
-                        margin-bottom: 0;
+                    .housecard-front,
+                    .housecard-back {
+                        color: white;
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        backface-visibility: hidden;
+                        border-radius: 8px;
+                        box-shadow: 10px 10px 15px rgba(@theme-color-beige);
                     }
-                }
 
-                #housecard-front-1 {
-                    background-color: @theme-color-tomato
-                }
+                    .point-total {
+                        font-size: 8rem;
+                        margin: auto;
+                        padding-top: 80px;
+                        padding-bottom: 20px;
+                        height: 80px;
+                        width: 100%;
+                        text-align: center;
+                        overflow: hidden;
+                        mix-blend-mode: hard-light;
+                        /*here flat shadow*/
+                        text-shadow: 10px 10px 15px rgba(90, 90, 90, 1), 0 -2px 1px #fff;
+                    }
 
-                #housecard-front-2 {
-                    background-color: @theme-color-navy
-                }
+                    .points-txt {
+                        font-size: 2.8rem;
+                    }
 
-                #housecard-front-3 {
-                    background-color: @theme-color-green
-                }
+                    .housecard-front {
+                        z-index: 2;
 
-                #housecard-front-4 {
-                    background-color: @theme-color-yellow
-                }
-
-                .housecard-back {
-                    transform: rotateY(180deg);
-                    background-color: @theme-color-blue;
-                    cursor: initial;
-
-                    .point-increment-area {
-                        height: 130px;
-                        display: flex;
-                        flex-direction: column;
-
-                        .choose {
-                            text-align: left;
-                            padding-left: 19px;
-                            font-size: 1.6rem;
-                            height: 20px;
-                            margin-top: 10px;
-                            margin-bottom: 6px;
+                        .house-name {
+                            font-size: 3rem;
+                            height: 40px;
+                            margin-top: 40px;
+                            margin-bottom: 0;
                         }
+                    }
 
-                        .increment-number-container {
+                    #housecard-front-1 {
+                        background-color: @theme-color-tomato
+                    }
 
-                            .row-1,
-                            .row-2 {
-                                margin-bottom: 8px;
-                                width: 100%;
-                                display: flex;
-                                justify-content: space-evenly;
+                    #housecard-front-2 {
+                        background-color: @theme-color-navy
+                    }
 
-                                .increment-number {
-                                    cursor: pointer;
+                    #housecard-front-3 {
+                        background-color: @theme-color-green
+                    }
+
+                    #housecard-front-4 {
+                        background-color: @theme-color-yellow
+                    }
+
+                    .housecard-back {
+                        transform: rotateY(180deg);
+                        background-color: @theme-color-blue;
+                        cursor: initial;
+
+                        .point-increment-area {
+                            height: 130px;
+                            display: flex;
+                            flex-direction: column;
+
+                            .choose {
+                                text-align: left;
+                                padding-left: 19px;
+                                font-size: 1.6rem;
+                                height: 20px;
+                                margin-top: 10px;
+                                margin-bottom: 6px;
+                            }
+
+                            .increment-number-container {
+
+                                .row-1,
+                                .row-2 {
+                                    margin-bottom: 8px;
+                                    width: 100%;
                                     display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    font-size: 1.5rem;
-                                    width: 25px;
-                                    height: 35px;
-                                    border: 1px solid @theme-color-white;
-                                    border-radius: 2px;
-                                    transition-duration: 0.2s;
+                                    justify-content: space-evenly;
 
-                                    &:hover {
+                                    .increment-number {
+                                        cursor: pointer;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        font-size: 1.5rem;
+                                        width: 25px;
+                                        height: 35px;
+                                        border: 1px solid @theme-color-white;
+                                        border-radius: 2px;
+                                        transition-duration: 0.2s;
+
+                                        &:hover {
+                                            background-color: white;
+                                            color: @theme-color-blue;
+                                        }
+                                    }
+
+                                    .active-number {
                                         background-color: white;
                                         color: @theme-color-blue;
                                     }
                                 }
-
-                                .active-number {
-                                    background-color: white;
-                                    color: @theme-color-blue;
-                                }
                             }
-                        }
 
-                        .points-button-container {
-                            display: flex;
-                            justify-content: space-between;
-
-                            .points-button {
-                                margin: 0 19px;
-                                background-color: @theme-color-white;
-                                color: @theme-color-blue;
-                                font-size: 1.5rem;
-                                border-radius: 2px;
+                            .points-button-container {
                                 display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                width: 73px;
-                                height: 28px;
-                                font-weight: 600;
-                                z-index: 1;
-                                transition-duration: 0.2s;
+                                justify-content: space-between;
 
-                                &:hover {
-                                    background-color: white;
+                                .points-button {
+                                    margin: 0 19px;
+                                    background-color: @theme-color-white;
+                                    color: @theme-color-blue;
+                                    font-size: 1.5rem;
+                                    border-radius: 2px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    width: 73px;
+                                    height: 28px;
+                                    font-weight: 600;
+                                    z-index: 1;
+                                    transition-duration: 0.2s;
+
+                                    &:hover {
+                                        background-color: white;
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    .point-total {
-                        padding-top: 30px;
-                        cursor: default;
-                        width: 100%;
+                        .point-total {
+                            padding-top: 30px;
+                            cursor: default;
+                            width: 100%;
+                        }
                     }
                 }
             }
-        }
 
-        .flip {
-            .housecard-inner {
-                transform: rotateY(180deg);
+            .flip {
+                .housecard-inner {
+                    transform: rotateY(180deg);
+                }
             }
         }
     }
 }
 
 .schools-page {
+    display: flex;
+
     .schools-container {
         display: flex;
         flex-direction: column;
-        width: 100%;
-        font-family: 'BigJohnPRO-Regular';
+        font-family: 'Lato';
 
         .schools-page-header {
             padding: 20px;
@@ -720,32 +744,30 @@ html {
         }
 
         .schools-list {
-            // min-height: 100vh;
             display: flex;
             align-items: flex-start;
             flex-wrap: wrap;
             margin-top: 80px;
             justify-content: space-evenly;
 
-            .school-card {
-                width: 260px;
-                height: 360px;
-                color: @theme-color-white;
-                border-radius: 8px;
-                font-size: 2.6rem;
-                background-color: @theme-color-blue;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 40px;
-                .menu-button {
+            .menu-button {
+                .school-card {
                     display: flex;
                     flex-direction: column;
-                    justify-content: space-evenly;
+                    width: 260px;
+                    height: 360px;
+                    color: @theme-color-white;
+                    border-radius: 8px;
+                    font-size: 2.6rem;
+                    background-color: @theme-color-blue;
+                    display: flex;
+                    justify-content: center;
                     align-items: center;
-                }
-                .from {
-                    font-size: 2.5rem;
+                    margin: 40px;
+
+                    .from {
+                        font-size: 2.5rem;
+                    }
                 }
             }
         }
@@ -764,6 +786,7 @@ html {
             transition-duration: 0.2s;
             margin: 0 auto;
             cursor: pointer;
+
             &:hover {
                 opacity: 1;
             }
@@ -1179,12 +1202,6 @@ html {
     }
 }
 
-/*SchoolsPage (C.Juelfs)*/
-.schools-page {
-    height: inherit;
-    display: flex;
-    flex-direction: row;
-}
 
 .schools-page .side-menu {
     display: flex;
