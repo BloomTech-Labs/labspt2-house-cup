@@ -471,6 +471,7 @@ html {
             opacity: 0.8;
             transition-duration: 0.2s;
             margin: 0 auto;
+            cursor: pointer;
 
             &:hover {
                 opacity: 1;
@@ -526,7 +527,7 @@ html {
 
                     .new-house-button {
                         width: 28px;
-                        height: 28px;
+                        // height: 28px;
                         display: flex;
                         margin-left: 20px;
                         justify-content: center;
@@ -536,6 +537,65 @@ html {
                         border-radius: 100%;
                         padding: none;
                     }
+                }
+            }
+        }
+
+        #edit-school {
+            background-color: @theme-color-yellow;
+            margin-bottom: 40px;
+            .edit-school-form {
+                display: flex;
+                align-items: center;
+                width: 100%;
+
+                .input-container {
+                    width: 60%;
+                    display: flex;
+                    align-items: center;
+                    .input-title {
+                        margin-left: 40px;
+                    }
+                    .edit-school-input {
+                        color: white;
+                        height: 30px;
+                        width: 40%;
+                        margin-bottom: 5px;
+                        margin-left: 20px;
+                        background-color: transparent;
+                        border: none;
+                        border-bottom: 1px solid white;
+                        padding: 0 10px;
+                        font-size: 1.5rem;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+                .edit-school-button {
+                    height: 28px;
+                    width: 80px;
+                    border-radius: 20px;
+                    background-color: @theme-color-pink;
+                    color: @theme-color-white;
+                    font-weight: 800;
+                    // display: flex;
+                    // justify-content: center;
+                    // align-items: center;
+                    font-size: 1.6rem;
+                    margin: 0 20px;
+                    opacity: 0.8;
+                    transition-duration: 0.2s;
+                    margin: 0 auto;
+                    cursor: pointer;
+        
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+                .delete-button {
+                    width: 140px;
                 }
             }
         }

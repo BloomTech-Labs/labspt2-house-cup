@@ -16,7 +16,7 @@ class SideMenu extends React.Component {
                 <header>
                     <h1>House Cup Tracker</h1>
                 </header>
-                
+
                 <NavLink to="/admin/schools" className='menu-button' activeClassName="activeMenu" style={{ textDecoration: "none", color: "inherit" }}>
                     <h2>Schools</h2>
                 </NavLink>

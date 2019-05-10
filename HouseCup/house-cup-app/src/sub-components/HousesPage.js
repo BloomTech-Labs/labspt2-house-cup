@@ -14,12 +14,15 @@ class Houses extends React.Component {
         super(props);
         this.state = {
             newHouse: false,
+            editSchool: false,
             incrementTicker: 0,
             houseList: [],
-            name: '',
+            newHouseName: '',
             color: '',
             pointTotal: '',
-            schoolData: {}
+            schoolInfo: {},
+            newSchoolName: '',
+            newSchoolCity: ''
         }
     }
     //new house classname toggle
@@ -28,16 +31,26 @@ class Houses extends React.Component {
             newHouse: !preState.newHouse
         }))
     }
+    //edit school classname toggle
+    editSchoolToggle = e => {
+        this.setState(preState => ({
+            editSchool: !preState.editSchool
+        }))
+    }
 
     componentDidMount() {
-        axios.get(`http://localhost:5000/schools/${this.props.match.params.id}/houses`)
+        const id = this.props.match.params.id;
+        axios.get(`http://localhost:5000/schools/${id}/houses`)
             .then(response => {
                 if (response) {
                     this.setState({ houseList: response.data });
-                    axios.get(`http://localhost:5000/schools/${this.props.match.params.id}`)
+                    axios.get(`http://localhost:5000/schools/${id}`)
                         .then(response => {
-                            console.log(response.data.data.school)
-                            this.setState({ schoolData: response.data.data.school })
+                            this.setState({
+                                schoolInfo: response.data.data.school,
+                                newSchoolName: response.data.data.school.name,
+                                newSchoolCity: response.data.data.school.city
+                            })
                         })
                         .catch(err => console.log(err));
                 } else {
@@ -48,15 +61,31 @@ class Houses extends React.Component {
             .catch(err => console.log(err))
     }
 
+    //delete this school
+    deleteSchool = e => {
+        // e.preventDefault();
+        const { getAccessToken } = auth;
+        const headers = { Authorization: `Bearer ${getAccessToken()}` };
+        const id = this.props.match.params.id;
+        console.log(headers);
+        axios.delete(`http://localhost:5000/schools/${id}`, { headers })
+            .then(response => {
+                console.log('success', response)
+                this.props.history.goBack();
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     //Add House
     addHouse = (e) => {
         e.preventDefault();
         const { getAccessToken } = auth;
         const headers = { Authorization: `Bearer ${getAccessToken()}` }
-
         const newHouse = {
-            name: this.state.name,
-            color: this.state.color,
+            name: this.state.newHouseName,
+            color: this.state.newHouseColor,
             pointTotal: this.state.points
         }
 
@@ -74,12 +103,12 @@ class Houses extends React.Component {
                 });
 
             this.setState({
-                name: '',
+                newHouseName: '',
                 color: '',
                 pointTotal: ''
             });
         }
-        console.log(`House ${this.state.name} added!`);
+        console.log(`House ${this.state.newHouseName} added!`);
     }
     //Handle-Input
     handleInput = (event) => {
@@ -169,7 +198,43 @@ class Houses extends React.Component {
                 <div className='houses-container'>
                     <div className='houses-page-header'>
                         <div>
-                            <h2 className='houses-page-welcome'>Welcome to the school of {this.state.schoolData.name}</h2>
+                            <h2 className='houses-page-welcome'>Welcome to the school of {this.state.schoolInfo.name}</h2>
+                        </div>
+                        <div
+                            className={this.state.editSchool ? 'new-house new-house-expand' : 'new-house new-house-collapse'}
+                            id='edit-school'
+                            onClick={this.editSchoolToggle.bind(this)}
+                        >
+                            <h2 className={this.state.editSchool ? 'hidden' : "'new-house-txt'"}>Edit School Detail</h2>
+                            <form
+                                className={this.state.editSchool ? "edit-school-form" : "hidden"}
+                                onClick={event => event.stopPropagation()}
+                            >
+                                <div className='input-container'>
+                                    <h2 className="input-title">Name:</h2>
+                                    <input
+                                        className="edit-school-input"
+                                        type="text"
+                                        value={this.state.newSchoolName}
+                                        name="newSchoolName"
+                                        onChange={this.handleInput.bind(this)}
+                                    />
+                                    <h2
+                                        className="input-title"
+                                    >
+                                        City:
+                                </h2>
+                                    <input
+                                        className="edit-school-input"
+                                        type="text"
+                                        value={this.state.newSchoolCity}
+                                        name="newSchoolCity"
+                                        onChange={this.handleInput.bind(this)}
+                                    />
+                                </div>
+                                <button className='edit-school-button'>Save</button>
+                                <button className='edit-school-button delete-button' onClick={this.deleteSchool}>Delete School</button>
+                            </form>
                         </div>
                         <div className={this.state.newHouse ? 'new-house new-house-expand' : 'new-house new-house-collapse'} onClick={this.newHouseToggle.bind(this)} >
                             <h2 className='new-house-txt'>Add New House</h2>
@@ -182,8 +247,8 @@ class Houses extends React.Component {
                                     <input type="text"
                                         className='new-house-input'
                                         placeholder='name'
-                                        name='name'
-                                        value={this.state.name}
+                                        name='newHouseName'
+                                        value={this.state.newHouseName}
                                         onChange={this.handleInput} />
                                     <input type="text"
                                         className='new-house-input'

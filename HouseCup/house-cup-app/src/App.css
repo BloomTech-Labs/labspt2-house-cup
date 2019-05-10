@@ -389,6 +389,7 @@ html {
   opacity: 0.8;
   transition-duration: 0.2s;
   margin: 0 auto;
+  cursor: pointer;
 }
 .houses-page .houses-container .new-house-collapse:hover {
   opacity: 1;
@@ -437,7 +438,6 @@ html {
 }
 .houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .new-house-button {
   width: 28px;
-  height: 28px;
   display: flex;
   margin-left: 20px;
   justify-content: center;
@@ -446,6 +446,58 @@ html {
   background-color: #ECA00D;
   border-radius: 100%;
   padding: none;
+}
+.houses-page .houses-container #edit-school {
+  background-color: #ECA00D;
+  margin-bottom: 40px;
+}
+.houses-page .houses-container #edit-school .edit-school-form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.houses-page .houses-container #edit-school .edit-school-form .input-container {
+  width: 60%;
+  display: flex;
+  align-items: center;
+}
+.houses-page .houses-container #edit-school .edit-school-form .input-container .input-title {
+  margin-left: 40px;
+}
+.houses-page .houses-container #edit-school .edit-school-form .input-container .edit-school-input {
+  color: white;
+  height: 30px;
+  width: 40%;
+  margin-bottom: 5px;
+  margin-left: 20px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  padding: 0 10px;
+  font-size: 1.5rem;
+}
+.houses-page .houses-container #edit-school .edit-school-form .input-container .edit-school-input:focus {
+  outline: none;
+}
+.houses-page .houses-container #edit-school .edit-school-form .edit-school-button {
+  height: 28px;
+  width: 80px;
+  border-radius: 20px;
+  background-color: #d51c38;
+  color: #F1EFEA;
+  font-weight: 800;
+  font-size: 1.6rem;
+  margin: 0 20px;
+  opacity: 0.8;
+  transition-duration: 0.2s;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.houses-page .houses-container #edit-school .edit-school-form .edit-school-button:hover {
+  opacity: 1;
+}
+.houses-page .houses-container #edit-school .edit-school-form .delete-button {
+  width: 140px;
 }
 .houses-page .houses-container .hidden {
   display: none;

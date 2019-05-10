@@ -4,8 +4,6 @@ import axios from 'axios';
 import { Route } from 'react-router-dom';
 //landingPage imports:
 import LandingPage from './sub-components/LandingPage'
-//test data:
-import scoreboardTestData from './mock data/scoreboard';
 //Admin import(s):
 import Houses from './sub-components/HousesPage';
 //Settings import(s):
@@ -23,7 +21,6 @@ import SecuredRoute from './sub-components/SecuredRoute';
 import BillingPage from './sub-components/BillingPage';
 //About.js
 import About from './sub-components/About';
-import schoolsTestData from './mock data/schools';
 import auth from './utils/Auth.js';
 //ModifySchool.js
 import ModifySchoolPage from './sub-components/ModifySchool';
@@ -33,11 +30,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      testData: scoreboardTestData,
-      testData2: schoolsTestData,
-      userData: [],
       schoolData: [],
-      houseData: [],
       name: null,
       email: null,
 
@@ -51,29 +44,11 @@ class App extends Component {
       silentAuth();
     }
 
-    axios.get('http://localhost:5000/users')
-      .then(response => {
-        // console.log(response.data.data.allUsers)
-        this.setState({ userData: response.data.data.allUsers })
-        // console.log('success', response);
-      })
-      .catch(err => console.log(err));
-
     axios.get('http://localhost:5000/schools')
       .then(response => {
-        // console.log(response.data.data.schools)
         this.setState({ schoolData: response.data.data.schools })
       })
-
       .catch(err => console.log(err));
-    axios.get('http://localhost:5000/houses')
-      .then(response => {
-        // console.log(response.data.data.houses)
-        this.setState({ houseData: response.data.data.houses })
-      })
-      .catch(err => {
-        console.log(err)
-      });
 
   }
 
