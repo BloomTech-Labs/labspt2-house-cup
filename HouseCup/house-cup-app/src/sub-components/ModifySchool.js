@@ -4,7 +4,7 @@ import axios from 'axios';
 import auth from '../utils/Auth.js';
 
 class ModifySchoolPage extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             school: [],
@@ -14,12 +14,12 @@ class ModifySchoolPage extends React.Component {
             newCity: '',
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         const id = this.props.match.params.id;
         // console.log(id);
         axios.get(`http://localhost:5000/schools/${id}`)
             .then(response => {
-                this.setState({school: response.data.data.school})
+                this.setState({ school: response.data.data.school })
                 // this.setState({name: response.data.data.school.name })
                 // this.setState({city: response.data.data.school.city})
             })
@@ -30,12 +30,12 @@ class ModifySchoolPage extends React.Component {
 
     deleteSchool = e => {
         // e.preventDefault();
-        const {getAccessToken} = auth;
+        const { getAccessToken } = auth;
         const headers = { Authorization: `Bearer ${getAccessToken()}` };
         const id = this.props.match.params.id;
         console.log(id);
         console.log(headers);
-        axios.delete(`http://localhost:5000/schools/${id}`, {headers})
+        axios.delete(`http://localhost:5000/schools/${id}`, { headers })
             .then(response => {
                 console.log('success', response)
                 this.props.history.goBack();
@@ -48,7 +48,7 @@ class ModifySchoolPage extends React.Component {
     render() {
         return (
             <div className='modify-school-page'>
-                <SideMenu/>
+                <SideMenu />
                 <div className='school-card'>
                     <h2>{this.state.school.name}</h2>
                     <h4>{this.state.school.city}</h4>

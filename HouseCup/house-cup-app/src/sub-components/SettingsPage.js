@@ -4,6 +4,7 @@ import auth from '../utils/Auth';
 import axios from 'axios';
 
 class Settings extends Component {
+
 					constructor(props) {
 					super(props);
 					this.state ={
@@ -11,7 +12,7 @@ class Settings extends Component {
 							password: '',
 							newPassword:'',
 					};
-					}
+		}
 
 componentDidMount() {
 
@@ -33,7 +34,7 @@ updateUser = (newPassword) => {
 handleInput = (event) => {
 this.setState({
 		[event.target.name]: event.target.value
-})
+    })
 }
 
 handleSubmit = (event) => {
@@ -73,9 +74,10 @@ return (
 									 value={this.state.newPassword}
 									 onChange={this.handleInput} required  />		
 					  <button type="submit" value="Save">Save</button>			 							 									 
-				 </form>
-			</div>
-			</div>
+</form>
+
+					</div>
+				</div>
 			</>
 		);
 	}
