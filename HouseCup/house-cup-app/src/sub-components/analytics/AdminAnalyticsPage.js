@@ -7,11 +7,11 @@ import auth from '../../utils/Auth.js';
 import dummyData from './dummy.js';
 import axios from 'axios';
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
-];
+// const options = [
+//   { value: 'chocolate', label: 'Chocolate' },
+//   { value: 'strawberry', label: 'Strawberry' },
+//   { value: 'vanilla', label: 'Vanilla' }
+// ];
 
 export default class AdminAnalyticsPage extends Component {
   constructor(props) {

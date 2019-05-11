@@ -1,4 +1,4 @@
-    
+
 import React from 'react';
 import LandingImg from '../images/realestate.png';
 import Dumbledore from '../images/dumbledore.jpg';
@@ -96,10 +96,8 @@ class LandingPage extends React.Component {
                 </div>
                 <div className='landing-page-block landing-page-block-3'>
                     <h2 className='checkout' >Check out the top-tier schools we work with</h2>
-                    <h2 className='school-search'>Or find your school's public page below</h2>
-                    <input className='school-search-input' placeholder='search for your school here'></input>
                     <div className='schools-list' >
-                        {this.state.schoolsList.map((school) => {
+                        {this.props.schoolsSelected.map((school) => {
                             return (
                                 <div
                                     key={school.id}
@@ -112,13 +110,8 @@ class LandingPage extends React.Component {
                             )
                         })}
                     </div>
-                    <div>
-                        {this.props.schoolsSelected.map((x) => {
-                            return (
-                                <ul>-{x.name}</ul>
-                            )
-                        })}
-                    </div>
+                    <h2 className='school-search'>Or find your school's public page below</h2>
+                    <input className='school-search-input' placeholder='search for your school here'></input>
                 </div>
                 <div className='landing-page-block landing-page-block-4'>
                     <div className='review-container'>

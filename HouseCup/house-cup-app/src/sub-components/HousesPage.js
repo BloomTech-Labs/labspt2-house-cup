@@ -14,11 +14,15 @@ class Houses extends React.Component {
         super(props);
         this.state = {
             newHouse: false,
+            editSchool: false,
             incrementTicker: 0,
             houseList: [],
-            name: '',
+            newHouseName: '',
             color: '',
-            pointTotal: ''
+            pointTotal: '',
+            schoolInfo: {},
+            newSchoolName: '',
+            newSchoolCity: ''
         }
     }
     //new house classname toggle
@@ -27,19 +31,51 @@ class Houses extends React.Component {
             newHouse: !preState.newHouse
         }))
     }
+    //edit school classname toggle
+    editSchoolToggle = e => {
+        this.setState(preState => ({
+            editSchool: !preState.editSchool
+        }))
+    }
 
- componentDidMount() {
-    axios.get(`http://localhost:5000/schools/${this.props.match.params.id}/houses`)
-        .then(response => { 
-            if(response) {
-            this.setState({  houseList: response.data  });
-           
-            } else {
-                console.log(`There is no houses data from the db`);
-            }
-            
-         })
-        .catch(err => console.log(err))
+    componentDidMount() {
+        const id = this.props.match.params.id;
+        axios.get(`http://localhost:5000/schools/${id}/houses`)
+            .then(response => {
+                if (response) {
+                    this.setState({ houseList: response.data });
+                    axios.get(`http://localhost:5000/schools/${id}`)
+                        .then(response => {
+                            this.setState({
+                                schoolInfo: response.data.data.school,
+                                newSchoolName: response.data.data.school.name,
+                                newSchoolCity: response.data.data.school.city
+                            })
+                        })
+                        .catch(err => console.log(err));
+                } else {
+                    console.log(`There is no houses data from the db`);
+                }
+
+            })
+            .catch(err => console.log(err))
+    }
+
+    //delete this school
+    deleteSchool = e => {
+        // e.preventDefault();
+        const { getAccessToken } = auth;
+        const headers = { Authorization: `Bearer ${getAccessToken()}` };
+        const id = this.props.match.params.id;
+        console.log(headers);
+        axios.delete(`http://localhost:5000/schools/${id}`, { headers })
+            .then(response => {
+                console.log('success', response)
+                this.props.history.goBack();
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     //Add House
@@ -47,10 +83,9 @@ class Houses extends React.Component {
         e.preventDefault();
         const { getAccessToken } = auth;
         const headers = { Authorization: `Bearer ${getAccessToken()}` }
-
         const newHouse = {
-            name: this.state.name,
-            color: this.state.color,
+            name: this.state.newHouseName,
+            color: this.state.newHouseColor,
             pointTotal: this.state.points
         }
 
@@ -68,12 +103,12 @@ class Houses extends React.Component {
                 });
 
             this.setState({
-                name: '',
+                newHouseName: '',
                 color: '',
                 pointTotal: ''
             });
         }
-        console.log(`House ${this.state.name} added!`);
+        console.log(`House ${this.state.newHouseName} added!`);
     }
     //Handle-Input
     handleInput = (event) => {
@@ -154,41 +189,81 @@ class Houses extends React.Component {
         placeholder: styles => ({ ...styles, ...this.dot() }),
         singleValue: (styles, { data }) => ({ ...styles, ...this.dot(data.color) }),
     };
-    
-    
+
+
     render() {
         return (
-            <div className='admin-main-page'>
+            <div className='houses-page'>
                 <SideMenu {...this.props} />
-                <div className='housecard-container'>
-                    <div className={this.state.newHouse ? 'new-house new-house-expand' : 'new-house new-house-collapse'} onClick={this.newHouseToggle.bind(this)} >
-                        <h2 className='new-house-txt'>Add New House</h2>
-                        <div className='add-house-inputs'>
+                <div className='houses-container'>
+                    <div className='houses-page-header'>
+                        <div>
+                            <h2 className='houses-page-welcome'>Welcome to the school of {this.state.schoolInfo.name}</h2>
+                        </div>
+                        <div
+                            className={this.state.editSchool ? 'new-house new-house-expand' : 'new-house new-house-collapse'}
+                            id='edit-school'
+                            onClick={this.editSchoolToggle.bind(this)}
+                        >
+                            <h2 className={this.state.editSchool ? 'hidden' : "'new-house-txt'"}>Edit School Detail</h2>
                             <form
-                                className={this.state.newHouse ? 'new-house-form' : 'hidden'}
-                                onSubmit={this.addHouse}
+                                className={this.state.editSchool ? "edit-school-form" : "hidden"}
                                 onClick={event => event.stopPropagation()}
                             >
-                                <input type="text"
-                                    className='new-house-input'
-                                    placeholder='name'
-                                    name='name'
-                                    value={this.state.name}
-                                    onChange={this.handleInput} />
-                                <input type="text"
-                                    className='new-house-input'
-                                    placeholder='points'
-                                    name='pointTotal'
-                                    value={this.state.pointTotal}
-                                    onChange={this.handleInput} />
-                                <input type="text"
-                                    className='new-house-input'
-                                    placeholder='Color'
-                                    name='color'
-                                    value={this.state.color}
-                                    onChange={this.handleInput} />
-                                {/* The following code needs to be checked-- Needs attention */}
-                                {/* <Select
+                                <div className='input-container'>
+                                    <h2 className="input-title">Name:</h2>
+                                    <input
+                                        className="edit-school-input"
+                                        type="text"
+                                        value={this.state.newSchoolName}
+                                        name="newSchoolName"
+                                        onChange={this.handleInput.bind(this)}
+                                    />
+                                    <h2
+                                        className="input-title"
+                                    >
+                                        City:
+                                </h2>
+                                    <input
+                                        className="edit-school-input"
+                                        type="text"
+                                        value={this.state.newSchoolCity}
+                                        name="newSchoolCity"
+                                        onChange={this.handleInput.bind(this)}
+                                    />
+                                </div>
+                                <button className='edit-school-button'>Save</button>
+                                <button className='edit-school-button delete-button' onClick={this.deleteSchool}>Delete School</button>
+                            </form>
+                        </div>
+                        <div className={this.state.newHouse ? 'new-house new-house-expand' : 'new-house new-house-collapse'} onClick={this.newHouseToggle.bind(this)} >
+                            <h2 className='new-house-txt'>Add New House</h2>
+                            <div className='add-house-inputs'>
+                                <form
+                                    className={this.state.newHouse ? 'new-house-form' : 'hidden'}
+                                    onSubmit={this.addHouse}
+                                    onClick={event => event.stopPropagation()}
+                                >
+                                    <input type="text"
+                                        className='new-house-input'
+                                        placeholder='name'
+                                        name='newHouseName'
+                                        value={this.state.newHouseName}
+                                        onChange={this.handleInput} />
+                                    <input type="text"
+                                        className='new-house-input'
+                                        placeholder='points'
+                                        name='pointTotal'
+                                        value={this.state.pointTotal}
+                                        onChange={this.handleInput} />
+                                    <input type="text"
+                                        className='new-house-input'
+                                        placeholder='Color'
+                                        name='color'
+                                        value={this.state.color}
+                                        onChange={this.handleInput} />
+                                    {/* The following code needs to be checked-- Needs attention */}
+                                    {/* <Select
                                 defaultValue={colorOptions[2]}
                                 label="Single select"
                                 name="color"
@@ -196,11 +271,12 @@ class Houses extends React.Component {
                                 options={colorOptions}
                                 styles={this.colorStyles}
                             /> */}
-                                <button className='new-house-button'>+</button>
-                            </form>
+                                    <button className='new-house-button'>+</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <div className='housecards'>
+                    <div className='houses-list'>
                         {this.state.houseList.map((eachHouse) => {
                             return (
 
@@ -213,7 +289,7 @@ class Houses extends React.Component {
                                             className='housecard-front'
                                             id={`housecard-front-${eachHouse.id}`}
                                             onClick={this.toggleFlip.bind(this, eachHouse.id)}>
-                                            <p className='house-color'>{eachHouse.color}</p>
+                                            {/* <p className='house-color'>{eachHouse.color}</p> */}
                                             <h2 className='house-name'>{eachHouse.name}</h2>
                                             <h3 className='point-total'>{eachHouse.points}</h3>
                                             <h2 className='points-txt'>Points</h2>
@@ -260,6 +336,7 @@ class Houses extends React.Component {
                             )
                         })}
                     </div>
+
                 </div>
             </div>
         )
