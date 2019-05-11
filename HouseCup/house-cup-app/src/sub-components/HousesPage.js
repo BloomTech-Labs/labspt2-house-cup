@@ -1,13 +1,10 @@
 import React from 'react';
 import SideMenu from './SideMenu';
 import axios from 'axios';
-
-//import for react select
 import Select from 'react-select';
 import chroma from 'chroma-js';
 import colorOptions from './ColorOptions';
 import auth from '../utils/Auth.js';
-
 
 class Houses extends React.Component {
     constructor(props) {
@@ -18,8 +15,9 @@ class Houses extends React.Component {
             incrementTicker: 0,
             houseList: [],
             newHouseName: '',
-            color: '',
-            pointTotal: '',
+            newHouseColor: '',
+            points: '',
+            selectedColor: '#E2592D',
             schoolInfo: {},
             newSchoolName: '',
             newSchoolCity: ''
@@ -85,8 +83,8 @@ class Houses extends React.Component {
         const headers = { Authorization: `Bearer ${getAccessToken()}` }
         const newHouse = {
             name: this.state.newHouseName,
-            color: this.state.newHouseColor,
-            pointTotal: this.state.points
+            color: this.state.selectedColor,
+            points: this.state.points
         }
 
         if (newHouse) {
@@ -105,7 +103,7 @@ class Houses extends React.Component {
             this.setState({
                 newHouseName: '',
                 color: '',
-                pointTotal: ''
+                points: ''
             });
         }
         console.log(`House ${this.state.newHouseName} added!`);
@@ -129,18 +127,21 @@ class Houses extends React.Component {
     }
 
     addPoint = id => {
-        let newPointTotal = this.state.houseList[id - 1].pointTotal + this.state.incrementTicker;
+        let pos = this.state.houseList.map(function (e) { return e.id; }).indexOf(id);
+        let newPointTotal = this.state.houseList[pos].points + this.state.incrementTicker;
         this.setState((prevState) => {
-            prevState.houseList[id - 1].pointTotal = newPointTotal;
+            prevState.houseList[pos].points = newPointTotal;
         })
         var elements = document.getElementsByClassName(`active-number`);
         elements[0].classList.toggle('active-number');
         this.forceUpdate();
     };
+
     dropPoint = id => {
-        let newPointTotal = this.state.houseList[id - 1].pointTotal - this.state.incrementTicker;
+        let pos = this.state.houseList.map(function (e) { return e.id; }).indexOf(id);
+        let newPointTotal = this.state.houseList[pos].points - this.state.incrementTicker;
         this.setState((prevState) => {
-            prevState.houseList[id - 1].pointTotal = newPointTotal;
+            prevState.houseList[pos].points = newPointTotal;
         })
         var elements = document.getElementsByClassName(`active-number`);
         elements[0].classList.toggle('active-number');
@@ -167,22 +168,21 @@ class Houses extends React.Component {
             width: 10,
         },
     });
+
     //color styles
     colorStyles = {
-        control: styles => ({ ...styles, backgroundColor: 'white' }),
+        control: styles => ({ ...styles, backgroundColor: '#f9f7f6' }),
         option: (styles, { data, isDisabled, isFocused, isSelected }) => {
             const color = chroma(data.color);
             return {
                 ...styles,
-                backgroundColor: isDisabled
-                    ? null
-                    : isSelected ? data.color : isFocused ? color.alpha(0.1).css() : null,
-                color: isDisabled
-                    ? '#ccc'
-                    : isSelected
-                        ? chroma.contrast(color, 'white') > 2 ? 'white' : 'black'
-                        : data.color,
-                cursor: isDisabled ? 'not-allowed' : 'default',
+                backgroundColor: isSelected
+                    ? data.color
+                    : isFocused
+                        ? color.alpha(0.1).css() : null,
+                color: isSelected
+                    ? chroma.contrast(color, 'white') > 2 ? 'white' : 'black'
+                    : data.color,
             };
         },
         input: styles => ({ ...styles, ...this.dot() }),
@@ -190,6 +190,11 @@ class Houses extends React.Component {
         singleValue: (styles, { data }) => ({ ...styles, ...this.dot(data.color) }),
     };
 
+    handlePickColor = selectedColor => {
+        this.setState({
+            selectedColor: selectedColor.color
+        });
+    }
 
     render() {
         return (
@@ -239,9 +244,8 @@ class Houses extends React.Component {
                         <div className={this.state.newHouse ? 'new-house new-house-expand' : 'new-house new-house-collapse'} onClick={this.newHouseToggle.bind(this)} >
                             <h2 className='new-house-txt'>Add New House</h2>
                             <div className='add-house-inputs'>
-                                <form
+                                <div
                                     className={this.state.newHouse ? 'new-house-form' : 'hidden'}
-                                    onSubmit={this.addHouse}
                                     onClick={event => event.stopPropagation()}
                                 >
                                     <input type="text"
@@ -252,27 +256,23 @@ class Houses extends React.Component {
                                         onChange={this.handleInput} />
                                     <input type="text"
                                         className='new-house-input'
+                                        id='points'
+                                        type='number'
                                         placeholder='points'
-                                        name='pointTotal'
-                                        value={this.state.pointTotal}
+                                        name='points'
+                                        value={this.state.points}
                                         onChange={this.handleInput} />
-                                    <input type="text"
-                                        className='new-house-input'
-                                        placeholder='Color'
-                                        name='color'
-                                        value={this.state.color}
-                                        onChange={this.handleInput} />
-                                    {/* The following code needs to be checked-- Needs attention */}
-                                    {/* <Select
-                                defaultValue={colorOptions[2]}
-                                label="Single select"
-                                name="color"
-                                value={this.state.color}
-                                options={colorOptions}
-                                styles={this.colorStyles}
-                            /> */}
-                                    <button className='new-house-button'>+</button>
-                                </form>
+                                    <Select
+                                        defaultValue={colorOptions[5]}
+                                        label="Single select"
+                                        name="color"
+                                        options={colorOptions}
+                                        styles={this.colorStyles}
+                                        className='react-select'
+                                        onChange={this.handlePickColor}
+                                    />
+                                    <button className='new-house-button' onClick={this.addHouse.bind(this)}>+</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -287,6 +287,7 @@ class Houses extends React.Component {
                                     <div className='housecard-inner'>
                                         <div
                                             className='housecard-front'
+                                            style={{ backgroundColor: eachHouse.color }}
                                             id={`housecard-front-${eachHouse.id}`}
                                             onClick={this.toggleFlip.bind(this, eachHouse.id)}>
                                             {/* <p className='house-color'>{eachHouse.color}</p> */}
@@ -326,7 +327,7 @@ class Houses extends React.Component {
                                                 <h3
                                                     className='point-total'
                                                 >
-                                                    {eachHouse.pointTotal}
+                                                    {eachHouse.points}
                                                 </h3>
                                                 <h2 className='points-txt'>Points</h2>
                                             </div>

@@ -497,7 +497,7 @@ html {
             }
 
             .add-house-inputs {
-                width: 70%;
+                width: 74%;
 
                 .new-house-form {
                     display: flex;
@@ -507,7 +507,7 @@ html {
                     .new-house-input {
                         color: white;
                         height: 30px;
-                        width: 40%;
+                        width: 25%;
                         margin-bottom: 5px;
                         margin-left: 20px;
                         background-color: transparent;
@@ -521,21 +521,31 @@ html {
                         }
                     }
 
+                    .react-select {
+                        width: 18%;
+                    }
+
                     input::placeholder {
                         color: @theme-color-beige;
                     }
 
                     .new-house-button {
-                        width: 28px;
-                        // height: 28px;
+                        width: 26px;
+                        height: 26px;
                         display: flex;
                         margin-left: 20px;
                         justify-content: center;
-                        align-items: center;
-                        font-size: 2rem;
+                        font-size: 1.8rem;
                         background-color: @theme-color-yellow;
                         border-radius: 100%;
                         padding: none;
+                        opacity: 0.9;
+                        transition-duration: 0.2s;
+                        cursor: pointer;
+
+                        &:hover {
+                            opacity: 1;
+                        }
                     }
                 }
             }
@@ -544,6 +554,7 @@ html {
         #edit-school {
             background-color: @theme-color-yellow;
             margin-bottom: 40px;
+
             .edit-school-form {
                 display: flex;
                 align-items: center;
@@ -553,9 +564,11 @@ html {
                     width: 60%;
                     display: flex;
                     align-items: center;
+
                     .input-title {
                         margin-left: 40px;
                     }
+
                     .edit-school-input {
                         color: white;
                         height: 30px;
@@ -573,6 +586,7 @@ html {
                         }
                     }
                 }
+
                 .edit-school-button {
                     height: 28px;
                     width: 80px;
@@ -589,11 +603,12 @@ html {
                     transition-duration: 0.2s;
                     margin: 0 auto;
                     cursor: pointer;
-        
+
                     &:hover {
                         opacity: 1;
                     }
                 }
+
                 .delete-button {
                     width: 140px;
                 }
@@ -658,6 +673,7 @@ html {
 
                     .housecard-front {
                         z-index: 2;
+                        // background-color: #025211;
 
                         .house-name {
                             font-size: 3rem;
