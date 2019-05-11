@@ -89,7 +89,7 @@ class App extends Component {
           component={About} />
         <SecuredRoute exact
           path='/admin/settings'
-          component={SettingsPage} />
+          component={(props) => <SettingsPage {...props} />} />
         <SecuredRoute exact
           path='/admin/analytics'
           HouseData={this.state.houseData}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SideMenu from './SideMenu';
 
-class Settings extends Component {
+class SettingsPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -17,7 +17,9 @@ class Settings extends Component {
 				<SideMenu {...this.props} />
 				<div className="settings">
 					<div className="Modal">
-						<form onSubmit={this.handleSubmit}>
+						<form 
+						onSubmit={this.handleSubmit}
+						>
 							<h1>Update Password</h1>
 							<input name="email"
 								type="email"
@@ -46,4 +48,4 @@ class Settings extends Component {
 	}
 }
 
-export default Settings;
+export default SettingsPage;
