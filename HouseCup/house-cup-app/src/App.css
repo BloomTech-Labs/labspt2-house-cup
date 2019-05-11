@@ -1023,24 +1023,30 @@ html {
 /* *****************
 Setting page styles -- Below this line
 ******************   */
-@import "https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900";
+
 
 .settings {
-  align-items: center;
   display: flex;
-  height: 100vh;
-  justify-content: center;
-  width: 100vw;
-  position: absolute;
-  top: 0;
-  left: 0;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100vh;  
+  
 }
 .settings h1 {
     color:yellow;
     margin-bottom: 60px;
     font-family: cursive;
 }
+
 .Modal {
+   display:flex;
+   justify-content: center;
+   align-items: center;
+   width:100%;
+}
+
+.Modal .Form-modal {
   background: #3E363F;
   border-radius: 2px;
   padding: 20px;
@@ -1054,8 +1060,6 @@ Setting page styles -- Below this line
   border-bottom: 1.5px solid #ffff00ec;
   padding-bottom: 18px;
   margin-bottom: 35px;
-}
-.Input  {
   outline: none;
   border: 0;
   color:red;
@@ -1064,46 +1068,7 @@ Setting page styles -- Below this line
   flex: 1 0 auto;
   font-size: 16px;
   font-weight: 800;
-}
-.Input:focus ~ label {
-  opacity: 1;
-}
-.Input label {
-  font-size: 13px;
-  font: '900 17px "Font Awesome 5 Free"';
-  opacity: .1;
-  transition: opacity .5s ease;
-}
-.Input label::before {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #FFFCE8;  
-  height: 30px;  
-  width: 30px;
-  
-   
-}
-
-
-input[type='text'] ~ label::before {
-  
-  font-family: "Font Awesome 5 Free";
-  content: "\f007";
-  font-weight: 900;
-}
- input[type='email'] ~ label::before {
- 
-  font-family: "Font Awesome 5 Free";
-  content: "\f1fa";
-  font-weight: 900;
-}
- input[type='password'] ~ label::before {
-  
-  font-family: "Font Awesome 5 Free";
-  content: "\f023";
-  font-weight: 900;
-}
+} 
 
 button {
   display: flex;
@@ -1124,29 +1089,10 @@ button {
   
 }
 
-button:hover {
+/* button:hover {
   transform: scale(1.02);
 }
 button:active {
   transform: scale(0.99);
-}
-
-/* .example-enter {
-  margin-top: 30px;
-  opacity: .01;
-}
-.example-enter.example-enter-active {
-  margin-top: 0px;
-  opacity: 1;
-  transition: opacity .5s ease, margin .5s ease;
-}
-
-.example-leave {
-  margin-top: 0px;
-  opacity: 1;
-}
-.example-leave.example-leave-active {
-  margin-top: -30px;
-  opacity: .01;
-  transition: opacity .3s ease, margin .5s ease;
 } */
+

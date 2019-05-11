@@ -146,10 +146,14 @@ const authData = {
 function getTokenFromAuth0(req,res,next) {
   request.post('https://venky-yagatilee.auth0.com/oauth/token', authData)
          .then( response => {
-            //  console.log(`Line 33`, response.body.access_token)
-             req.access_token = response.body.access_token;
-             next();
-            //  console.log(`Line 35 for req`, req.access_token)
+            if (res.body.access_token) {
+              console.log(`Line 33`, response.body.access_token)
+              req.access_token = res.body.access_token;
+              console.log(`Line 35 for req`, req.access_token)
+              next();
+            } else {
+              res.send(401, 'Unauthorized');
+            }
          })
          .catch(err => {
             //  response.status(500).json({msg: `Something is wrong`});

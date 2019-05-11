@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import { Route } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 //landingPage imports:
 import LandingPage from './sub-components/LandingPage'
 //test data:
@@ -81,7 +82,7 @@ class App extends Component {
   render() {    
     return (
       <div className="App">
-
+      <Switch>
         <Route exact 
                path='/' 
                render={(props) =>
@@ -103,7 +104,10 @@ class App extends Component {
                 render={(props) => <Houses {...props} /> }/>
         <Route  exact 
                 path = '/admin/schools/:id/update' 
-                render={(props) => <ModifySchoolPage {...props} />} />    
+                render={(props) => <ModifySchoolPage {...props} />} />
+        {/* <Route exact 
+               path = '/admin/settings'
+               render={(props) => <SettingsPage {...props} />}   />         */}
 
         <SecuredRoute exact 
                       path = '/admin/billing'
@@ -113,14 +117,17 @@ class App extends Component {
                       component={About} />
         <SecuredRoute exact 
                       path = '/admin/settings'
+                      props = {this.props}
                       component={SettingsPage}/>
         <SecuredRoute exact 
                       path = '/admin/analytics' 
                       HouseData={this.state.houseData}
                       component={AdminAnalyticsPage} />
+      </Switch>                      
       </div>
     );
   }
 
 }
+
 export default App;
