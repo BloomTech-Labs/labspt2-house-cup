@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 // import { Route } from 'react-router-dom';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 //landingPage imports:
 import LandingPage from './sub-components/LandingPage'
 //Admin import(s):
@@ -73,22 +73,22 @@ class App extends Component {
         <Route  exact 
                 path = '/admin/schools/:id'
                 render={(props) => <Houses {...props} /> }/>
+                
         <Route  exact 
                 path = '/admin/schools/:id/update' 
                 render={(props) => <ModifySchoolPage {...props} />} />
-        {/* <Route exact 
-               path = '/admin/settings'
-               render={(props) => <SettingsPage {...props} />}   />         */}
-
+       
         <SecuredRoute path='/about'
-          component={About} />
+                      component={About} />
+
         <SecuredRoute exact
-          path='/admin/settings'
-          component={SettingsPage} />
+                      path='/admin/settings'
+                      component={SettingsPage} />
+
         <SecuredRoute exact
-          path='/admin/analytics'
-          HouseData={this.state.houseData}
-          component={AdminAnalyticsPage} />
+                      path='/admin/analytics'
+                      HouseData={this.state.houseData}
+                      component={AdminAnalyticsPage} />
       </div>
     );
   }

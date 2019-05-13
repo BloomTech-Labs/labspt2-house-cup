@@ -1,4 +1,3 @@
-
 import React from 'react';
 import LandingImg from '../images/realestate.png';
 import Dumbledore from '../images/dumbledore.jpg';
@@ -7,8 +6,6 @@ import { ReactComponent as IconChart } from '../images/icon-chart.svg';
 import { ReactComponent as IconTeacher } from '../images/icon-teacher.svg';
 import { ReactComponent as IconCastle } from '../images/castle.svg';
 
-//GSAP import
-// import { TweenMax, Linear } from "gsap/all";
 
 import schoolsTestData from '../mock data/schools';
 import auth from '../utils/Auth';
@@ -130,4 +127,5 @@ class LandingPage extends React.Component {
         )
     }
 }
+
 export default LandingPage;
