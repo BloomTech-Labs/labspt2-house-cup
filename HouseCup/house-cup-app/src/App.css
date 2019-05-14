@@ -411,7 +411,7 @@ html {
   margin: 0 27px;
 }
 .houses-page .houses-container .new-house-expand .add-house-inputs {
-  width: 70%;
+  width: 74%;
 }
 .houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form {
   display: flex;
@@ -421,7 +421,7 @@ html {
 .houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .new-house-input {
   color: white;
   height: 30px;
-  width: 40%;
+  width: 25%;
   margin-bottom: 5px;
   margin-left: 20px;
   background-color: transparent;
@@ -433,19 +433,28 @@ html {
 .houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .new-house-input:focus {
   outline: none;
 }
+.houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .react-select {
+  width: 18%;
+}
 .houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form input::placeholder {
   color: #D0CAAD;
 }
 .houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .new-house-button {
-  width: 28px;
+  width: 26px;
+  height: 26px;
   display: flex;
   margin-left: 20px;
   justify-content: center;
-  align-items: center;
-  font-size: 2rem;
+  font-size: 1.8rem;
   background-color: #ECA00D;
   border-radius: 100%;
   padding: none;
+  opacity: 0.9;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+.houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .new-house-button:hover {
+  opacity: 1;
 }
 .houses-page .houses-container #edit-school {
   background-color: #ECA00D;
