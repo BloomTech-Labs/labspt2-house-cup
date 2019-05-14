@@ -58,6 +58,7 @@ sequelize.sync();
 const userRouter = require('../controllers/routes/users_routes');
 const schoolsRouter = require('../controllers/routes/schools');
 const housesRouter = require('../controllers/routes/houses');
+const paymentRouter = require('../controllers/routes/payment');
 const { errorHandler } = require('../middleware/index');
 
 const server = express();
@@ -72,10 +73,8 @@ server.use('/users', userRouter);
 server.use('/schools', schoolsRouter);
 // Get the id from req.params -- > houses.js
 server.use('/', housesRouter);
+server.use('/', paymentRouter);
 
-
-const configureRoutes = require("../controllers/routes");
-configureRoutes(server);
 
 server.get('/', (req, res) => {
   res.send(`Server is up and running now.`);

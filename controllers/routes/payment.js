@@ -1,4 +1,7 @@
+const express = require('express');
+const router = express.Router();
 const stripe =  require("stripe")(process.env.STRIPE_SECRET_KEY);
+
 
 const stripeChargeCallback = res => (stripeErr, stripeRes) => {
   if (stripeErr) {
@@ -8,16 +11,15 @@ const stripeChargeCallback = res => (stripeErr, stripeRes) => {
   }
 };
 
-const paymentApi = server => {
 
-  server.get("/", (req, res) => {
+  router.get("/", (req, res) => {
     res.send({
       message: "Hello Stripe checkout server!",
       timestamp: new Date().toISOString()
     });
   });
 
-  server.post("/payment", (req, res) => {
+  router.post("/payment", (req, res) => {
     const body = {
       source: req.body.token.id,
       amount: req.body.amount,
@@ -26,7 +28,6 @@ const paymentApi = server => {
     stripe.charges.create(body, stripeChargeCallback(res));
   });
 
-  return server;
-};
+  
 
-module.exports = paymentApi;
+module.exports = router;
