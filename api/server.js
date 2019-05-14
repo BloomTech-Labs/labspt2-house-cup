@@ -41,6 +41,18 @@ School.hasMany(House, {
 
   belongsToMany
 */
+// const corsOptions = {
+//   credentials: true,
+//   origin: function(origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   }
+// };
+
+
 
 sequelize.sync();
 const userRouter = require('../controllers/routes/users_routes');

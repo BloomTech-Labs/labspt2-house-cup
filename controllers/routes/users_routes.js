@@ -1,6 +1,8 @@
 const express = require("express");
 const { User, School, House } = require('../../Models');
 const router = express.Router();
+const request = require('superagent');
+
 const sequelize = require("../../sequelize");
 const {
   inputValidation,
@@ -10,11 +12,42 @@ const {
   findUser,
   checkPassword,
   provideAccess,
-  getTokenFromAuth0,
+  getTokenFromAuth0
+  
 } = require("../../middleware/user_middleware");
+
 const {jwtCheck} = require('../../auth/Express-jwt');
 
 
+router.patch('/update',
+            getTokenFromAuth0, 
+            jwtCheck,
+            (req, res) => {
+              const user_id = req.user.sub;
+              const update = req.body;
+              console.log(`user id`, user_id);
+              console.log(`Update`, update)
+              const headers = { Authorization: `Bearer ${req.access_token}` };
+              
+              request.patch(`https://venky-yagatilee.auth0.com/api/v2/users/${user_id}`, update, {headers})
+                   .then( data => {
+                        console.log(data);
+                   })
+                   .catch(err => {
+                      res.status(500).json({msg: `Something went wrong`});
+                   })
+              //  request
+              //   .patch(`https://venky-yagatilee.auth0.com/api/v2/users/${id}`)
+              //   .set('Authorization', 'Bearer ' + req.access_token )
+              //   .send(update)
+              //   .then(data => {
+              //     console.log(`Line 129 userupdate`, data );
+              //     res.status(200).json(data);
+              //   })
+              //   .catch(err => {
+              //     res.status(403).json({msg: '403 Forbidden'});
+              //     console.log(err)}
+            });
 
 router.get("/", (req, res, next) => {
   getTokenFromAuth0();
@@ -40,6 +73,8 @@ router.get("/", (req, res, next) => {
       // res.status(500).json({err})
     });
 });
+
+
 
 router.get("/:id", (req, res) => {
   const { id } = req.body;
@@ -99,7 +134,26 @@ router.post( "/register",
   }
 );
 
-// Update user details
+// Update user details -- settings page in the front-end
+//1. Get the user details based on the valid token
+router.get('/userCredentials', getTokenFromAuth0, jwtCheck, (req, res) => {
+  const user_id = req.user.sub;
+  request
+    .get(`https://venky-yagatilee.auth0.com/api/v2/users/${user_id}`)
+    .set('Authorization', 'Bearer ' + req.access_token)
+    .then(data => {
+      res.status(200).json(data);
+    })
+    .catch(err => {
+      res.status(404).json({msg:'403 Forbidden'});
+      console.log(err);
+    });
+});
+//
+
+//2. Update the user details (password)
+
+
 
 
 

@@ -1,7 +1,8 @@
 const { User } = require('../Models');
 const bcrypt = require('bcryptjs');
 const { generateToken } = require('../auth/jwt');
-const  request = require("request");
+const  request = require("superagent");
+
 
 function inputValidation(req, res, next) {
   const { firstName, lastName, email, password } = req.body;
@@ -14,6 +15,11 @@ function inputValidation(req, res, next) {
   // if (!lastName) {
   //   missingFields.push('lastName');
   // }
+
+const NON_INTERACTIVE_CLIENT_ID = "s9Qekd0RGrf7q6MzklrKi8n6R9HzKz06";
+const NON_INTERACTIVE_CLIENT_SECRET = "09m5DSGrksPQf7WQq5OS3uTqY11l6RmLufxUGVoWvusF3Kf52Tb1ZUiE9UBOEXmO";
+
+
 
   if (!email) {
     missingFields.push('email');
@@ -122,26 +128,33 @@ function provideAccess(req, res, next) {
   res.status(200).json({ token: token });
   //still need to implement using passport.js
 }
+const NON_INTERACTIVE_CLIENT_ID = "s9Qekd0RGrf7q6MzklrKi8n6R9HzKz06";
+const NON_INTERACTIVE_CLIENT_SECRET = "09m5DSGrksPQf7WQq5OS3uTqY11l6RmLufxUGVoWvusF3Kf52Tb1ZUiE9UBOEXmO";
 
+const authCredentials = {
+  client_id: NON_INTERACTIVE_CLIENT_ID,
+  client_secret: NON_INTERACTIVE_CLIENT_SECRET,
+  grant_type: 'client_credentials',
+  audience: "https://venky-yagatilee.auth0.com/api/v2/"
+};
+const authData = {
+  client_id: NON_INTERACTIVE_CLIENT_ID,
+  client_secret: NON_INTERACTIVE_CLIENT_SECRET,
+  grant_type: 'client_credentials',
+  audience: "https://venky-yagatilee.auth0.com/api/v2/"
+};
 function getTokenFromAuth0(req,res,next) {
-  const options = { 
-      method: 'POST',
-      url: 'https://venky-yagatilee.auth0.com/oauth/token',
-      headers: { 'content-type': 'application/x-www-form-urlencoded' },
-      form: {
-            grant_type: 'client_credentials',
-            client_id: '46Ngw5RelPCvdaCoKrqPvIWyvgFQBqvx',
-            client_secret: 'S6yQ3xtx-DYjRLPBt20MWzHG6wEUFXHZGUtSf__mAfR5fD80r4qgT134CO5Ocqu3',
-            audience: 'https://venky-yagatilee.auth0.com/api/v2/'
-        } 
-   };
-
-    request(options, function (error, response, body) {
-        if (error) throw new Error(error);
-          console.log(`Line 141`, body);
-         
-        });
-        next();
+  request.post('https://venky-yagatilee.auth0.com/oauth/token', authData)
+         .then( response => {
+            //  console.log(`Line 33`, response.body.access_token)
+             req.access_token = response.body.access_token;
+             next();
+            //  console.log(`Line 35 for req`, req.access_token)
+         })
+         .catch(err => {
+            //  response.status(500).json({msg: `Something is wrong`});
+            console.log(`Error:`, err)
+         }); 
 }
 
 module.exports = {
@@ -153,4 +166,5 @@ module.exports = {
   checkPassword,
   provideAccess,
   getTokenFromAuth0
+  
   };
