@@ -656,6 +656,17 @@ html {
   cursor: default;
   width: 100%;
 }
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .bin {
+  fill: #D0CAAD;
+  width: 20px;
+  position: relative;
+  left: 105px;
+  bottom: 20px;
+}
+.houses-page .houses-container .houses-list .housecard .housecard-inner .housecard-back .bin:hover {
+  fill: #F1EFEA;
+  cursor: pointer;
+}
 .houses-page .houses-container .houses-list .flip .housecard-inner {
   transform: rotateY(180deg);
 }
@@ -779,8 +790,6 @@ html {
   display: none;
 }
 @media (max-width: 800px) {
-  display: flex;
-  flex-direction: column;
   .landing-page-block {
     display: flex;
     flex-direction: column;
@@ -1109,4 +1118,93 @@ html {
     margin: 0 auto;
     padding: 0px;
   }
+}
+/* *****************
+Setting page styles -- Below this line
+******************   */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Lato Hairline'), local('Lato-Hairline'), url(https://fonts.gstatic.com/s/lato/v15/S6u8w4BMUTPHh30AXC-v.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh7USSwiPHA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjx4wWw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwiPHA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Lato Black'), local('Lato-Black'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh50XSwiPHA.ttf) format('truetype');
+}
+.settings {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.settings h1 {
+  color: yellow;
+  margin-bottom: 60px;
+  font-family: cursive;
+}
+.Modal {
+  background: #3E363F;
+  border-radius: 2px;
+  padding: 20px;
+  width: 320px;
+  height: 400px;
+}
+.Input {
+  display: flex;
+  flex-direction: row-reverse;
+  border-bottom: 1.5px solid #ffff00ec;
+  padding-bottom: 18px;
+  margin-bottom: 35px;
+}
+.Input {
+  outline: none;
+  border: 0;
+  color: red;
+  background: transparent;
+  font-family: "Lato", sans-serif;
+  flex: 1 0 auto;
+  font-size: 16px;
+  font-weight: 800;
+}
+.Input:focus ~ label {
+  opacity: 1;
+}
+.Input label {
+  font-size: 13px;
+  font: '900 17px "Font Awesome 5 Free"';
+  opacity: 0.1;
+  transition: opacity 0.5s ease;
+}
+.Input label::before {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFFCE8;
+  height: 30px;
+  width: 30px;
 }

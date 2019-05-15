@@ -5,6 +5,7 @@ import Select from 'react-select';
 import chroma from 'chroma-js';
 import colorOptions from './ColorOptions';
 import auth from '../utils/Auth.js';
+import { ReactComponent as IconBin } from '../images/bin.svg';
 
 class Houses extends React.Component {
     constructor(props) {
@@ -37,20 +38,30 @@ class Houses extends React.Component {
     }
 
     componentDidMount() {
+        this.fetchSchoolInfo();
+        this.fetchHouses();
+    }
+
+    fetchSchoolInfo = e => {
+        const id = this.props.match.params.id;
+        axios.get(`http://localhost:5000/schools/${id}`)
+            .then(response => {
+                this.setState({
+                    schoolInfo: response.data.data.school,
+                    newSchoolName: response.data.data.school.name,
+                    newSchoolCity: response.data.data.school.city
+                })
+            })
+            .catch(err => console.log(err));
+    }
+
+    //fetch houses
+    fetchHouses = e => {
         const id = this.props.match.params.id;
         axios.get(`http://localhost:5000/schools/${id}/houses`)
             .then(response => {
                 if (response) {
                     this.setState({ houseList: response.data });
-                    axios.get(`http://localhost:5000/schools/${id}`)
-                        .then(response => {
-                            this.setState({
-                                schoolInfo: response.data.data.school,
-                                newSchoolName: response.data.data.school.name,
-                                newSchoolCity: response.data.data.school.city
-                            })
-                        })
-                        .catch(err => console.log(err));
                 } else {
                     console.log(`There is no houses data from the db`);
                 }
@@ -59,22 +70,48 @@ class Houses extends React.Component {
             .catch(err => console.log(err))
     }
 
-    //delete this school
-    deleteSchool = e => {
-        // e.preventDefault();
+    //update school info
+    putSchool = school => {
+        const id = this.props.match.params.id;
         const { getAccessToken } = auth;
         const headers = { Authorization: `Bearer ${getAccessToken()}` };
-        const id = this.props.match.params.id;
-        console.log(headers);
+        axios
+            .put(`http://localhost:5000/schools/${id}`, school, { headers })
+            .then(response => {
+                console.log(response);
+                this.fetchSchoolInfo();
+            })
+            .catch(err => console.log(err));
+    };
+
+    handleUpdate = e => {
+        e.preventDefault();
+        const newSchool = {
+            name: this.state.newSchoolName,
+            city: this.state.newSchoolCity,
+        };
+        this.putSchool(newSchool);
+        this.editSchoolToggle();
+    };
+
+    //delete this school
+    deleteSchool = id => {
+        const { getAccessToken } = auth;
+        const headers = { Authorization: `Bearer ${getAccessToken()}` };
         axios.delete(`http://localhost:5000/schools/${id}`, { headers })
             .then(response => {
-                console.log('success', response)
-                this.props.history.goBack();
+                console.log('success', response);
+                this.props.fetchSchools();
             })
             .catch(err => {
                 console.log(err)
             })
     }
+    handleDelete = () => {
+        const id = this.props.match.params.id;
+        this.deleteSchool(id);
+        this.props.history.push("/admin/schools");
+    };
 
     //Add House
     addHouse = (e) => {
@@ -108,12 +145,30 @@ class Houses extends React.Component {
         }
         console.log(`House ${this.state.newHouseName} added!`);
     }
+
+    //delete house
+    deleteHouse = id => {
+        const { getAccessToken } = auth;
+        const headers = { Authorization: `Bearer ${getAccessToken()}` };
+        console.log(id);
+        axios.delete(`http://localhost:5000/${id}`, { headers })
+            .then(response => {
+                console.log('success', response);
+                this.fetchHouses();
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     //Handle-Input
     handleInput = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         })
     }
+
+
     //House point system
     pickTicker = e => {
         var activeNum = document.getElementsByClassName(`active-number`);
@@ -134,7 +189,7 @@ class Houses extends React.Component {
         })
         var elements = document.getElementsByClassName(`active-number`);
         elements[0].classList.toggle('active-number');
-        this.forceUpdate();
+        this.putHouse(this.state.houseList[pos]);
     };
 
     dropPoint = id => {
@@ -145,9 +200,23 @@ class Houses extends React.Component {
         })
         var elements = document.getElementsByClassName(`active-number`);
         elements[0].classList.toggle('active-number');
-        this.forceUpdate();
+        this.putHouse(this.state.houseList[pos]);
     };
 
+    //update house point
+    putHouse = house => {
+        const { getAccessToken } = auth;
+        const headers = { Authorization: `Bearer ${getAccessToken()}` };
+        console.log(house);
+        axios
+            .put(`http://localhost:5000/${house.id}`, house, { headers })
+            .then(response => {
+                this.fetchHouses();
+            })
+            .catch(err => console.log(err));
+    };
+
+    // flip card
     toggleFlip = id => {
         var element = document.getElementById(`housecard-${id}`);
         element.classList.toggle("flip");
@@ -237,8 +306,8 @@ class Houses extends React.Component {
                                         onChange={this.handleInput.bind(this)}
                                     />
                                 </div>
-                                <button className='edit-school-button'>Save</button>
-                                <button className='edit-school-button delete-button' onClick={this.deleteSchool}>Delete School</button>
+                                <button className='edit-school-button' onClick={this.handleUpdate}>Save</button>
+                                <button className='edit-school-button delete-button' onClick={this.handleDelete}>Delete School</button>
                             </form>
                         </div>
                         <div className={this.state.newHouse ? 'new-house new-house-expand' : 'new-house new-house-collapse'} onClick={this.newHouseToggle.bind(this)} >
@@ -313,9 +382,6 @@ class Houses extends React.Component {
                                                         <span className='increment-number' id='9' onClick={this.pickTicker.bind(this)}>9</span>
                                                         <span className='increment-number' id='10' onClick={this.pickTicker.bind(this)}>10</span>
                                                     </div>
-                                                    <div className='increment-number-ticker'>
-                                                        {/* <button className='down-ticker' onClick={this.incrementChangeDown}>↓</button> */}
-                                                    </div>
                                                 </div>
                                                 <div className='points-button-container'>
                                                     <button className='add-points-button points-button' onClick={this.addPoint.bind(this, eachHouse.id)}>Add</button>
@@ -329,7 +395,8 @@ class Houses extends React.Component {
                                                 >
                                                     {eachHouse.points}
                                                 </h3>
-                                                <h2 className='points-txt'>Points</h2>
+                                                <h2 className='points-txt' onClick={this.putHouse.bind(this, eachHouse)}>Points</h2>
+                                                <IconBin className='bin' onClick={this.deleteHouse.bind(this, eachHouse.id)} />
                                             </div>
                                         </div>
                                     </div>

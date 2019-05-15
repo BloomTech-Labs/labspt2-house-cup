@@ -30,7 +30,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      schoolData: [],
+      schoolsList: [],
       name: null,
       email: null,
 
@@ -44,14 +44,21 @@ class App extends Component {
       silentAuth();
     }
 
-    axios.get('http://localhost:5000/schools')
-      .then(response => {
-        this.setState({ schoolData: response.data.data.schools })
-      })
-      .catch(err => console.log(err));
+    this.fetchSchools();
 
   }
 
+  fetchSchools = e => {
+    axios.get('http://localhost:5000/schools')
+        .then(response => {
+            if (response) {
+                this.setState({ schoolsList: response.data.data.schools })
+            } else {
+                console.log(`There is no response from the server`);
+            }
+        })
+        .catch(err => console.log(err))
+}
 
   render() {
     return (
@@ -61,7 +68,7 @@ class App extends Component {
           path='/'
           render={(props) =>
             <LandingPage {...props}
-              schoolsSelected={this.state.schoolData} />} />
+              schoolsSelected={this.state.schoolsList} />} />
         <Route exact
           path='/callback'
           render={(props) => <Callback />} />
@@ -69,13 +76,17 @@ class App extends Component {
           path='/admin/schools'
           render={(props) =>
             <SchoolsPage {...props}
-              schools={this.state.schoolData}
+              schoolsList={this.state.schoolsList}
               houseList={this.state.testData}
+              fetchSchools={this.fetchSchools}
             />
           } />
         <Route exact
           path='/admin/schools/:id'
-          render={(props) => <Houses {...props} />}
+          render={(props) =>
+          <Houses {...props} 
+          fetchSchools={this.fetchSchools}
+          />}
         />
         <Route exact
           path='/admin/schools/:id/update'

@@ -9,7 +9,6 @@ class SchoolsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            schoolsList: [],
             authProfile: [],
             authPassword: '',
             houseList: [],
@@ -19,16 +18,7 @@ class SchoolsPage extends Component {
         }
     }
     componentDidMount() {
-        axios.get('http://localhost:5000/schools')
-            .then(response => {
-                if (response) {
-                    this.setState({ schoolsList: response.data.data.schools })
-                } else {
-                    console.log(`There is no response from the server`);
-                }
-            })
-            .catch(err => console.log(err))
-
+        this.props.fetchSchools();
     }
 
     addSchool = (e) => {
@@ -43,10 +33,7 @@ class SchoolsPage extends Component {
             const headers = { Authorization: `Bearer ${getAccessToken()}` };
             axios.post('http://localhost:5000/schools', newSchool, { headers })
                 .then(school => {
-                    let newSchool = school.data.data.newSchool;
-                    this.setState({
-                        schoolsList: [...this.state.schoolsList, newSchool]
-                    })
+                    this.props.fetchSchools();
                 }).catch(err => {
                     console.log(err);
                 });
@@ -105,7 +92,7 @@ class SchoolsPage extends Component {
                         </div>
                     </div>
                     <div className='schools-list'>
-                        {this.state.schoolsList.map((school) => {
+                        {this.props.schoolsList.map((school) => {
                             return (
                                 <NavLink to={`/admin/schools/${school.id}`} className='menu-button' activeClassName="activeMenu" style={{ textDecoration: "none", color: "inherit" }}>
                                     <div className='school-card'>
