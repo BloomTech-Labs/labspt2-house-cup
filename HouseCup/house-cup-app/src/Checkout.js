@@ -5,6 +5,8 @@
 import React  from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+import cup from './images/images.jpg'
+
 
 const Checkout = () => {
   const publishableKey = "pk_test_WyufeHp9FTBavFWAOUqK0icx00EoXVThGt";   
@@ -29,11 +31,12 @@ const Checkout = () => {
   return (
     <StripeCheckout
       label="Go Premium" //Component button text
-      name="Business LLC" //Modal Header
+      name="House-Cup" //Modal Header
       description="Upgrade to a premium account today."
       panelLabel="Go Premium" //Submit button in modal
       amount={1999} //Amount in cents $9.99
       token={onToken}
+      image={cup}
       stripeKey={publishableKey}      
       billingAddress={false}
     />

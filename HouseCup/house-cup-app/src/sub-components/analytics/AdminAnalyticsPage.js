@@ -21,10 +21,13 @@ export default class AdminAnalyticsPage extends Component {
 
  handleChange = (selectedOption) => {
     const year = selectedOption["label"]
-    const yearData = this.state.graphData.data[year]    
+    const yearData = this.state.graphData.data[year];
+    console.log(yearData)
+     let limitedData = yearData.slice(0,5);
+     console.log(limitedData)
     this.setState({ 
         selectedOption: selectedOption,
-        data: yearData
+        data: limitedData
        });
     console.log(`Option selected:`, selectedOption["label"]);
 }
@@ -41,7 +44,7 @@ componentDidMount() {
   const year = this.state.graphData.years[length-1]
   this.setState({
      selectedOption: this.state.graphData.years[length-1],
-     data: this.state.graphData.data[year.label]
+     data: this.state.graphData.data[year.label].slice(0,5)
   })
   window.addEventListener('resize', this.renderGraphs);
   const {getAccessToken} = auth;
