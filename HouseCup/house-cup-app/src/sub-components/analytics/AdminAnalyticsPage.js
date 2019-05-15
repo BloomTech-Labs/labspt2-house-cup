@@ -19,14 +19,17 @@ export default class AdminAnalyticsPage extends Component {
      this.state = {
         graphData: dummyData,
         selectedOption: null,
-        data: null     
+        data: null,
+        year: '2019'    
                     
       }
   }
 
+ 
+
 handleChange = (selectedOption) => {
     const year = selectedOption["label"]
-    const yearData = this.state.graphData.data[year]
+    const yearData = this.state.graphData.data[year]    
     this.setState({ 
         selectedOption: selectedOption,
         data: yearData

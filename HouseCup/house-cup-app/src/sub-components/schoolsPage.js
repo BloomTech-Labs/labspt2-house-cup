@@ -94,7 +94,7 @@ class SchoolsPage extends Component {
                     <div className='schools-list'>
                         {this.props.schoolsList.map((school) => {
                             return (
-                                <NavLink to={`/admin/schools/${school.id}`} className='menu-button' activeClassName="activeMenu" style={{ textDecoration: "none", color: "inherit" }}>
+                                <NavLink to={`/admin/schools/${school.id}`} className='menu-button' activeClassName="activeMenu" style={{ textDecoration: "none", color: "inherit" }} key={school.id}>
                                     <div className='school-card'>
                                         <h2>{school.name}</h2>
                                         <h2 className='from'>from</h2>

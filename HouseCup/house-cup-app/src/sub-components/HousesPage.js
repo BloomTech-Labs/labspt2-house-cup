@@ -7,7 +7,7 @@ import colorOptions from './ColorOptions';
 import auth from '../utils/Auth.js';
 import { ReactComponent as IconBin } from '../images/bin.svg';
 
-class Houses extends React.Component {
+class HousesPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -323,7 +323,7 @@ class Houses extends React.Component {
                                         name='newHouseName'
                                         value={this.state.newHouseName}
                                         onChange={this.handleInput} />
-                                    <input type="text"
+                                    <input
                                         className='new-house-input'
                                         id='points'
                                         type='number'
@@ -411,4 +411,4 @@ class Houses extends React.Component {
     }
 }
 
-export default Houses;
+export default HousesPage;

@@ -41,12 +41,26 @@ School.hasMany(House, {
 
   belongsToMany
 */
+// const corsOptions = {
+//   credentials: true,
+//   origin: function(origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   }
+// };
+
+
 
 sequelize.sync();
 const userRouter = require('../controllers/routes/users_routes');
 const schoolsRouter = require('../controllers/routes/schools');
 const housesRouter = require('../controllers/routes/houses');
+const paymentRouter = require('../controllers/routes/payment');
 const { errorHandler } = require('../middleware/index');
+
 const server = express();
 
 server.use(bodyParser.json());
@@ -59,6 +73,8 @@ server.use('/users', userRouter);
 server.use('/schools', schoolsRouter);
 // Get the id from req.params -- > houses.js
 server.use('/', housesRouter);
+server.use('/', paymentRouter);
+
 
 server.get('/', (req, res) => {
   res.send(`Server is up and running now.`);

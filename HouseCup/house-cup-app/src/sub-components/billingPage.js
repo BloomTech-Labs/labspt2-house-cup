@@ -15,11 +15,7 @@ const BillingPage = props => {
                     For {props.premiumPrice} upgrade to a <b>premium</b> account with unlimited Houses and historical analytics.
                 </span>
                 <div className='payment-info-box'>
-                    <Checkout
-                      name={'Historical Analytics'}
-                      description={'House Cup'}
-                      amount={19}
-                    />
+                    <Checkout />
                 </div>   
                 </Payment>            
             {/* </div> */}

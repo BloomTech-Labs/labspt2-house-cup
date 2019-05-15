@@ -27,7 +27,7 @@ class SideMenu extends React.Component {
                     <h2>Analytics</h2>
                 </NavLink>
 
-                <NavLink to="/admin/settings" className='menu-button' activeClassName="activeMenu" style={{ textDecoration: "none", color: "inherit" }}>
+                <NavLink to='/admin/settings' className='menu-button'  activeClassName="activeMenu"  style={{ textDecoration: "none", color: "inherit" }}>
                     <h2>Settings</h2>
                 </NavLink>
                 <div className='menu-button' onClick={() => { this.logout() }}>
