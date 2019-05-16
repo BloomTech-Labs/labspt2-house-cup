@@ -668,6 +668,7 @@ html {
   display: flex;
   flex-direction: column;
   font-family: 'Lato';
+  width: 80%;
 }
 .schools-page .schools-container .schools-page-header {
   padding: 20px;
@@ -991,6 +992,7 @@ html {
   .houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .react-select {
     width: 50%;
     margin-top: 20px;
+    font-size: 1.3rem;
   }
   .houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .new-house-button {
     margin-left: 0px;
