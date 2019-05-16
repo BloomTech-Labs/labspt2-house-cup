@@ -19,35 +19,6 @@ const {
 const {jwtCheck} = require('../../auth/Express-jwt');
 
 
-router.patch('/update',
-            getTokenFromAuth0, 
-            jwtCheck,
-            (req, res) => {
-              const user_id = req.user.sub;
-              const update = req.body;
-              console.log(`user id`, user_id);
-              console.log(`Update`, update)
-              const headers = { Authorization: `Bearer ${req.access_token}` };
-              
-              request.patch(`https://venky-yagatilee.auth0.com/api/v2/users/${user_id}`, update, {headers})
-                   .then( data => {
-                        console.log(data);
-                   })
-                   .catch(err => {
-                      res.status(500).json({msg: `Something went wrong`});
-                   })
-              //  request
-              //   .patch(`https://venky-yagatilee.auth0.com/api/v2/users/${id}`)
-              //   .set('Authorization', 'Bearer ' + req.access_token )
-              //   .send(update)
-              //   .then(data => {
-              //     console.log(`Line 129 userupdate`, data );
-              //     res.status(200).json(data);
-              //   })
-              //   .catch(err => {
-              //     res.status(403).json({msg: '403 Forbidden'});
-              //     console.log(err)}
-            });
 
 router.get("/", (req, res, next) => {
   getTokenFromAuth0();
@@ -149,9 +120,61 @@ router.get('/userCredentials', getTokenFromAuth0, jwtCheck, (req, res) => {
       console.log(err);
     });
 });
-//
+//2. Update the user payment details
+router.patch('/updatebill',
+            jwtCheck,
+            async (req, res,next) => {
+              try{
+              const user_id = req.user.sub;
+              const paymentDetails = req.body;
+              console.log(`user id`, user_id);
+              console.log(`Update`, paymentDetails)
+             
+              const user = await User.findOne({
+                where: {
+                  user_id: user_id
+                },
+              });
+              console.log(`line 138-- updatebill`, user)              
+              const updatedUser = user.update(paymentDetails);
+              res.status(200).json(updatedUser)
+            } catch(err) {
+              next({ ...err, code: 500 })
+            }
+              
+            });
 
-//2. Update the user details (password)
+
+//3. Update the user details (password)
+router.patch('/update',
+            getTokenFromAuth0, 
+            jwtCheck,
+            (req, res) => {
+              const user_id = req.user.sub;
+              const update = req.body;
+              console.log(`user id`, user_id);
+              console.log(`Update`, update)
+              const headers = { Authorization: `Bearer ${req.access_token}` };
+              
+              request.patch(`https://venky-yagatilee.auth0.com/api/v2/users/${user_id}`, update, {headers})
+                   .then( data => {
+                        console.log(data);
+                   })
+                   .catch(err => {
+                      res.status(500).json({msg: `Something went wrong`});
+                   })
+              //  request
+              //   .patch(`https://venky-yagatilee.auth0.com/api/v2/users/${id}`)
+              //   .set('Authorization', 'Bearer ' + req.access_token )
+              //   .send(update)
+              //   .then(data => {
+              //     console.log(`Line 129 userupdate`, data );
+              //     res.status(200).json(data);
+              //   })
+              //   .catch(err => {
+              //     res.status(403).json({msg: '403 Forbidden'});
+              //     console.log(err)}
+            });
 
 
 

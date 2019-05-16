@@ -49,8 +49,8 @@ handleSubmit = (event) => {
 render() {
 return (
 <>
-<SideMenu />
 <div className="settings">
+<SideMenu />
 <div className="Modal">
 <form onSubmit={this.handleSubmit}>
 	<h1>Update Password</h1>

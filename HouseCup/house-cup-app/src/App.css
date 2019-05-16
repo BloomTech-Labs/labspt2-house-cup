@@ -1126,7 +1126,7 @@ Setting page styles -- Below this line
   
 }
 .settings h1 {
-    color:yellow;
+    color:rgb(226, 89, 45);
     margin-bottom: 60px;
     font-family: cursive;
 }
