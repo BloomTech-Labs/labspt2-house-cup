@@ -190,7 +190,7 @@ html {
   min-height: 800px;
   max-width: unset;
   width: 100%;
-  background-image: linear-gradient(#f9f7f6, #E2592D);
+  background-image: linear-gradient(#f9f7f6, #a0011f);
 }
 .landing-page .landing-page-block-4 .review-container {
   max-width: 1080px;
@@ -812,7 +812,8 @@ html {
   background-color: #ECA00D;
 }
 .settings-page .settings .settings-input-container .Input {
-  color: white;
+  margin-top: 25px;
+  color: #F1EFEA;
   height: 30px;
   width: 60%;
   background-color: transparent;
@@ -825,7 +826,7 @@ html {
   outline: none;
 }
 .settings-page .settings .settings-input-container input::placeholder {
-  color: #D0CAAD;
+  color: lightgray;
 }
 .settings-page .settings .settings-input-container .save-button {
   height: 28px;
