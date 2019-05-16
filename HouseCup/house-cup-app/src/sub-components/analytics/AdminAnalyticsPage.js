@@ -40,6 +40,15 @@ renderGraphs = () => {
 }
 
 componentDidMount() {
+  const {getAccessToken} = auth;
+  const headers = {Authorization : `Bearer ${getAccessToken()}`}
+  axios.get('http://localhost:5000/users/member', {headers})
+       .then( user=> {
+          console.log(`Line 47`, user);
+       })
+       .catch(err => {
+           console.log(err);
+       });
   const length = this.state.graphData.years.length;
   const year = this.state.graphData.years[length-1]
   this.setState({
@@ -47,8 +56,7 @@ componentDidMount() {
      data: this.state.graphData.data[year.label].slice(0,5)
   })
   window.addEventListener('resize', this.renderGraphs);
-  const {getAccessToken} = auth;
-  const headers = {Authorization : `Bearer ${getAccessToken()}`}
+  
    axios.get('http://localhost:5000/schools/houses/data', {headers})
         .then( response => {
           console.log(response.data);

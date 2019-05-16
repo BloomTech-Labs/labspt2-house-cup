@@ -127,9 +127,7 @@ router.patch('/updatebill',
               try{
               const user_id = req.user.sub;
               const paymentDetails = req.body;
-              console.log(`user id`, user_id);
-              console.log(`Update`, paymentDetails)
-             
+                           
               const user = await User.findOne({
                 where: {
                   user_id: user_id
@@ -162,22 +160,23 @@ router.patch('/update',
                    })
                    .catch(err => {
                       res.status(500).json({msg: `Something went wrong`});
-                   })
-              //  request
-              //   .patch(`https://venky-yagatilee.auth0.com/api/v2/users/${id}`)
-              //   .set('Authorization', 'Bearer ' + req.access_token )
-              //   .send(update)
-              //   .then(data => {
-              //     console.log(`Line 129 userupdate`, data );
-              //     res.status(200).json(data);
-              //   })
-              //   .catch(err => {
-              //     res.status(403).json({msg: '403 Forbidden'});
-              //     console.log(err)}
+                   })              
             });
 
-
-
+  router.get('/member',
+        jwtCheck,
+        (req,res) => {
+          const user_id = req.user.sub;
+          User.findOne({ where: { user_id: userId } })
+              .then( response => {
+                  console.log(`Response from 172`, response)
+                  res.status(200).json(response)
+              })
+              .catch(err => {
+                  res.status(500).json({msg:`Something went wrong`});
+              })
+     }      
+ );
 
 
 

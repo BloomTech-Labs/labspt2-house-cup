@@ -7,8 +7,7 @@ module.exports = sequelize.define('users', {
   name: { type: Sequelize.STRING, allowNull: true },
   email: { type: Sequelize.STRING, allowNull: true },
   // password: { type: Sequelize.STRING, allowNull: false },
-  isPremium:{type:Sequelize.BOOLEAN, allowNull:false, defaultValue:false },
-  isAdmin: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true },
+  isAdmin: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
 });
 
 /*

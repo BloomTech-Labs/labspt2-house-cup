@@ -40,6 +40,7 @@ class App extends Component {
              houseData: [],
              name: null,
              email:  null,
+             isPaidMember:false,
 
          }
    }
@@ -76,9 +77,16 @@ class App extends Component {
      });
 
  }
-
+ 
+ checkMemberShip = () => {
+    this.setState({
+        isPaidMember:true
+    })
+ }
 
  render() {
+    const isMember = this.state.isPaidMember;
+    console.log(isMember);
    return (
      <div className="App">
 
@@ -106,8 +114,10 @@ class App extends Component {
                render={(props) => <ModifySchoolPage {...props} />} />
 
        <SecuredRoute exact
-                     path = '/admin/billing'
-                     component={BillingPage}/>
+                    path = '/admin/billing'
+                    component={BillingPage}
+                    checkMemberShip={this.checkMemberShip}  
+                    />
 
        <SecuredRoute path='/about'
                      component={About} />
@@ -117,7 +127,7 @@ class App extends Component {
        <SecuredRoute exact
                      path = '/admin/analytics'
                      HouseData={this.state.houseData}
-component={AdminAnalyticsPage} />
+                    component={AdminAnalyticsPage} />
      </div>
    );
  }

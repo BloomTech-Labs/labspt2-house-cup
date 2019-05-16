@@ -4,6 +4,7 @@ import SideMenu from './SideMenu';
 import Payment from './Styles/Payment.js';
 
 const BillingPage = props => {
+    console.log(props.checkMembership);
    return (
        <div className='billing-page'>
            {/* side page component goes here  */}
@@ -19,6 +20,7 @@ const BillingPage = props => {
                      name={'Historical Analytics'}
                      description={'House Cup'}
                      amount={19}
+                     checkMembership = {props.checkMembership}
                    />
                </div>
                </Payment>
