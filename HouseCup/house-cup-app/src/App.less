@@ -78,22 +78,15 @@ html {
                 font-size: 1.3rem;
                 opacity: 0.8;
                 transition-duration: 0.2s;
+                color: white;
+                background-color: @theme-color-yellow;
+                width: 120px;
 
                 &:hover {
                     opacity: 1;
                 }
             }
 
-            .login-button {
-                color: white;
-                background-color: @theme-color-yellow;
-                width: 120px;
-            }
-
-            .logout-button {
-                color: white;
-                background-color: @theme-color-tomato;
-            }
         }
     }
 
@@ -107,7 +100,6 @@ html {
     }
 
     .landing-page-block-1 {
-        // margin: 60px 0 120px 0;
         min-height: 750px;
         display: flex;
         justify-content: space-between;
@@ -296,9 +288,9 @@ html {
         }
     }
 
-    .landing-img {
-        width: 300px;
-    }
+    // .landing-img {
+    //     width: 300px;
+    // }
 
     .login-box {
         width: 500px;
@@ -783,12 +775,14 @@ html {
                             cursor: default;
                             width: 100%;
                         }
+
                         .bin {
                             fill: @theme-color-beige;
                             width: 20px;
                             position: relative;
                             left: 105px;
                             bottom: 20px;
+
                             &:hover {
                                 fill: @theme-color-white;
                                 cursor: pointer;
@@ -948,126 +942,6 @@ html {
     }
 }
 
-@media (max-width: 800px) {
-
-    .landing-page-block {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .landing-page-block-1 {
-        min-height: 750px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        // width: 800px;
-
-        .jumbo-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin-top: 50px;
-
-            .jumbo-1 {
-                font-size: 2rem;
-                color: @theme-color-tomato;
-                font-family: 'BigJohnPRO-Regular';
-            }
-
-            .jumbo-title {
-                font-size: 4rem;
-                margin: 0;
-                font-family: 'BigJohnPRO-Bold';
-                font-weight: 100;
-                color: #323232;
-            }
-        }
-
-        .landing-img {
-            width: 400px;
-        }
-    }
-
-    .landing-page-block-2 {
-        // min-height: 2000px;
-        align-items: center;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-
-        .feature {
-            // width: 250px;
-            font-size: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            // align-items: center;
-            margin: 50px;
-        }
-
-        .icon {
-            width: 60px;
-            fill: white;
-        }
-
-        .feature-txt {
-            margin-left: 20px;
-            margin-top: 40px;
-            font-size: 2.6rem;
-            font-weight: 300;
-            font-family: 'BigJohnPRO-Regular';
-            color: @theme-color-white;
-        }
-    }
-
-    .landing-page-block-3 {
-        // min-height: 2000px;
-        align-items: center;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-
-        .schools-list {
-            display: flex;
-            flex-direction: column;
-        }
-    }
-
-    .landing-page-block-4 {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .review-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-        }
-
-        .review-user {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-        }
-    }
-}
-
-
-//responsive design from Chris and VK
-.admin-main-page .housecard-container .housecards {
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.admin-main-page .housecard-container .housecards .housecard {
-    margin: auto;
-}
-
 
 /********************
     Analytics Page - graphs
@@ -1153,187 +1027,130 @@ html {
     }
 }
 
-/* tablet break */
 @media (max-width: 800px) {
-    input {
-        margin: 2.5%;
-        /* border-radius: 20%; */
-        height: 25px;
-        width: 75%;
+    .landing-page {
+        .landing-page-header {
+            position: static;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .button-container {
+                width: 100%;
+                margin-top: 40px;
+            }
+        }
+
+        .landing-page-block {
+            flex-direction: column;
+            width: 100%;
+            min-width: unset;
+        }
+
+        .landing-page-block-1 {
+            justify-content: flex-start;
+
+            .jumbo-container {
+                width: 100%;
+
+                .jumbo-1,
+                .jumbo-title {
+                    margin-left: 40px;
+                }
+            }
+
+            .landing-img {
+                width: 350px;
+            }
+        }
+
+        .landing-page-block-2 {
+            padding: 40px 0;
+
+            .feature {
+                margin: 40px 0;
+            }
+        }
+
+        .landing-page-block-3 {
+            // padding: 0 20px;
+
+            .checkout , .school-search{
+                margin: 50px 40px;
+            }
+
+            .schools-list {
+                flex-direction: column;
+            }
+        }
+
+        .landing-page-block-4 {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .review-container {
+                flex-direction: column;
+                min-width: unset;
+                width: 100%;
+
+                .review-text {
+                    width: unset;
+                    margin: 0 40px;
+                }
+
+                .review-user {
+                    margin-left: 0;
+                    width: unset;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .dumbledore-name {
+                        margin-top: 20px;
+                    }
+                }
+
+            }
+        }
     }
 
-    button {
-        border: 1px solid;
-        height: 25px;
-        width: 50%;
-        font-family: 'BigJohnPRO-Regular';
-        font-size: 1.5rem;
-        border-radius: 15px;
-    }
-
-    button:hover {
-        background-color: white;
-    }
-
-    .app {
-        max-width: 800px;
-        /* font-family: 'BigJohnPRO-Regular';
-      font-size: 2.4rem; */
-    }
-
-    .side-menu {
-        width: 100%;
-    }
-
-    .admin-main-page {
-        max-width: 800px;
-        display: flex;
-        /* flex-direction: row; */
-        flex-wrap: wrap;
-    }
-
-    .admin-main-page .housecard-container {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .admin-main-page .housecard-container .newSchoolInputs {
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        margin-bottom: 5%;
-        /* border: 1px solid; */
-        background-color: #E2592D;
-        width: 75%;
-        /* max-width: 840px; */
-        height: 250px;
-        border-radius: 10px;
-    }
-
-    .admin-main-page .housecard-container .housecards {
-        margin: auto;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-    }
-
-    .admin-main-page .housecard-container .housecards .housecard {
-        margin: auto;
-    }
-}
-
-
-/* mobile break */
-@media (max-width: 500px) {
-    input {
-        margin: 2.5%;
-        /* border-radius: 20%; */
-        height: 25px;
-        min-width: 5px;
-    }
-
-    button {
-        border: 1px solid;
-        height: 25px;
-        width: 75%;
-        font-family: 'BigJohnPRO-Regular';
-        font-size: 1.25rem;
-        border-radius: 15px;
-    }
-
-    button:hover {
-        background-color: white;
-    }
-
-    .app {
-        max-width: 500px;
-    }
-
-    .side-menu {
-        width: 100%;
-    }
-
-    .admin-main-page {
-        max-width: 500px;
-        display: flex;
-        /* flex-direction: row; */
-        flex-wrap: wrap;
-        margin: auto;
-    }
-
-    .admin-main-page .housecard-container {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .admin-main-page .housecard-container .newSchoolInputs {
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        margin-bottom: 5%;
-        /* border: 1px solid; */
-        background-color: grey;
-        width: 75%;
-        height: 200px;
-        border-radius: 10px;
-    }
-
-    .admin-main-page .housecard-container .housecards {
-        margin: auto;
-    }
-}
-
-
-.schools-page .side-menu {
-    display: flex;
-    width: 20%;
-    align-items: center;
-    flex-direction: column;
-}
-
-.schools-page .schools-container {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-content: center;
-}
-
-.schools-page .schools-container .schools-list {
-    // border: 5px solid blue;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-content: center;
-    border-radius: 10px;
-}
-
-
-@media (max-width: 800px) {
     .schools-page {
         flex-direction: column;
         justify-content: space-evenly;
+
+        .side-menu {
+            width: 100%;
+            min-height: unset;
+        }
+
+        .schools-container {
+            width: 100%;
+
+            .schools-page-header {
+                .schools-page-welcome {
+                    text-align: center;
+                }
+            }
+        }
     }
 
-    .schools-page .side-menu {
-        width: 100%;
-    }
+    .houses-page {
+        flex-direction: column;
+        justify-content: space-evenly;
 
-    .schools-page .schools-container {
-        width: 100%;
-        margin-top: 30px;
-    }
+        .side-menu {
+            width: 100%;
+            min-height: unset;
+        }
 
-    .schools-page .schools-container .add-school-container {
-        width: 100%;
-    }
+        .houses-container {
+            width: 100%;
 
-    .schools-page .schools-container .add-school-container .add-school-inputs {
-        width: 100%;
+            .houses-page-welcome {
+                text-align: center;
+            }
+        }
     }
 }
 
