@@ -1028,6 +1028,11 @@ html {
 }
 
 @media (max-width: 800px) {
+    .side-menu {
+        width: 100%;
+        min-height: unset;
+    }
+
     .landing-page {
         .landing-page-header {
             position: static;
@@ -1076,7 +1081,8 @@ html {
         .landing-page-block-3 {
             // padding: 0 20px;
 
-            .checkout , .school-search{
+            .checkout,
+            .school-search {
                 margin: 50px 40px;
             }
 
@@ -1106,6 +1112,7 @@ html {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
+
                     .dumbledore-name {
                         margin-top: 20px;
                     }
@@ -1119,9 +1126,35 @@ html {
         flex-direction: column;
         justify-content: space-evenly;
 
-        .side-menu {
-            width: 100%;
-            min-height: unset;
+        .schools-container {
+            .new-school-expand {
+                flex-direction: column;
+                width: 260px;
+                height: 310px;
+                border-radius: 8px;
+                font-size: 1.8rem;
+                padding-top: 50px;
+
+                .add-school-inputs {
+                    width: 100%;
+
+                    .new-school-form {
+                        flex-direction: column;
+                        align-items: center;
+
+                        .new-school-input {
+                            margin-left: 0px;
+                            margin-top: 20px;
+                        }
+
+                        .new-school-button {
+                            margin-left: 0px;
+                            margin-top: 40px;
+                        }
+
+                    }
+                }
+            }
         }
 
         .schools-container {
@@ -1139,25 +1172,90 @@ html {
         flex-direction: column;
         justify-content: space-evenly;
 
-        .side-menu {
-            width: 100%;
-            min-height: unset;
-        }
-
         .houses-container {
             width: 100%;
 
             .houses-page-welcome {
                 text-align: center;
             }
+
+            .new-house-expand {
+                flex-direction: column;
+                width: 260px;
+                height: 340px;
+                border-radius: 8px;
+                font-size: 1.8rem;
+                padding-top: 20px;
+
+                .add-house-inputs {
+                    width: 100%;
+
+                    .new-house-form {
+                        flex-direction: column;
+                        align-items: center;
+
+                        .new-house-input {
+                            margin-left: 0px;
+                            margin-top: 30px;
+                            width: 40%;
+                        }
+
+                        .react-select {
+                            width: 50%;
+                            margin-top: 20px;
+                        }
+
+                        .new-house-button {
+                            margin-left: 0px;
+                            margin-top: 40px;
+                        }
+
+                    }
+                }
+            }
+
+            #edit-school {
+                .edit-school-form {
+                    flex-direction: column;
+                    width: 100%;
+                    align-items: flex-start;
+
+                    .input-container {
+                        flex-direction: column;
+                        width: 100%;
+                        margin: 0 auto;
+
+                        .input-title {
+                            margin-left: 65px;
+                            align-self: flex-start;
+                        }
+
+                        .edit-school-input {
+                            margin-left: 0;
+                            width: 40%;
+
+                        }
+                    }
+
+                    .edit-school-button {
+                        width: 140px;
+                        margin-top: 20px;
+                    }
+                }
+            }
         }
+    }
+
+    .analytics {
+        flex-direction: column;
+    }
+
+    .billing-page {
+        flex-direction: column;
     }
 }
 
 @media (max-width:800px) {
-    .billing-page {
-        flex-direction: column;
-    }
 
     .bLuJyq {
         width: 80%;
