@@ -3,45 +3,45 @@ const { School, User, House } = require('../../Models');
 // we need the mergeParams set to true because the school id in the params is being set
 // from server.js and by default we don't have access to that param, mergeParams makes sure
 // that we get the params from the other handlers
-const router = express.Router({mergeParams: true,});
-const  {jwtCheck} = require('../../auth/Express-jwt.js');
+const router = express.Router({ mergeParams: true, });
+const { jwtCheck } = require('../../auth/Express-jwt.js');
 // we need the "get" function from lodash
 const _ = require('lodash');
 
-router.get('/schools/houses/data', jwtCheck, async function(req,res,next){
-      try {
+router.get('/schools/houses/data', jwtCheck, async function (req, res, next) {
+  try {
 
-          const user = await User.findOne({
-                      where: {
-                        user_id: req.user.sub
-                      },
-                 });
-                //  console.log(`Houses line 19`, user.id)
-          const school = await School.findOne({
-                    where: {
-                      userId: user.id,
-                    }
-               });  
-              //  console.log(`houses`, school)
-         if(!school) return next({ code: 404 });   
-         const houses = await school.getHouses();
-        //  console.log(`Line28`, houses)
-         return res.status(200).json(houses);     
-
-      } catch(err) {
-        next(err);
+    const user = await User.findOne({
+      where: {
+        user_id: req.user.sub
+      },
+    });
+    //  console.log(`Houses line 19`, user.id)
+    const school = await School.findOne({
+      where: {
+        userId: user.id,
       }
+    });
+    //  console.log(`houses`, school)
+    if (!school) return next({ code: 404 });
+    const houses = await school.getHouses();
+    //  console.log(`Line28`, houses)
+    return res.status(200).json(houses);
+
+  } catch (err) {
+    next(err);
+  }
 });
 // get all houses for a particular school
 // remember we have a hidden "id" parameter in this url, we don't see it here because it is a nested route
 // this is why we needed mergeParams set on the express Router
-router.get('/schools/:id/houses', async function(req, res, next) {
+router.get('/schools/:id/houses', async function (req, res, next) {
   try {
     // find the school referenced by the ID
     console.log(`Line number 18`, req.params.id)
     const school = await School.findByPk(req.params.id);
     // if the school doesn't exist send a 404
-    if(!school) return next({ code: 404 });
+    if (!school) return next({ code: 404 });
     // since we already established that schools have many houses - we can make use of the "getHouses"
     // function that sequelize has created for us - this will perform the necessary join
     const houses = await school.getHouses();
@@ -60,7 +60,7 @@ router.get('/schools/:id/houses', async function(req, res, next) {
   }
 });
 // get details of just one house in a school
-router.get('schools/:id/houses/:houseId', async function(req, res) {
+router.get('schools/:id/houses/:houseId', async function (req, res) {
   // first find the house by primary key, while getting the house let's also
   // include the school and the owner details for convenience
   const house = await House.findByPk(req.params.houseId, {
@@ -79,20 +79,20 @@ router.get('schools/:id/houses/:houseId', async function(req, res) {
   });
 
   // if the house doesn't exist send a 404
-  if(!house) return next({ code: 404 });
+  if (!house) return next({ code: 404 });
 
   res.json(house);
 });
 
 // create a new house in that particular school
 // again, we have the hidden "id" parameter from the parent route
-router.post('/schools/:id/houses', jwtCheck, async function(req, res, next) {
+router.post('/schools/:id/houses', jwtCheck, async function (req, res, next) {
   try {
     // find the school by primary key using the forwared "id" magic parameter
     const school = await School.findByPk(req.params.id);
 
     // if the school doesn't exists throw a 404
-    if(!school) return next({ code: 404 });
+    if (!school) return next({ code: 404 });
 
     // get the details of the currently logged in user
     const user = await User.findOne({
@@ -141,7 +141,7 @@ router.post('/schools/:id/houses', jwtCheck, async function(req, res, next) {
 // even though the house ID is globally unique, we still need the user to specify the school Id and the house ID
 // in the URL for uniformity
 // again we have the hidden "id" paramater available to us
-router.put('/:houseId', jwtCheck , async function(req, res, next) {
+router.put('/:houseId', jwtCheck, async function (req, res, next) {
   // find the particular house with the primary key
   const house = await House.findByPk(req.params.houseId, {
     include: [
@@ -158,12 +158,12 @@ router.put('/:houseId', jwtCheck , async function(req, res, next) {
   });
 
   // if the house doesn't exist send a 404
-  if(!house) return next({code: 404})
+  if (!house) return next({ code: 404 })
 
   // get the details of the currently logged in user
   const loggedInUser = await User.findOne({
     where: {
-      email: req.user.email,
+      user_id: req.user.sub
     },
   });
 
@@ -181,13 +181,19 @@ router.put('/:houseId', jwtCheck , async function(req, res, next) {
     });
   }
   // everything's good now we can just update the house calling the sequelize update method
-  const updatedHouse = await house.update(req.body);
+  const selector = {
+    where: {
+      id: req.body.id
+    },
+  }
+
+  const updatedHouse = await house.update(req.body, selector);
   res.json(updatedHouse);
 });
 
 // delete a particular house from a school
 // again hidden "id" parameter is available for us to query the school
-router.delete('/:houseId',jwtCheck, async function(req, res, next) {
+router.delete('/:houseId', jwtCheck, async function (req, res, next) {
   // find the house by primary key
   const house = await House.findByPk(req.params.houseId, {
     include: [
@@ -204,12 +210,12 @@ router.delete('/:houseId',jwtCheck, async function(req, res, next) {
   });
 
   // if the house doesn't exist throw a 404
-  if(!house) return next({ code: 404 });
+  if (!house) return next({ code: 404 });
 
   // get the details of the logged in user
   const loggedInUser = await User.findOne({
     where: {
-      email: req.user.email,
+      user_id: req.user.sub
     },
   });
 
