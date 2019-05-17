@@ -45,25 +45,25 @@ router.get("/", (req, res, next) => {
 
 
 
-router.get("/:id", (req, res) => {
-  const { id } = req.body;
-  Users.findById(id)
-    .then(user => {
-      if (user) {
-        res.status(200).json({
-          status: true,
-          data: {
-            user
-          }
-        });
-      } else {
-        next({ code: 404 });
-      }
-    })
-    .catch(err => {
-      next({ ...err, code: 500 });
-    });
-});
+// router.get("/:id", (req, res) => {
+//   const { id } = req.body;
+//   Users.findById(id)
+//     .then(user => {
+//       if (user) {
+//         res.status(200).json({
+//           status: true,
+//           data: {
+//             user
+//           }
+//         });
+//       } else {
+//         next({ code: 404 });
+//       }
+//     })
+//     .catch(err => {
+//       next({ ...err, code: 500 });
+//     });
+// });
 
 router.post( "/register",
   jwtCheck,
@@ -151,14 +151,17 @@ router.patch('/update',
               console.log(`user id`, user_id);
               console.log(`Update`, update)
               const headers = { Authorization: `Bearer ${req.access_token}` };
-              
-              request.patch(`https://venky-yagatilee.auth0.com/api/v2/users/${user_id}`, update, {headers})
-                   .then( data => {
-                        console.log(data);
-                   })
-                   .catch(err => {
-                      res.status(500).json({msg: `Something went wrong`});
-                   })              
+            
+              request.patch(`https://venky-yagatilee.auth0.com/api/v2/users/${user_id}`)
+                      .set('Authorization', 'Bearer ' + req.access_token)
+                      .send(update)
+                      .then(data => {
+                        res.status(200).json(data);
+                      })
+                      .catch(err => {
+                        res.send(403, '403 Forbidden');
+                        console.log(err);
+    });             
             });
 //Get the paid member details
 router.get('/member',
@@ -179,7 +182,6 @@ router.get('/member',
                 } catch(err) {
                   next({ ...err, code: 500 })
                 }
-  
 });
 
 

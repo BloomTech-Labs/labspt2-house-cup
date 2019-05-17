@@ -15,9 +15,11 @@ class Checkout extends Component {
        key: "pk_test_WyufeHp9FTBavFWAOUqK0icx00EoXVThGt"
       }
    }
- 
-   
- onToken = (token) => {
+
+  changeMember = () => {
+     this.props.member();
+  } 
+  onToken = (token) => {
       
     const { getAccessToken } = auth;
     const headers = { Authorization: `Bearer ${getAccessToken()}` };
@@ -35,10 +37,10 @@ class Checkout extends Component {
                                   this.setState({
                                      isPaidMember:true
                                   });
-                                  this.props.checkMembership();
+                                  this.changeMember();
                               })
                               .catch(err => {
-                                  console.log(`Line 34 checkout:`, err)
+                                  console.log(`Line 43 checkout:`, err)
                               })
                   } else {
                       console.log(`Checkout line 37: You need to make payment`)

@@ -70,6 +70,7 @@ server.use(logger('tiny'));
 server.use(cors());
 
 server.use('/users', userRouter);
+
 server.use('/schools', schoolsRouter);
 // Get the id from req.params -- > houses.js
 server.use('/', housesRouter);
@@ -80,7 +81,7 @@ server.get('/', (req, res) => {
   res.send(`Server is up and running now.`);
 });
 
-server.use(errorHandler);
+// server.use(errorHandler);
 
 module.exports = {
   server,

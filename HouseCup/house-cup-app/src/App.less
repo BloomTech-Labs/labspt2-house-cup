@@ -783,6 +783,17 @@ html {
                             cursor: default;
                             width: 100%;
                         }
+                        .bin {
+                            fill: @theme-color-beige;
+                            width: 20px;
+                            position: relative;
+                            left: 105px;
+                            bottom: 20px;
+                            &:hover {
+                                fill: @theme-color-white;
+                                cursor: pointer;
+                            }
+                        }
                     }
                 }
             }
@@ -938,8 +949,6 @@ html {
 }
 
 @media (max-width: 800px) {
-    display: flex;
-    flex-direction: column;
 
     .landing-page-block {
         display: flex;
@@ -1340,4 +1349,73 @@ html {
     }
 
 
+}
+
+/* *****************
+Setting page styles -- Below this line
+******************   */
+@import "https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900";
+
+.settings {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.settings h1 {
+    color: yellow;
+    margin-bottom: 60px;
+    font-family: cursive;
+}
+
+.Modal {
+    background: #3E363F;
+    border-radius: 2px;
+    padding: 20px;
+    width: 320px;
+    height: 400px;
+}
+
+.Input {
+    display: flex;
+    flex-direction: row-reverse;
+    border-bottom: 1.5px solid #ffff00ec;
+    padding-bottom: 18px;
+    margin-bottom: 35px;
+}
+
+.Input {
+    outline: none;
+    border: 0;
+    color: red;
+    background: transparent;
+    font-family: "Lato", sans-serif;
+    flex: 1 0 auto;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.Input:focus~label {
+    opacity: 1;
+}
+
+.Input label {
+    font-size: 13px;
+    font: '900 17px "Font Awesome 5 Free"';
+    opacity: .1;
+    transition: opacity .5s ease;
+}
+
+.Input label::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFCE8;
+    height: 30px;
+    width: 30px;
 }

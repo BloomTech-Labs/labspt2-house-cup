@@ -1,7 +1,7 @@
 const express = require('express')
 const { School, User, House } = require('../../Models')
 const router = express.Router()
-const  {jwtCheck}  = require('../../auth/Express-jwt.js');
+const { jwtCheck } = require('../../auth/Express-jwt.js');
 
 
 // This middleware ensures that only the owner of the school can make updates
@@ -10,14 +10,12 @@ async function ensureOwner(req, res, next) {
   // get the user object from database by matching  the auth token
   const user = await User.findOne({
     where: {
-      userId: req.user.sub
+      user_id: req.user.sub
     },
   })
-   
-  
+
   // get the school with the id specified in params
   const school = await School.findByPk(req.params.id)
-
   // the ID may be invalid i.e. no school exists with that ID, send a 404 in that case
   if (!school) return next({ code: 404 })
 
@@ -38,12 +36,12 @@ async function ensureOwner(req, res, next) {
   return next({ code: 403 })
 }
 
-router.get('/', async function(req, res) {
+router.get('/', async function (req, res) {
   try {
     const schools = await School.findAll({
-      include: [{ model: User, attributes:["user_id"] }, House],
+      include: [{ model: User, attributes: ["user_id"] }, House],
     }) // attributes:["firstName", "lastName", "email", "id"]
-  
+
     return res.json({
       status: true,
       data: {
@@ -56,7 +54,7 @@ router.get('/', async function(req, res) {
   }
 })
 
-router.get('/:id', async function(req, res) {
+router.get('/:id', async function (req, res) {
   try {
     const school = await School.findByPk(req.params.id)
     res.json({
@@ -71,30 +69,30 @@ router.get('/:id', async function(req, res) {
   }
 })
 
-router.post('/', jwtCheck, async function(req, res) {
-    console.log(`Line 75:`,req.user);
+router.post('/', jwtCheck, async function (req, res) {
+  console.log(`Line 75:`, req.user);
   try {
-      const user = await User.findOne({
-                      where: {
-                        user_id: req.user.sub
-                      },
-               })
-              
-            const newSchool = await School.create({
-                          ...req.body,
-                          userId: user.id,
-                        })
+    const user = await User.findOne({
+      where: {
+        user_id: req.user.sub
+      },
+    })
 
-              res.status(201).json({
-                  status: true,
-                  data: {
-                    newSchool,
-                  },
-              })
+    const newSchool = await School.create({
+      ...req.body,
+      userId: user.id,
+    })
+
+    res.status(201).json({
+      status: true,
+      data: {
+        newSchool,
+      },
+    })
   } catch (err) {
-          console.log(err)
-      next({ ...err, code: 500 })
-    }
+    console.log(err)
+    next({ ...err, code: 500 })
+  }
 })
 
 // Edit details of a particular school
@@ -103,16 +101,21 @@ router.post('/', jwtCheck, async function(req, res) {
 // don't have to make the queries in this function
 // async function for await usage
 router.put('/:id', jwtCheck, ensureOwner, async (req, res, next) => {
-         // wrap the code in try..catch block to catch any errors
+  // wrap the code in try..catch block to catch any errors
   try {
-       // every sequelize model has a handy update method which accepts an object
-      // we can directly pass the body to the update method, sequelize automatically strips off unwanted properties
-     // and updates the right values in the db
-    const updatedSchool = await req.school.update(req.body)
-
-  // just send back the updated object back to user
+    // every sequelize model has a handy update method which accepts an object
+    // we can directly pass the body to the update method, sequelize automatically strips off unwanted properties
+    // and updates the right values in the db
+    const selector = {
+      where: {
+        id: req.school.id
+      },
+    }
+    const updatedSchool = await School.update(req.body, selector)
+    // just send back the updated object back to user
     res.status(200).json(updatedSchool)
   } catch (err) {
+    console.log(err)
     next({ ...err, code: 500 })
   }
 })
@@ -123,7 +126,7 @@ router.put('/:id', jwtCheck, ensureOwner, async (req, res, next) => {
 // router.delete('/:id', jwtCheck, async (req, res, next) => {
 //   // error catching
 //   try {
-    
+
 //     // sequelize models have a handy destroy method, we don't even need to pass any arguments to it!
 //     const school = await School.findByPk(req.params.id);
 //     console.log(school.dataValues);
@@ -135,7 +138,7 @@ router.put('/:id', jwtCheck, ensureOwner, async (req, res, next) => {
 
 //     // send the details of deleted school back to user
 //     res.status(200).redirect('http://localhost:3000/admin/schools')
-    
+
 //   } catch (err) {
 //     next({...err, code: 500 })
 //   }
@@ -143,19 +146,6 @@ router.put('/:id', jwtCheck, ensureOwner, async (req, res, next) => {
 
 
 router.delete('/:id', jwtCheck, (req, res, next) => {
-  // School.findOne({
-  //   where: {id: req.params.id},
-  //   include: [{model: House}]
-  // })
-  //   .then(response => {
-  //     console.log(response, 'Success! back end delete route: School.findByPk')
-  //     res.json(response)
-  //   })
-  //   .catch(err => {
-  //     console.log(err, 'Error! back end delete route: School.findByPk')
-  //     next({...err, code: 500 })
-  //   });
-
   School.destroy({
     where: { id: req.params.id }
   })
@@ -165,7 +155,7 @@ router.delete('/:id', jwtCheck, (req, res, next) => {
     })
     .catch(err => {
       console.log(err, 'Error! back end delete route: School.destroy')
-      next({...err, code: 500 })
+      next({ ...err, code: 500 })
     })
 
 })

@@ -39,19 +39,7 @@ renderGraphs = () => {
     })
 }
 
-getMember = () => {
-  const {getAccessToken} = auth;
-  const headers = {Authorization : `Bearer ${getAccessToken()}`}
-  console.log(headers);
-  axios.get('http://localhost:5000/users/member', {headers})
-       .then( user=> {
-          console.log(`Line 47`, user);
-       })
-       .catch(err => {
-           console.log(err);
-       });
-       console.log(`I am not working`)
-}
+
 
 getHouses = () => {
   const {getAccessToken} = auth;
@@ -66,7 +54,7 @@ getHouses = () => {
 }
 
 componentDidMount() {
-  this.getMember();
+  
   const length = this.state.graphData.years.length;
   const year = this.state.graphData.years[length-1]
   this.setState({
@@ -82,9 +70,11 @@ componentDidMount() {
  componentUpdate() {
    window.addEventListener('resize', this.renderGraphs);
  }
+
   render() {
       const { selectedOption } = this.state;
       const length = this.state.graphData.years.length;
+      console.log(this.props.isPaidMember)
     return (
       <div className="analytics">
         <SideMenu />

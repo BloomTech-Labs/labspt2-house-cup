@@ -3,7 +3,7 @@ import SideMenu from './SideMenu';
 import auth from '../utils/Auth';
 import axios from 'axios';
 
-class Settings extends Component {
+class SettingsPage extends Component {
 					constructor(props) {
 					super(props);
 					this.state ={
@@ -82,4 +82,4 @@ return (
  }
 }
 
-export default Settings;
+export default SettingsPage;

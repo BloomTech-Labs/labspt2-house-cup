@@ -18,9 +18,11 @@ class Callback extends Component {
 
     sendUsers = () => {
       const { getAccessToken } = auth;
+      const {getProfile} = auth;
+      const name = getProfile().name
       const headers = { Authorization: `Bearer ${getAccessToken()}` };
       console.log(`Callback.js line 22`, headers);
-      axios.post('http://localhost:5000/users/register', {}, {headers})
+      axios.post('http://localhost:5000/users/register', {name:name}, {headers})
           .then( user => {
               console.log(user);
           }).catch(err => {
