@@ -45,16 +45,8 @@ router.get('/schools/:id/houses', async function (req, res, next) {
     // since we already established that schools have many houses - we can make use of the "getHouses"
     // function that sequelize has created for us - this will perform the necessary join
     const houses = await school.getHouses();
-    return res.json(houses);
-    // const houses = await House.findAll({
-    //   attributes: ["name", "points", "color"]
-    // });
-    // return res.json({
-    //     status: true,
-    //     data: {
-    //       houses,
-    //     },
-    // });
+    const sortedHouses = houses.sort((a, b) => { return a.id - b.id });
+    return res.json(sortedHouses);
   } catch (err) {
     next(err);
   }

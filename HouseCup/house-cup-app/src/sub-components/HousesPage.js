@@ -272,7 +272,7 @@ class HousesPage extends React.Component {
                 <div className='houses-container'>
                     <div className='houses-page-header'>
                         <div>
-                            <h2 className='houses-page-welcome'>Welcome to the school of {this.state.schoolInfo.name}</h2>
+                            <h2 className='houses-page-welcome'>Welcome to the school of {this.state.schoolInfo.name} at {this.state.schoolInfo.city}</h2>
                         </div>
                         <div
                             className={this.state.editSchool ? 'new-house new-house-expand' : 'new-house new-house-collapse'}

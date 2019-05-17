@@ -39,14 +39,14 @@ export default class AdminAnalyticsPage extends Component {
      console.log(limitedData)
     
     console.log(`Option selected:`, selectedOption["label"]);
-}
+  }
 
-renderGraphs = () => {
+  renderGraphs = () => {
     this.setState({
       options: this.state.options,
       data: [...this.state.data]
     })
-}
+  }
 
 getMember = () => {
   const {getAccessToken} = auth;
@@ -112,26 +112,26 @@ componentDidMount() {
       <div className="analytics">
         <SideMenu />
         <div className="graphs">
-           <form className="select" onSubmit={this.handleSubmit}>
-                <Select value={selectedOption}
-                        name= "selectedOption"
-                        defaultValue={this.state.graphData.years[length-1]}
-                        onChange={(value) => this.handleChange(value)}
-                        options={this.state.graphData.years} />     
-            </form>
-           
+          <form className="select" onSubmit={this.handleSubmit}>
+            <Select value={selectedOption}
+              name="selectedOption"
+              defaultValue={this.state.graphData.years[length - 1]}
+              onChange={(value) => this.handleChange(value)}
+              options={this.state.graphData.years} />
+          </form>
+
           <Graph>
-            <Chart 
-                chartType="LineChart"
-                data={this.state.data}
-                options={this.state.graphData.options}
-                loader={<div className='loading'>...Loading Chart</div>}
-                className="chart"
-                max-width={"100%"}
-                height={"480px"}
+            <Chart
+              chartType="LineChart"
+              data={this.state.data}
+              options={this.state.graphData.options}
+              loader={<div className='loading'>...Loading Chart</div>}
+              className="chart"
+              max-width={"100%"}
+              height={"480px"}
             />
-          </Graph>             
-        </div>     
+          </Graph>
+        </div>
       </div>
     )
   }

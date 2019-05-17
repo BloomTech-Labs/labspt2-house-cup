@@ -120,30 +120,6 @@ router.put('/:id', jwtCheck, ensureOwner, async (req, res, next) => {
   }
 })
 
-// Delete a particular school
-// middleware setup same as above - protectEndPoint and then ensureOwner
-
-// router.delete('/:id', jwtCheck, async (req, res, next) => {
-//   // error catching
-//   try {
-
-//     // sequelize models have a handy destroy method, we don't even need to pass any arguments to it!
-//     const school = await School.findByPk(req.params.id);
-//     console.log(school.dataValues);
-//     await School.destroy({
-//       where: {
-//         id: school.dataValues.id
-//       }
-//     });
-
-//     // send the details of deleted school back to user
-//     res.status(200).redirect('http://localhost:3000/admin/schools')
-
-//   } catch (err) {
-//     next({...err, code: 500 })
-//   }
-// })
-
 
 router.delete('/:id', jwtCheck, (req, res, next) => {
   School.destroy({
