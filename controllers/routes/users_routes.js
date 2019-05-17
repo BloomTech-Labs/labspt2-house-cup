@@ -4,17 +4,15 @@ const router = express.Router();
 const request = require('superagent');
 
 const sequelize = require("../../sequelize");
-const {
-  inputValidation,
-  isUserRegistered,
-  hashPassword,
-  loginValidation,
-  findUser,
-  checkPassword,
-  provideAccess,
-  getTokenFromAuth0
-  
-} = require("../../middleware/user_middleware");
+const {inputValidation,
+      isUserRegistered,
+      hashPassword,
+      loginValidation,
+      findUser,
+      checkPassword,
+      provideAccess,
+      getTokenFromAuth0
+      } = require("../../middleware/user_middleware");
 
 const {jwtCheck} = require('../../auth/Express-jwt');
 
@@ -140,7 +138,7 @@ router.patch('/updatebill',
               next({ ...err, code: 500 })
             }
               
-            });
+  });
 
 
 //3. Update the user details (password)
@@ -162,21 +160,27 @@ router.patch('/update',
                       res.status(500).json({msg: `Something went wrong`});
                    })              
             });
-
-  router.get('/member',
-        jwtCheck,
-        (req,res) => {
-          const user_id = req.user.sub;
-          User.findOne({ where: { user_id: userId } })
-              .then( response => {
-                  console.log(`Response from 172`, response)
-                  res.status(200).json(response)
-              })
-              .catch(err => {
-                  res.status(500).json({msg:`Something went wrong`});
-              })
-     }      
- );
+//Get the paid member details
+router.get('/member',
+                jwtCheck,
+                async (req, res,next) => {
+                  console.log(`Line 167 user`, req.user)
+                  try{
+                  const user_id = req.user.sub;                  
+                              
+                  const user = await User.findOne({
+                    where: {
+                      user_id: user_id
+                    },
+                  });
+                  console.log(`line 177-member`, user)              
+                  // const updatedUser = user.update(paymentDetails);
+                  res.status(200).json(user)
+                } catch(err) {
+                  next({ ...err, code: 500 })
+                }
+  
+});
 
 
 

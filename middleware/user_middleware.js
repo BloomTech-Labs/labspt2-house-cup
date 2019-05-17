@@ -143,6 +143,7 @@ const authData = {
   grant_type: 'client_credentials',
   audience: "https://venky-yagatilee.auth0.com/api/v2/"
 };
+
 function getTokenFromAuth0(req,res,next) {
   request.post('https://venky-yagatilee.auth0.com/oauth/token', authData)
          .then( response => {

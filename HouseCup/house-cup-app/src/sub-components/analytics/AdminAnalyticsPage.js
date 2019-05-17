@@ -39,9 +39,10 @@ renderGraphs = () => {
     })
 }
 
-componentDidMount() {
+getMember = () => {
   const {getAccessToken} = auth;
   const headers = {Authorization : `Bearer ${getAccessToken()}`}
+  console.log(headers);
   axios.get('http://localhost:5000/users/member', {headers})
        .then( user=> {
           console.log(`Line 47`, user);
@@ -49,6 +50,23 @@ componentDidMount() {
        .catch(err => {
            console.log(err);
        });
+       console.log(`I am not working`)
+}
+
+getHouses = () => {
+  const {getAccessToken} = auth;
+  const headers = {Authorization : `Bearer ${getAccessToken()}`}
+  axios.get('http://localhost:5000/schools/houses/data', {headers})
+        .then( response => {
+          console.log(response.data);
+        })
+        .catch(err => {
+           console.log(`Error message from analytics page`, err);
+        });
+}
+
+componentDidMount() {
+  this.getMember();
   const length = this.state.graphData.years.length;
   const year = this.state.graphData.years[length-1]
   this.setState({
@@ -56,14 +74,8 @@ componentDidMount() {
      data: this.state.graphData.data[year.label].slice(0,5)
   })
   window.addEventListener('resize', this.renderGraphs);
-  
-   axios.get('http://localhost:5000/schools/houses/data', {headers})
-        .then( response => {
-          console.log(response.data);
-        })
-        .catch(err => {
-           console.log(`Error message from analytics page`, err);
-        });
+  this.getHouses();
+   
 }  
 
  

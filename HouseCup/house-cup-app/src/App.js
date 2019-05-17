@@ -46,7 +46,7 @@ class App extends Component {
    }
 
  componentDidMount = () => {
-
+  
    const { silentAuth } = auth;
    if (localStorage.getItem('isLoggedIn') === 'true') {
         silentAuth();
@@ -83,6 +83,7 @@ class App extends Component {
         isPaidMember:true
     })
  }
+ 
 
  render() {
     const isMember = this.state.isPaidMember;
@@ -113,7 +114,7 @@ class App extends Component {
                path = '/admin/schools/:id/update'
                render={(props) => <ModifySchoolPage {...props} />} />
 
-       <SecuredRoute exact
+       <Route exact
                     path = '/admin/billing'
                     component={BillingPage}
                     checkMemberShip={this.checkMemberShip}  
