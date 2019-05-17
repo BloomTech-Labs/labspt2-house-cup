@@ -14,21 +14,30 @@ export default class AdminAnalyticsPage extends Component {
         graphData: dummyData,
         selectedOption: null,
         data: null,
-        year: '2019'    
-                    
+        year: '2019',
+        isPaidMember: false                    
       }
   }
 
  handleChange = (selectedOption) => {
     const year = selectedOption["label"]
     const yearData = this.state.graphData.data[year];
+    let limitedData = yearData.slice(0,5);
     console.log(yearData)
-     let limitedData = yearData.slice(0,5);
-     console.log(limitedData)
-    this.setState({ 
+    if(this.state.isPaidMember) {
+       this.setState({
+        selectedOption: selectedOption,
+        data: yearData
+       })
+    } else {
+      this.setState({ 
         selectedOption: selectedOption,
         data: limitedData
        });
+
+    }
+     console.log(limitedData)
+    
     console.log(`Option selected:`, selectedOption["label"]);
 }
 
@@ -39,7 +48,22 @@ renderGraphs = () => {
     })
 }
 
-
+getMember = () => {
+  const {getAccessToken} = auth;
+  const headers = {Authorization : `Bearer ${getAccessToken()}`}
+  axios.get('http://localhost:5000/users/member', {headers})
+        .then( response => {
+          console.log(`Response from line 47 member`, response.data.isAdmin);
+          if(response.data.isAdmin) {
+              this.setState({
+                 isPaidMember: true
+              })
+          }
+        })
+        .catch(err => {
+           console.log(`Error message from analytics page`, err);
+        });
+}
 
 getHouses = () => {
   const {getAccessToken} = auth;
@@ -54,15 +78,24 @@ getHouses = () => {
 }
 
 componentDidMount() {
-  
+  this.getMember();
+  this.getHouses();
   const length = this.state.graphData.years.length;
   const year = this.state.graphData.years[length-1]
-  this.setState({
-     selectedOption: this.state.graphData.years[length-1],
-     data: this.state.graphData.data[year.label].slice(0,5)
-  })
+  if(this.state.isPaidMember) {
+    this.setState({
+      selectedOption: this.state.graphData.years[length-1],
+      data: this.state.graphData.data[year.label]
+   })
+  } else {
+    this.setState({
+      selectedOption: this.state.graphData.years[length-1],
+      data: this.state.graphData.data[year.label].slice(0,5)
+   });
+  }
+  
   window.addEventListener('resize', this.renderGraphs);
-  this.getHouses();
+  
    
 }  
 
