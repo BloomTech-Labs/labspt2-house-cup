@@ -56,18 +56,12 @@ html {
   font-size: 1.3rem;
   opacity: 0.8;
   transition-duration: 0.2s;
-}
-.landing-page .landing-page-header .button-container .button:hover {
-  opacity: 1;
-}
-.landing-page .landing-page-header .button-container .login-button {
   color: white;
   background-color: #ECA00D;
   width: 120px;
 }
-.landing-page .landing-page-header .button-container .logout-button {
-  color: white;
-  background-color: #DA2E05;
+.landing-page .landing-page-header .button-container .button:hover {
+  opacity: 1;
 }
 .landing-page .landing-page-block {
   margin: 0 auto;
@@ -196,7 +190,7 @@ html {
   min-height: 800px;
   max-width: unset;
   width: 100%;
-  background-image: linear-gradient(#f9f7f6, #E2592D);
+  background-image: linear-gradient(#f9f7f6, #a0011f);
 }
 .landing-page .landing-page-block-4 .review-container {
   max-width: 1080px;
@@ -238,9 +232,6 @@ html {
   font-size: 1.8rem;
   font-weight: 200;
   margin: 5px 0;
-}
-.landing-page .landing-img {
-  width: 300px;
 }
 .landing-page .login-box {
   width: 500px;
@@ -353,6 +344,127 @@ html {
 .side-menu h2 {
   font-family: 'BigJohnPRO-Regular';
   font-size: 2.4rem;
+}
+.schools-page {
+  display: flex;
+}
+.schools-page .schools-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Lato';
+  width: 80%;
+}
+.schools-page .schools-container .schools-page-header {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.schools-page .schools-container .schools-page-header .schools-page-welcome {
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: #DA2E05;
+  font-family: 'BigJohnPRO-Bold';
+  margin-bottom: 60px;
+}
+.schools-page .schools-container .schools-list {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 80px;
+  justify-content: space-evenly;
+}
+.schools-page .schools-container .schools-list .menu-button .school-card {
+  flex-direction: column;
+  width: 260px;
+  height: 360px;
+  color: #F1EFEA;
+  border-radius: 8px;
+  font-size: 2.6rem;
+  background-color: #5271c2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px;
+  box-shadow: 10px 10px 15px #d0caad;
+}
+.schools-page .schools-container .schools-list .menu-button .school-card .from {
+  font-size: 2.5rem;
+}
+.schools-page .schools-container .new-school-collapse {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #DA2E05;
+  height: 55px;
+  width: 205px;
+  border-radius: 100px;
+  color: #F1EFEA;
+  font-size: 1.3rem;
+  opacity: 0.8;
+  transition-duration: 0.2s;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.schools-page .schools-container .new-school-collapse:hover {
+  opacity: 1;
+}
+.schools-page .schools-container .new-school-expand {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto;
+  background-color: #DA2E05;
+  height: 55px;
+  width: 870px;
+  border-radius: 100px;
+  color: #F1EFEA;
+  font-size: 1.3rem;
+  transition-duration: 0.2s;
+}
+.schools-page .schools-container .new-school-expand .new-school-txt {
+  margin: 0 27px;
+}
+.schools-page .schools-container .new-school-expand .add-school-inputs {
+  width: 70%;
+}
+.schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form .new-school-input {
+  color: white;
+  height: 30px;
+  width: 40%;
+  margin-bottom: 5px;
+  margin-left: 20px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  padding: 0 10px;
+  font-size: 1.5rem;
+}
+.schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form .new-school-input:focus {
+  outline: none;
+}
+.schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form input::placeholder {
+  color: #D0CAAD;
+}
+.schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form .new-school-button {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  margin-left: 20px;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  background-color: #ECA00D;
+  border-radius: 100%;
+  padding: none;
+}
+.schools-page .hidden {
+  display: none;
 }
 .houses-page {
   display: flex;
@@ -670,229 +782,79 @@ html {
 .houses-page .houses-container .houses-list .flip .housecard-inner {
   transform: rotateY(180deg);
 }
-.schools-page {
+.settings-page {
   display: flex;
 }
-.schools-page .schools-container {
+.settings-page .settings {
+  margin-top: 20px;
+  width: 80%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   font-family: 'Lato';
 }
-.schools-page .schools-container .schools-page-header {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.schools-page .schools-container .schools-page-header .schools-page-welcome {
+.settings-page .settings .settings-title {
   font-size: 3.5rem;
-  font-weight: 400;
-  color: #DA2E05;
   font-family: 'BigJohnPRO-Bold';
-  margin-bottom: 60px;
+  color: #d51c38;
 }
-.schools-page .schools-container .schools-list {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
+.settings-page .settings .settings-input-container {
   margin-top: 80px;
-  justify-content: space-evenly;
-}
-.schools-page .schools-container .schools-list .menu-button .school-card {
+  display: flex;
   flex-direction: column;
-  width: 260px;
-  height: 360px;
-  color: #F1EFEA;
-  border-radius: 8px;
-  font-size: 2.6rem;
-  background-color: #5271c2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 40px;
-}
-.schools-page .schools-container .schools-list .menu-button .school-card .from {
-  font-size: 2.5rem;
-}
-.schools-page .schools-container .new-school-collapse {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #DA2E05;
-  height: 55px;
-  width: 205px;
-  border-radius: 100px;
-  color: #F1EFEA;
-  font-size: 1.3rem;
-  opacity: 0.8;
-  transition-duration: 0.2s;
-  margin: 0 auto;
-  cursor: pointer;
-}
-.schools-page .schools-container .new-school-collapse:hover {
-  opacity: 1;
-}
-.schools-page .schools-container .new-school-expand {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 0 auto;
-  background-color: #DA2E05;
-  height: 55px;
-  width: 870px;
-  border-radius: 100px;
-  color: #F1EFEA;
-  font-size: 1.3rem;
-  transition-duration: 0.2s;
-}
-.schools-page .schools-container .new-school-expand .new-school-txt {
-  margin: 0 27px;
-}
-.schools-page .schools-container .new-school-expand .add-school-inputs {
-  width: 70%;
-}
-.schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form {
-  display: flex;
   justify-content: space-around;
   align-items: center;
+  width: 260px;
+  height: 360px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 10px 10px 15px #d0caad;
+  background-color: #ECA00D;
 }
-.schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form .new-school-input {
-  color: white;
+.settings-page .settings .settings-input-container .Input {
+  margin-top: 25px;
+  color: #F1EFEA;
   height: 30px;
-  width: 40%;
-  margin-bottom: 5px;
-  margin-left: 20px;
+  width: 60%;
   background-color: transparent;
   border: none;
   border-bottom: 1px solid white;
   padding: 0 10px;
   font-size: 1.5rem;
 }
-.schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form .new-school-input:focus {
+.settings-page .settings .settings-input-container .Input:focus {
   outline: none;
 }
-.schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form input::placeholder {
-  color: #D0CAAD;
+.settings-page .settings .settings-input-container input::placeholder {
+  color: lightgray;
 }
-.schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form .new-school-button {
-  width: 28px;
+.settings-page .settings .settings-input-container .save-button {
   height: 28px;
-  display: flex;
-  margin-left: 20px;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-  background-color: #ECA00D;
-  border-radius: 100%;
-  padding: none;
+  width: 80px;
+  border-radius: 20px;
+  background-color: #d51c38;
+  color: #F1EFEA;
+  font-weight: 800;
+  font-size: 1.6rem;
+  opacity: 0.8;
+  transition-duration: 0.2s;
+  cursor: pointer;
 }
-.schools-page .hidden {
-  display: none;
-}
-@media (max-width: 800px) {
-  .landing-page-block {
-    display: flex;
-    flex-direction: column;
-  }
-  .landing-page-block-1 {
-    min-height: 750px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .landing-page-block-1 .jumbo-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 50px;
-  }
-  .landing-page-block-1 .jumbo-container .jumbo-1 {
-    font-size: 2rem;
-    color: #DA2E05;
-    font-family: 'BigJohnPRO-Regular';
-  }
-  .landing-page-block-1 .jumbo-container .jumbo-title {
-    font-size: 4rem;
-    margin: 0;
-    font-family: 'BigJohnPRO-Bold';
-    font-weight: 100;
-    color: #323232;
-  }
-  .landing-page-block-1 .landing-img {
-    width: 400px;
-  }
-  .landing-page-block-2 {
-    align-items: center;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  .landing-page-block-2 .feature {
-    font-size: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 50px;
-  }
-  .landing-page-block-2 .icon {
-    width: 60px;
-    fill: white;
-  }
-  .landing-page-block-2 .feature-txt {
-    margin-left: 20px;
-    margin-top: 40px;
-    font-size: 2.6rem;
-    font-weight: 300;
-    font-family: 'BigJohnPRO-Regular';
-    color: #F1EFEA;
-  }
-  .landing-page-block-3 {
-    align-items: center;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  .landing-page-block-3 .schools-list {
-    display: flex;
-    flex-direction: column;
-  }
-  .landing-page-block-4 {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .landing-page-block-4 .review-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .landing-page-block-4 .review-user {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-.admin-main-page .housecard-container .housecards {
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.admin-main-page .housecard-container .housecards .housecard {
-  margin: auto;
+.settings-page .settings .settings-input-container .save-button:hover {
+  opacity: 1;
 }
 /********************
     Analytics Page - graphs
   *********************/
-.graphs {
-  margin: 0 auto;
-  width: 100%;
-  position: relative;
-  height: 80vh;
-  padding: 0px;
+.analytics {
+  display: flex;
 }
-.select {
+.analytics .graphs {
+  margin-top: 150px;
+  width: 80%;
+  position: relative;
+}
+.analytics .select {
   position: absolute;
   right: 10%;
   z-index: 2;
@@ -939,272 +901,187 @@ html {
   background-image: none #96AD57 !important;
   border-color: #96AD57 !important;
 }
-/************
-    Analytics
-  ************/
-.analytics {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-}
-.chart {
-  max-width: 100%;
-}
 @media (max-width: 800px) {
-  .analytics {
-    flex-direction: column;
-  }
-}
-/* tablet break */
-@media (max-width: 800px) {
-  input {
-    margin: 2.5%;
-    /* border-radius: 20%; */
-    height: 25px;
-    width: 75%;
-  }
-  button {
-    border: 1px solid;
-    height: 25px;
-    width: 50%;
-    font-family: 'BigJohnPRO-Regular';
-    font-size: 1.5rem;
-    border-radius: 15px;
-  }
-  button:hover {
-    background-color: white;
-  }
-  .app {
-    max-width: 800px;
-    /* font-family: 'BigJohnPRO-Regular';
-      font-size: 2.4rem; */
-  }
   .side-menu {
     width: 100%;
+    min-height: unset;
   }
-  .admin-main-page {
-    max-width: 800px;
-    display: flex;
-    /* flex-direction: row; */
-    flex-wrap: wrap;
-  }
-  .admin-main-page .housecard-container {
+  .landing-page .landing-page-header {
+    position: static;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
-  }
-  .admin-main-page .housecard-container .newSchoolInputs {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-bottom: 5%;
-    /* border: 1px solid; */
-    background-color: #E2592D;
-    width: 75%;
-    /* max-width: 840px; */
-    height: 250px;
-    border-radius: 10px;
-  }
-  .admin-main-page .housecard-container .housecards {
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .admin-main-page .housecard-container .housecards .housecard {
-    margin: auto;
-  }
-}
-/* mobile break */
-@media (max-width: 500px) {
-  input {
-    margin: 2.5%;
-    /* border-radius: 20%; */
-    height: 25px;
-    min-width: 5px;
-  }
-  button {
-    border: 1px solid;
-    height: 25px;
-    width: 75%;
-    font-family: 'BigJohnPRO-Regular';
-    font-size: 1.25rem;
-    border-radius: 15px;
-  }
-  button:hover {
-    background-color: white;
-  }
-  .app {
-    max-width: 500px;
-  }
-  .side-menu {
     width: 100%;
   }
-  .admin-main-page {
-    max-width: 500px;
-    display: flex;
-    /* flex-direction: row; */
-    flex-wrap: wrap;
-    margin: auto;
+  .landing-page .landing-page-header .button-container {
+    width: 100%;
+    margin-top: 40px;
   }
-  .admin-main-page .housecard-container {
-    display: flex;
+  .landing-page .landing-page-block {
+    flex-direction: column;
+    width: 100%;
+    min-width: unset;
+  }
+  .landing-page .landing-page-block-1 {
+    justify-content: flex-start;
+  }
+  .landing-page .landing-page-block-1 .jumbo-container {
+    width: 100%;
+  }
+  .landing-page .landing-page-block-1 .jumbo-container .jumbo-1,
+  .landing-page .landing-page-block-1 .jumbo-container .jumbo-title {
+    margin-left: 40px;
+  }
+  .landing-page .landing-page-block-1 .landing-img {
+    width: 350px;
+  }
+  .landing-page .landing-page-block-2 {
+    padding: 40px 0;
+  }
+  .landing-page .landing-page-block-2 .feature {
+    margin: 40px 0;
+  }
+  .landing-page .landing-page-block-3 .checkout,
+  .landing-page .landing-page-block-3 .school-search {
+    margin: 50px 40px;
+  }
+  .landing-page .landing-page-block-3 .schools-list {
     flex-direction: column;
   }
-  .admin-main-page .housecard-container .newSchoolInputs {
-    margin: auto;
+  .landing-page .landing-page-block-4 {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    width: 100%;
+  }
+  .landing-page .landing-page-block-4 .review-container {
+    flex-direction: column;
+    min-width: unset;
+    width: 100%;
+  }
+  .landing-page .landing-page-block-4 .review-container .review-text {
+    width: unset;
+    margin: 0 40px;
+  }
+  .landing-page .landing-page-block-4 .review-container .review-user {
+    margin-left: 0;
+    width: unset;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 5%;
-    /* border: 1px solid; */
-    background-color: grey;
-    width: 75%;
-    height: 200px;
-    border-radius: 10px;
   }
-  .admin-main-page .housecard-container .housecards {
-    margin: auto;
+  .landing-page .landing-page-block-4 .review-container .review-user .dumbledore-name {
+    margin-top: 20px;
   }
-}
-.schools-page .side-menu {
-  display: flex;
-  width: 20%;
-  align-items: center;
-  flex-direction: column;
-}
-.schools-page .schools-container {
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-content: center;
-}
-.schools-page .schools-container .schools-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-content: center;
-  border-radius: 10px;
-}
-@media (max-width: 800px) {
   .schools-page {
     flex-direction: column;
     justify-content: space-evenly;
   }
-  .schools-page .side-menu {
+  .schools-page .schools-container .new-school-expand {
+    flex-direction: column;
+    width: 260px;
+    height: 310px;
+    border-radius: 8px;
+    font-size: 1.8rem;
+    padding-top: 50px;
+  }
+  .schools-page .schools-container .new-school-expand .add-school-inputs {
     width: 100%;
+  }
+  .schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form {
+    flex-direction: column;
+    align-items: center;
+  }
+  .schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form .new-school-input {
+    margin-left: 0px;
+    margin-top: 20px;
+  }
+  .schools-page .schools-container .new-school-expand .add-school-inputs .new-school-form .new-school-button {
+    margin-left: 0px;
+    margin-top: 40px;
   }
   .schools-page .schools-container {
     width: 100%;
+  }
+  .schools-page .schools-container .schools-page-header .schools-page-welcome {
+    text-align: center;
+  }
+  .houses-page {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .houses-page .houses-container {
+    width: 100%;
+  }
+  .houses-page .houses-container .houses-page-welcome {
+    text-align: center;
+  }
+  .houses-page .houses-container .new-house-expand {
+    flex-direction: column;
+    width: 260px;
+    height: 340px;
+    border-radius: 8px;
+    font-size: 1.8rem;
+    padding-top: 20px;
+  }
+  .houses-page .houses-container .new-house-expand .add-house-inputs {
+    width: 100%;
+  }
+  .houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form {
+    flex-direction: column;
+    align-items: center;
+  }
+  .houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .new-house-input {
+    margin-left: 0px;
     margin-top: 30px;
+    width: 40%;
   }
-  .schools-page .schools-container .add-school-container {
+  .houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .react-select {
+    width: 50%;
+    margin-top: 20px;
+    font-size: 1.3rem;
+  }
+  .houses-page .houses-container .new-house-expand .add-house-inputs .new-house-form .new-house-button {
+    margin-left: 0px;
+    margin-top: 40px;
+  }
+  .houses-page .houses-container #edit-school .edit-school-form {
+    flex-direction: column;
     width: 100%;
+    align-items: flex-start;
   }
-  .schools-page .schools-container .add-school-container .add-school-inputs {
+  .houses-page .houses-container #edit-school .edit-school-form .input-container {
+    flex-direction: column;
     width: 100%;
+    margin: 0 auto;
   }
-}
-@media (max-width: 800px) {
+  .houses-page .houses-container #edit-school .edit-school-form .input-container .input-title {
+    margin-left: 65px;
+    align-self: flex-start;
+  }
+  .houses-page .houses-container #edit-school .edit-school-form .input-container .edit-school-input {
+    margin-left: 0;
+    width: 40%;
+  }
+  .houses-page .houses-container #edit-school .edit-school-form .edit-school-button {
+    width: 140px;
+    margin-top: 20px;
+  }
+  .analytics {
+    flex-direction: column;
+  }
+  .analytics .graphs {
+    margin-top: 50px;
+    width: 100%;
+    max-width: unset;
+  }
   .billing-page {
     flex-direction: column;
   }
-  .bLuJyq {
-    width: 80%;
-    margin: 0 auto;
-    padding: 0px;
+  .settings-page {
+    flex-direction: column;
   }
-}
-/* *****************
-Setting page styles -- Below this line
-******************   */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 100;
-  src: local('Lato Hairline'), local('Lato-Hairline'), url(https://fonts.gstatic.com/s/lato/v15/S6u8w4BMUTPHh30AXC-v.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh7USSwiPHA.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjx4wWw.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwiPHA.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 900;
-  src: local('Lato Black'), local('Lato-Black'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh50XSwiPHA.ttf) format('truetype');
-}
-.settings {
-  align-items: center;
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  width: 100vw;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.settings h1 {
-  color: yellow;
-  margin-bottom: 60px;
-  font-family: cursive;
-}
-.Modal {
-  background: #3E363F;
-  border-radius: 2px;
-  padding: 20px;
-  width: 320px;
-  height: 400px;
-}
-.Input {
-  display: flex;
-  flex-direction: row-reverse;
-  border-bottom: 1.5px solid #ffff00ec;
-  padding-bottom: 18px;
-  margin-bottom: 35px;
-}
-.Input {
-  outline: none;
-  border: 0;
-  color: red;
-  background: transparent;
-  font-family: "Lato", sans-serif;
-  flex: 1 0 auto;
-  font-size: 16px;
-  font-weight: 800;
-}
-.Input:focus ~ label {
-  opacity: 1;
-}
-.Input label {
-  font-size: 13px;
-  font: '900 17px "Font Awesome 5 Free"';
-  opacity: 0.1;
-  transition: opacity 0.5s ease;
-}
-.Input label::before {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #FFFCE8;
-  height: 30px;
-  width: 30px;
+  .settings-page .settings {
+    width: 100%;
+    padding-bottom: 50px;
+  }
 }
