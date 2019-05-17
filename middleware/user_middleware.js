@@ -143,22 +143,19 @@ const authData = {
   grant_type: 'client_credentials',
   audience: "https://venky-yagatilee.auth0.com/api/v2/"
 };
+
 function getTokenFromAuth0(req,res,next) {
-  request.post('https://venky-yagatilee.auth0.com/oauth/token', authData)
-         .then( response => {
-            if (res.body.access_token) {
-              console.log(`Line 33`, response.body.access_token)
-              req.access_token = res.body.access_token;
-              console.log(`Line 35 for req`, req.access_token)
-              next();
-            } else {
-              res.send(401, 'Unauthorized');
-            }
-         })
-         .catch(err => {
-            //  response.status(500).json({msg: `Something is wrong`});
-            console.log(`Error:`, err)
-         }); 
+  request
+  .post('https://venky-yagatilee.auth0.com/oauth/token')
+  .send(authData)
+  .end(function(err, res) {
+    if (res.body.access_token) {
+      req.access_token = res.body.access_token;
+      next();
+    } else {
+      res.send(401, 'Unauthorized');
+    }
+  });
 }
 
 module.exports = {

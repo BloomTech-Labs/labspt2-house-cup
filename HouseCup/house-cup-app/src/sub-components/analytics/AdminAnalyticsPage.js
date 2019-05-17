@@ -7,33 +7,37 @@ import auth from '../../utils/Auth.js';
 import dummyData from './dummy.js';
 import axios from 'axios';
 
-// const options = [
-//   { value: 'chocolate', label: 'Chocolate' },
-//   { value: 'strawberry', label: 'Strawberry' },
-//   { value: 'vanilla', label: 'Vanilla' }
-// ];
-
 export default class AdminAnalyticsPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      graphData: dummyData,
-      selectedOption: null,
-      data: null,
-      year: '2019'
-
-    }
+     this.state = {
+        graphData: dummyData,
+        selectedOption: null,
+        data: null,
+        year: '2019',
+        isPaidMember: false                    
+      }
   }
 
-
-
-  handleChange = (selectedOption) => {
+ handleChange = (selectedOption) => {
     const year = selectedOption["label"]
-    const yearData = this.state.graphData.data[year]
-    this.setState({
-      selectedOption: selectedOption,
-      data: yearData
-    });
+    const yearData = this.state.graphData.data[year];
+    let limitedData = yearData.slice(0,5);
+    console.log(yearData)
+    if(this.state.isPaidMember) {
+       this.setState({
+        selectedOption: selectedOption,
+        data: yearData
+       })
+    } else {
+      this.setState({ 
+        selectedOption: selectedOption,
+        data: limitedData
+       });
+
+    }
+     console.log(limitedData)
+    
     console.log(`Option selected:`, selectedOption["label"]);
   }
 
@@ -44,32 +48,66 @@ export default class AdminAnalyticsPage extends Component {
     })
   }
 
-  componentDidMount() {
-    const length = this.state.graphData.years.length;
-    const year = this.state.graphData.years[length - 1]
+getMember = () => {
+  const {getAccessToken} = auth;
+  const headers = {Authorization : `Bearer ${getAccessToken()}`}
+  axios.get('http://localhost:5000/users/member', {headers})
+        .then( response => {
+          console.log(`Response from line 47 member`, response.data.isAdmin);
+          if(response.data.isAdmin) {
+              this.setState({
+                 isPaidMember: true
+              })
+          }
+        })
+        .catch(err => {
+           console.log(`Error message from analytics page`, err);
+        });
+}
+
+getHouses = () => {
+  const {getAccessToken} = auth;
+  const headers = {Authorization : `Bearer ${getAccessToken()}`}
+  axios.get('http://localhost:5000/schools/houses/data', {headers})
+        .then( response => {
+          console.log(response.data);
+        })
+        .catch(err => {
+           console.log(`Error message from analytics page`, err);
+        });
+}
+
+componentDidMount() {
+  this.getMember();
+  this.getHouses();
+  const length = this.state.graphData.years.length;
+  const year = this.state.graphData.years[length-1]
+  if(this.state.isPaidMember) {
     this.setState({
-      selectedOption: this.state.graphData.years[length - 1],
+      selectedOption: this.state.graphData.years[length-1],
       data: this.state.graphData.data[year.label]
-    })
-    window.addEventListener('resize', this.renderGraphs);
-    const { getAccessToken } = auth;
-    const headers = { Authorization: `Bearer ${getAccessToken()}` }
-    axios.get('http://localhost:5000/schools/houses/data', { headers })
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(err => {
-        console.log(`Error message from analytics page`, err);
-      });
+   })
+  } else {
+    this.setState({
+      selectedOption: this.state.graphData.years[length-1],
+      data: this.state.graphData.data[year.label].slice(0,5)
+   });
   }
+  
+  window.addEventListener('resize', this.renderGraphs);
+  
+   
+}  
 
+ 
+ componentUpdate() {
+   window.addEventListener('resize', this.renderGraphs);
+ }
 
-  componentUpdate() {
-    window.addEventListener('resize', this.renderGraphs);
-  }
   render() {
-    const { selectedOption } = this.state;
-    const length = this.state.graphData.years.length;
+      const { selectedOption } = this.state;
+      const length = this.state.graphData.years.length;
+      console.log(this.props.isPaidMember)
     return (
       <div className="analytics">
         <SideMenu />

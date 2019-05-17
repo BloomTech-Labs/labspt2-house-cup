@@ -4,50 +4,19 @@ const router = express.Router();
 const request = require('superagent');
 
 const sequelize = require("../../sequelize");
-const {
-  inputValidation,
-  isUserRegistered,
-  hashPassword,
-  loginValidation,
-  findUser,
-  checkPassword,
-  provideAccess,
-  getTokenFromAuth0
-  
-} = require("../../middleware/user_middleware");
+const {inputValidation,
+      isUserRegistered,
+      hashPassword,
+      loginValidation,
+      findUser,
+      checkPassword,
+      provideAccess,
+      getTokenFromAuth0
+      } = require("../../middleware/user_middleware");
 
 const {jwtCheck} = require('../../auth/Express-jwt');
 
 
-router.patch('/update',
-            getTokenFromAuth0, 
-            jwtCheck,
-            (req, res) => {
-              const user_id = req.user.sub;
-              const update = req.body;
-              console.log(`user id`, user_id);
-              console.log(`Update`, update)
-              const headers = { Authorization: `Bearer ${req.access_token}` };
-              
-              request.patch(`https://venky-yagatilee.auth0.com/api/v2/users/${user_id}`, update, {headers})
-                   .then( data => {
-                        console.log(data);
-                   })
-                   .catch(err => {
-                      res.status(500).json({msg: `Something went wrong`});
-                   })
-              //  request
-              //   .patch(`https://venky-yagatilee.auth0.com/api/v2/users/${id}`)
-              //   .set('Authorization', 'Bearer ' + req.access_token )
-              //   .send(update)
-              //   .then(data => {
-              //     console.log(`Line 129 userupdate`, data );
-              //     res.status(200).json(data);
-              //   })
-              //   .catch(err => {
-              //     res.status(403).json({msg: '403 Forbidden'});
-              //     console.log(err)}
-            });
 
 router.get("/", (req, res, next) => {
   getTokenFromAuth0();
@@ -76,25 +45,25 @@ router.get("/", (req, res, next) => {
 
 
 
-router.get("/:id", (req, res) => {
-  const { id } = req.body;
-  Users.findById(id)
-    .then(user => {
-      if (user) {
-        res.status(200).json({
-          status: true,
-          data: {
-            user
-          }
-        });
-      } else {
-        next({ code: 404 });
-      }
-    })
-    .catch(err => {
-      next({ ...err, code: 500 });
-    });
-});
+// router.get("/:id", (req, res) => {
+//   const { id } = req.body;
+//   Users.findById(id)
+//     .then(user => {
+//       if (user) {
+//         res.status(200).json({
+//           status: true,
+//           data: {
+//             user
+//           }
+//         });
+//       } else {
+//         next({ code: 404 });
+//       }
+//     })
+//     .catch(err => {
+//       next({ ...err, code: 500 });
+//     });
+// });
 
 router.post( "/register",
   jwtCheck,
@@ -149,12 +118,71 @@ router.get('/userCredentials', getTokenFromAuth0, jwtCheck, (req, res) => {
       console.log(err);
     });
 });
-//
+//2. Update the user payment details
+router.patch('/updatebill',
+            jwtCheck,
+            async (req, res,next) => {
+              try{
+              const user_id = req.user.sub;
+              const paymentDetails = req.body;
+                           
+              const user = await User.findOne({
+                where: {
+                  user_id: user_id
+                },
+              });
+              console.log(`line 138-- updatebill`, user)              
+              const updatedUser = user.update(paymentDetails);
+              res.status(200).json(updatedUser)
+            } catch(err) {
+              next({ ...err, code: 500 })
+            }
+              
+  });
 
-//2. Update the user details (password)
 
-
-
+//3. Update the user details (password)
+router.patch('/update',
+            getTokenFromAuth0, 
+            jwtCheck,
+            (req, res) => {
+              const user_id = req.user.sub;
+              const update = req.body;
+              console.log(`user id`, user_id);
+              console.log(`Update`, update)
+              const headers = { Authorization: `Bearer ${req.access_token}` };
+            
+              request.patch(`https://venky-yagatilee.auth0.com/api/v2/users/${user_id}`)
+                      .set('Authorization', 'Bearer ' + req.access_token)
+                      .send(update)
+                      .then(data => {
+                        res.status(200).json(data);
+                      })
+                      .catch(err => {
+                        res.send(403, '403 Forbidden');
+                        console.log(err);
+    });             
+            });
+//Get the paid member details
+router.get('/member',
+                jwtCheck,
+                async (req, res,next) => {
+                  console.log(`Line 167 user`, req.user)
+                  try{
+                  const user_id = req.user.sub;                  
+                              
+                  const user = await User.findOne({
+                    where: {
+                      user_id: user_id
+                    },
+                  });
+                  console.log(`line 177-member`, user)              
+                  // const updatedUser = user.update(paymentDetails);
+                  res.status(200).json(user)
+                } catch(err) {
+                  next({ ...err, code: 500 })
+                }
+});
 
 
 

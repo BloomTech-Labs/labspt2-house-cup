@@ -32,7 +32,7 @@ module.exports = {
       default:
         res.status(err.code || 500).json({
           status: false,
-          msg: err.message || 'Something went wrong',
+          message: err.message || 'Something went wrong',
         });
     }
   },

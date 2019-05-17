@@ -26,17 +26,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      schoolsList: [],
+         schoolsList: [],
+         isPaidMember:false
     }
   }
-
   componentDidMount = () => {
-
     const { silentAuth } = auth;
     if (localStorage.getItem('isLoggedIn') === 'true') {
-      silentAuth();
-    }
-
+           silentAuth();
+       }
     this.fetchSchools();
   }
 
@@ -52,41 +50,51 @@ class App extends Component {
       .catch(err => console.log(err))
   }
 
+  getMember = () => {
+     this.setState({
+        isPaidMember:!this.state.isPaidMember
+     })
+  }
 
   render() {
+      console.log(this.state.isPaidMember)
     return (
       <div className="App">
         <Route exact
-          path='/'
-          render={(props) =>
-            <LandingPage {...props}
-              schoolsSelected={this.state.schoolsList} />} />
+                path='/'
+                render={(props) =>
+                <LandingPage {...props}  schoolsSelected={this.state.schoolsList} />}                       
+                 />
         <Route exact
-          path='/callback'
-          render={(props) => <Callback />} />
+                path='/callback'
+                render={(props) => <Callback />}
+                />
         <Route exact
-          path='/admin/schools'
-          render={(props) =>
-            <SchoolsPage {...props}
-              schoolsList={this.state.schoolsList}
-              houseList={this.state.testData}
-              fetchSchools={this.fetchSchools}
-            />
+               path='/admin/schools'
+               render={(props) =>
+               <SchoolsPage {...props}
+                            schoolsList={this.state.schoolsList}
+                            houseList={this.state.testData}
+                            fetchSchools={this.fetchSchools}
+                />
           } />
         <Route exact
-          path='/admin/schools/:id'
-          render={(props) =>
-            <HousesPage {...props}
-              fetchSchools={this.fetchSchools}
-            />}
-        />
+               path='/admin/schools/:id'
+               render={(props) =>
+               <HousesPage {...props}  fetchSchools={this.fetchSchools}
+                />}
+              />
+        <Route exact
+               path='/admin/billing'
+               render={(props) =>
+               <BillingPage {...props} member={this.getMember} />}
+              />
         <SecuredRoute exact
-          path='/admin/billing'
-          component={BillingPage} />
-        <SecuredRoute exact
-          path='/admin/analytics'
-          HouseData={this.state.houseData}
-          component={AdminAnalyticsPage} />
+                      path='/admin/analytics'
+                      HouseData={this.state.houseData}
+                      component={AdminAnalyticsPage}
+                      isPaidMember={this.state.isPaidMember} />
+
         <SecuredRoute exact
           path='/admin/settings'
           component={(props) => <SettingsPage {...props} />} />
