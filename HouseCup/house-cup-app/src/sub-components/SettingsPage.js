@@ -10,6 +10,7 @@ class SettingsPage extends Component {
 			email: '',
 			password: '',
 			newPassword: '',
+			message: ''
 		};
 	}
 
@@ -23,7 +24,10 @@ class SettingsPage extends Component {
 		const headers = { Authorization: `Bearer ${getAccessToken()}` };
 		axios.patch('http://localhost:5000/users/update', newPassword, { headers })
 			.then(res => {
-				console.log(`settings line 24`, res);
+				console.log(`settings line 24`, res.data.msg);
+				this.setState({
+					 message:res.data.msg
+				})
 			})
 			.catch(err => {
 				console.log(`Line 29 settingspage error`, err);

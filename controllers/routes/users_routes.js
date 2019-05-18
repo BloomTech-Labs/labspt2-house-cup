@@ -156,7 +156,8 @@ router.patch('/update',
                       .set('Authorization', 'Bearer ' + req.access_token)
                       .send(update)
                       .then(data => {
-                        res.status(200).json(data);
+                        console.log()
+                        res.status(200).json({data:data, msg:`Password Changed Successfully`});
                       })
                       .catch(err => {
                         res.send(403, '403 Forbidden');
@@ -178,6 +179,7 @@ router.get('/member',
                   });
                   console.log(`line 177-member`, user)              
                   // const updatedUser = user.update(paymentDetails);
+                  
                   res.status(200).json(user)
                 } catch(err) {
                   next({ ...err, code: 500 })
