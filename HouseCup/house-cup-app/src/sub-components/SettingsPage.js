@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import DisplayBox from './Styles/Display';
+import Button from './Styles/Display';
 import SideMenu from './SideMenu';
 import auth from '../utils/Auth';
 import axios from 'axios';
@@ -10,7 +12,8 @@ class SettingsPage extends Component {
 			email: '',
 			password: '',
 			newPassword: '',
-			message: ''
+			message: '',
+			showBox: false
 		};
 	}
 
@@ -50,6 +53,10 @@ class SettingsPage extends Component {
 			newPassword: ''
 		});
 	}
+
+	toggleBox = () => {
+    this.setState({showBox: !this.state.showBox})
+ }
 	render() {
 		return (
 			<div className="settings-page">
@@ -77,9 +84,15 @@ class SettingsPage extends Component {
 							placeholder="New Password"
 							value={this.state.newPassword}
 							onChange={this.handleInput} required />
-						<button className="save-button" type="submit" value="Save">Save</button>
+						<button className="save-button" 
+						        type="submit" 
+										value="Save"
+										onClick={this.toggleBox}>Save</button>
 					</form>
-
+					<DisplayBox style={{display: this.state.showBox ? 'flex' : 'none' }}> 
+                    <p>{this.state.message}</p>                                          
+                    <Button className='no-button' onClick={this.toggleBox}>OK</Button>                    
+          </DisplayBox> 
 				</div>
 			</div>
 		);
