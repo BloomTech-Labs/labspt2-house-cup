@@ -21,7 +21,7 @@ class HousesPage extends React.Component {
             selectedColor: '#E2592D',
             schoolInfo: {},
             newSchoolName: '',
-            newSchoolCity: ''
+            newSchoolCity: '',            
         }
     }
     //new house classname toggle
@@ -81,7 +81,13 @@ class HousesPage extends React.Component {
                 console.log(response);
                 this.fetchSchoolInfo();
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err)
+                this.setState({
+                    message: 'You are not Authorized to Edit this School'
+                })
+            
+            });
     };
 
     handleUpdate = e => {
@@ -124,7 +130,7 @@ class HousesPage extends React.Component {
             points: this.state.points
         }
 
-        if (newHouse) {
+        if (newHouse.name && newHouse.points) {
             axios.post(`http://localhost:5000/schools/${this.props.match.params.id}/houses`,
                 newHouse, { headers })
                 .then(house => {

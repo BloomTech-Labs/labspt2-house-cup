@@ -35,7 +35,7 @@ class SettingsPage extends Component {
 			.catch(err => {
 				console.log(`Line 29 settingspage error`, err);
 				this.setState({
-					 message: (<ul><li className="error">403 Error-Check your password</li>
+					 message: (<ul><li className="error">Enter a valid password:</li>
 					               <li>At least 8 characters length</li>
 					               <li>Lower case letters(A-Z)</li>
 												 <li>Upper case letters(a-z)</li>
