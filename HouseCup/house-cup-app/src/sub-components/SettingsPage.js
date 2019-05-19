@@ -18,7 +18,7 @@ class SettingsPage extends Component {
 	}
 
 	componentDidMount() {
-
+      this.setState({message:''})
 	}
 
 	updateUser = (newPassword) => {
@@ -27,13 +27,21 @@ class SettingsPage extends Component {
 		const headers = { Authorization: `Bearer ${getAccessToken()}` };
 		axios.patch('http://localhost:5000/users/update', newPassword, { headers })
 			.then(res => {
-				console.log(`settings line 24`, res.data.msg);
+				console.log(`settings line 30`, res.data.msg);
 				this.setState({
 					 message:res.data.msg
 				})
 			})
 			.catch(err => {
 				console.log(`Line 29 settingspage error`, err);
+				this.setState({
+					 message: (<ul><li className="error">403 Error-Check your password</li>
+					               <li>At least 8 characters length</li>
+					               <li>Lower case letters(A-Z)</li>
+												 <li>Upper case letters(a-z)</li>
+			                   <li>Numbers(0-9)</li>
+												 <li>Special characters(!@#$%^&*)</li></ul>)
+				})
 			});
 	};
 
@@ -55,8 +63,19 @@ class SettingsPage extends Component {
 	}
 
 	toggleBox = () => {
-    this.setState({showBox: !this.state.showBox})
+	  setTimeout( ()=>{		
+	    	this.setState({showBox: !this.state.showBox});		
+		},1400)
+	
  }
+
+hideDisplay = () => {
+	 this.setState({
+			 showBox: false,
+			 message:''
+	 })
+}
+ 
 	render() {
 		return (
 			<div className="settings-page">
@@ -89,9 +108,12 @@ class SettingsPage extends Component {
 										value="Save"
 										onClick={this.toggleBox}>Save</button>
 					</form>
-					<DisplayBox style={{display: this.state.showBox ? 'flex' : 'none' }}> 
-                    <p>{this.state.message}</p>                                          
-                    <Button className='no-button' onClick={this.toggleBox}>OK</Button>                    
+					<DisplayBox  style={{display: (this.state.showBox && this.state.message) ? 'flex' : 'none' }}> 					          										    
+									    	 <div className="para"><strong>Password Update Details&#58;</strong></div> 
+												 <div className="para">{this.state.message}</div>  										    
+										<div className="content">                                                     
+                         <Button className='no-button' onClick={this.hideDisplay}>OK</Button> 
+										</div>                   
           </DisplayBox> 
 				</div>
 			</div>

@@ -3213,7 +3213,7 @@ dom-converter@~0.2:
   dependencies:
     utila "~0.4"
 
-dom-helpers@^3.2.0, dom-helpers@^3.3.1:
+dom-helpers@^3.2.0, dom-helpers@^3.3.1, dom-helpers@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.4.0.tgz#e9b369700f959f62ecde5a6babde4bccd9169af8"
   integrity sha512-LnuPJ+dwqKDIyotW1VzmOZ5TONUN7CwkCR5hrgawTUbkBGYdeoNLZo6nNfGkCrjtE1nXXaj7iMMpDa8/d9WoIA==
@@ -7935,7 +7935,7 @@ prompts@^0.1.9:
     kleur "^2.0.1"
     sisteransi "^0.1.1"
 
-prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -8126,6 +8126,16 @@ react-addons-css-transition-group@^15.6.2:
   integrity sha1-nkN2vPQLUhfRTsaFUwgc7ksIptY=
   dependencies:
     react-transition-group "^1.2.0"
+
+react-alert-template-basic@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-alert-template-basic/-/react-alert-template-basic-1.0.0.tgz#89bcf35095faf5ebdd25e1e7c300e6b4234b5ba1"
+  integrity sha512-6x5Us0oc+jj8BDNkvSWfQMESk5SdyGKitXdLb7CwIlIlecyATjCTKSWpLABg8tpKAPOSJu4Dv/fYUqxXEio/XA==
+
+react-alert@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/react-alert/-/react-alert-5.5.0.tgz#9154d67e31f72ad439c7147c9bb991f4696e0810"
+  integrity sha512-PzB6ktBmtNZkmgZVdPp/Wbe/zjIBzqBu9QHLTrfquUVVPCVVfn3lPWOebejEg6VOxGepIPOSAsb1bd3ESMyC0Q==
 
 react-app-polyfill@^0.2.1:
   version "0.2.1"
@@ -8334,6 +8344,15 @@ react-transition-group@^2.2.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
+
+react-transition-group@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.0.1.tgz#8cb8d58763e259da465385bb83b3b41b3ecba629"
+  integrity sha512-SsLcBYhO4afXJC9esL8XMxi/y0ZvEc7To0TvtrBELqzpjXQHPZOTxvuPh2/4EhYc0uSMfp2SExIxsyJ0pBdNzg==
+  dependencies:
+    dom-helpers "^3.4.0"
+    loose-envify "^1.4.0"
+    prop-types "^15.6.2"
 
 react@^16.8.3:
   version "16.8.3"
