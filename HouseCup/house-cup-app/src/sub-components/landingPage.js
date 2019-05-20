@@ -25,7 +25,6 @@ class LandingPage extends React.Component {
         this.setState({
             schoolsList: schoolsTestData
         });
-        // TweenMax.fromTo(this.myElements, 2, { x: -200 }, { x: 800, ease: Linear.easeNone, repeat: -1 });
     }
 
     handleInput = e => {

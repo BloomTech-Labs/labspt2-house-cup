@@ -57,7 +57,6 @@ class App extends Component {
   }
 
   render() {
-      console.log(this.state.isPaidMember)
     return (
       <div className="App">
         <Route exact

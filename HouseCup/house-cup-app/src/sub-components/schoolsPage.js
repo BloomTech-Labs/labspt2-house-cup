@@ -14,11 +14,28 @@ class SchoolsPage extends Component {
             houseList: [],
             newSchool: false,
             newSchoolName: '',
-            newSchoolCity: ''
+            newSchoolCity: '',
+            user: {}
         }
     }
     componentDidMount() {
+        this.getUser();
         this.props.fetchSchools();
+    }
+
+    getUser = (e) => {
+        const { getAccessToken } = auth;
+        const headers = { Authorization: `Bearer ${getAccessToken()}` };
+        console.log(headers);
+        axios.get('http://localhost:5000/users/userCredentials', { headers })
+            .then(user => {
+                console.log(user);
+                this.setState({
+                    user: user
+                });
+            }).catch(err => {
+                console.log(err);
+            })
     }
 
     addSchool = (e) => {

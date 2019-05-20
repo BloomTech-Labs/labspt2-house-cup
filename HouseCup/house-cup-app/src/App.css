@@ -866,41 +866,62 @@ html {
   ******************/
 .billing-page {
   display: flex;
-  justify-content: space-between;
+}
+.billing-page .payment {
+  background-color: #323232;
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  height: 380px;
+  margin: 150px auto;
+  justify-content: space-around;
+  align-items: center;
+  padding: 50px;
+  color: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.billing-page .payment h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  border: 3px solid white;
+  padding: 20px;
+}
+.billing-page .payment .payment-premium-ad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.3rem;
+  text-align: center;
+}
+.billing-page .payment .StripeCheckout {
+  background: #DA2E05 !important;
+  border-radius: 100px !important;
+  padding: 4px 12px !important;
+  width: 205px;
+  height: 55px;
+  opacity: 0.8;
+}
+.billing-page .payment .StripeCheckout:hover {
+  opacity: 1;
+}
+.billing-page .payment .StripeCheckout span {
+  background-image: none !important;
+  font-size: 1.8rem !important;
+  font-family: "Lato" !important;
+  box-shadow: none !important;
+  font-weight: bold !important;
+}
+@media (max-width: 800px) {
+  .billing-page .payment {
+    flex-direction: column;
+    max-width: 90%;
+    height: 450px;
+    padding: 40px;
+  }
 }
 /**************
    checkout button - billing pay button
-  ***************/
-.StripeCheckout span {
-  background-color: #e01e59 !important;
-}
-.StripeCheckout span {
-  background: none transparent !important;
-  background-image: none !important;
-  font-size: 1em !important;
-  font-family: "Roboto" !important;
-  box-shadow: none !important;
-  font-weight: 400 !important;
-}
-.StripeCheckout {
-  background: #F16C3D !important;
-  background-image: none #F16C3D !important;
-  -webkit-border-radius: 2px !important;
-  -moz-border-radius: 2px !important;
-  border-radius: 2px !important;
-  border-color: #F16C3D !important;
-  padding: 4px 12px !important;
-  box-shadow: none !important;
-  width: 180px !important;
-  height: 35px !important;
-  margin-top: 30px !important;
-}
-.StripeCheckout:hover,
-.StripeCheckout span:hover {
-  background: #96AD57 !important;
-  background-image: none #96AD57 !important;
-  border-color: #96AD57 !important;
-}
+//   ***************/
 @media (max-width: 800px) {
   .side-menu {
     width: 100%;
