@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import DisplayBox from './Styles/Display';
+import Button from './Styles/Display';
 import SideMenu from './SideMenu';
 import auth from '../utils/Auth';
 import axios from 'axios';
@@ -10,11 +12,13 @@ class SettingsPage extends Component {
 			email: '',
 			password: '',
 			newPassword: '',
+			message: '',
+			showBox: false
 		};
 	}
 
 	componentDidMount() {
-
+      this.setState({message:''})
 	}
 
 	updateUser = (newPassword) => {
@@ -23,10 +27,21 @@ class SettingsPage extends Component {
 		const headers = { Authorization: `Bearer ${getAccessToken()}` };
 		axios.patch('http://localhost:5000/users/update', newPassword, { headers })
 			.then(res => {
-				console.log(`settings line 24`, res);
+				console.log(`settings line 30`, res.data.msg);
+				this.setState({
+					 message:res.data.msg
+				})
 			})
 			.catch(err => {
 				console.log(`Line 29 settingspage error`, err);
+				this.setState({
+					 message: (<ul><li className="error">Enter a valid password:</li>
+					               <li>At least 8 characters length</li>
+					               <li>Lower case letters(A-Z)</li>
+												 <li>Upper case letters(a-z)</li>
+			                   <li>Numbers(0-9)</li>
+												 <li>Special characters(!@#$%^&*)</li></ul>)
+				})
 			});
 	};
 
@@ -46,6 +61,21 @@ class SettingsPage extends Component {
 			newPassword: ''
 		});
 	}
+
+	toggleBox = () => {
+	  setTimeout( ()=>{		
+	    	this.setState({showBox: !this.state.showBox});		
+		},1400)
+	
+ }
+
+hideDisplay = () => {
+	 this.setState({
+			 showBox: false,
+			 message:''
+	 })
+}
+ 
 	render() {
 		return (
 			<div className="settings-page">
@@ -73,9 +103,18 @@ class SettingsPage extends Component {
 							placeholder="New Password"
 							value={this.state.newPassword}
 							onChange={this.handleInput} required />
-						<button className="save-button" type="submit" value="Save">Save</button>
+						<button className="save-button" 
+						        type="submit" 
+										value="Save"
+										onClick={this.toggleBox}>Save</button>
 					</form>
-
+					<DisplayBox  style={{display: (this.state.showBox && this.state.message) ? 'flex' : 'none' }}> 					          										    
+									    	 <div className="para"><strong>Password Update Details&#58;</strong></div> 
+												 <div className="para">{this.state.message}</div>  										    
+										<div className="content">                                                     
+                         <Button className='no-button' onClick={this.hideDisplay}>OK</Button> 
+										</div>                   
+          </DisplayBox> 
 				</div>
 			</div>
 		);

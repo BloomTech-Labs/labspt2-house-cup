@@ -29,7 +29,7 @@ class SchoolsPage extends Component {
             city: this.state.newSchoolCity
         }
 
-        if (newSchool) {
+        if (newSchool.name && newSchool.city) {
             const headers = { Authorization: `Bearer ${getAccessToken()}` };
             axios.post('http://localhost:5000/schools', newSchool, { headers })
                 .then(school => {
