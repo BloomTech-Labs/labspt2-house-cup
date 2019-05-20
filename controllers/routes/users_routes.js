@@ -85,7 +85,6 @@ router.post("/register",
 //1. Get the user details based on the valid token
 router.get('/userCredentials', getTokenFromAuth0, jwtCheck, (req, res) => {
   const user_id = req.user.sub;
-  console.log(user_id);
   request
     .get(`https://venky-yagatilee.auth0.com/api/v2/users/${user_id}`)
     .set('Authorization', 'Bearer ' + req.access_token)
@@ -95,7 +94,6 @@ router.get('/userCredentials', getTokenFromAuth0, jwtCheck, (req, res) => {
           user_id: req.user.sub
         },
       })
-      console.log(user);
       res.status(200).json({user: user});
     })
     .catch(err => {

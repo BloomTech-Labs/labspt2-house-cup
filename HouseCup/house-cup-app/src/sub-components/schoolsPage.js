@@ -11,11 +11,12 @@ class SchoolsPage extends Component {
         this.state = {
             authProfile: [],
             authPassword: '',
+            mySchoolsList: [],
             houseList: [],
             newSchool: false,
             newSchoolName: '',
             newSchoolCity: '',
-            user: {}
+            userId: null
         }
     }
     componentDidMount() {
@@ -23,15 +24,14 @@ class SchoolsPage extends Component {
         this.props.fetchSchools();
     }
 
-    getUser = (e) => {
+    getUser = () => {
         const { getAccessToken } = auth;
         const headers = { Authorization: `Bearer ${getAccessToken()}` };
-        console.log(headers);
         axios.get('http://localhost:5000/users/userCredentials', { headers })
-            .then(user => {
-                console.log(user);
+            .then(data => {
+                let userId = Number(data.data.user.id)
                 this.setState({
-                    user: user
+                    mySchoolsList: this.props.schoolsList.filter(school => Number(school.userId) === userId)
                 });
             }).catch(err => {
                 console.log(err);
@@ -109,7 +109,7 @@ class SchoolsPage extends Component {
                         </div>
                     </div>
                     <div className='schools-list'>
-                        {this.props.schoolsList.map((school) => {
+                        {this.state.mySchoolsList.map((school) => {
                             return (
                                 <NavLink to={`/admin/schools/${school.id}`} className='menu-button' activeClassName="activeMenu" style={{ textDecoration: "none", color: "inherit" }} key={school.id}>
                                     <div className='school-card'>
