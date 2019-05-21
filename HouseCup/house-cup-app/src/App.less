@@ -377,6 +377,87 @@ html {
     }
 }
 
+.public-page {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+    align-items: center;
+
+    .houses-page-welcome {
+        font-size: 3.5rem;
+        font-weight: 400;
+        color: @theme-color-tomato;
+        font-family: 'BigJohnPRO-Bold';
+        margin-bottom: 60px;
+        margin-top: 100px;
+    }
+
+    .sign-in {
+        font-family: "Lato";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: @theme-color-tomato;
+        height: 55px;
+        width: 205px;
+        border-radius: 100px;
+        color: @theme-color-white;
+        font-size: 2.4rem;
+        opacity: 0.8;
+        transition-duration: 0.2s;
+        margin: 0 auto;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .house-list {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: space-evenly;
+        min-height: 800px;
+        margin-top: 80px;
+        .housecard-front {
+            color: white;
+            text-align: center;
+            width: 260px;
+            height: 360px;
+            margin: 40px;
+            border-radius: 8px;
+            box-shadow: 10px 10px 15px rgba(@theme-color-beige);
+
+            .house-name {
+                font-size: 3rem;
+                height: 40px;
+                margin-top: 40px;
+                margin-bottom: 0;
+            }
+
+            .point-total {
+                font-size: 8rem;
+                margin: auto;
+                padding-top: 80px;
+                padding-bottom: 20px;
+                height: 80px;
+                width: 100%;
+                text-align: center;
+                overflow: hidden;
+                mix-blend-mode: hard-light;
+                /*here flat shadow*/
+                text-shadow: 10px 10px 15px rgba(90, 90, 90, 1), 0 -2px 1px #fff;
+            }
+
+            .points-txt {
+                font-size: 2.8rem;
+            }
+        }
+    }
+}
+
 .side-menu {
     background-color: @theme-color-oranage;
     display: flex;
@@ -810,22 +891,6 @@ html {
                             margin-top: 40px;
                             margin-bottom: 0;
                         }
-                    }
-
-                    #housecard-front-1 {
-                        background-color: @theme-color-tomato
-                    }
-
-                    #housecard-front-2 {
-                        background-color: @theme-color-navy
-                    }
-
-                    #housecard-front-3 {
-                        background-color: @theme-color-green
-                    }
-
-                    #housecard-front-4 {
-                        background-color: @theme-color-yellow
                     }
 
                     .housecard-back {

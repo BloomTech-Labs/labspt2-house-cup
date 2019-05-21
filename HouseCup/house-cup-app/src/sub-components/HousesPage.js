@@ -365,7 +365,6 @@ class HousesPage extends React.Component {
                                             style={{ backgroundColor: eachHouse.color }}
                                             id={`housecard-front-${eachHouse.id}`}
                                             onClick={this.toggleFlip.bind(this, eachHouse.id)}>
-                                            {/* <p className='house-color'>{eachHouse.color}</p> */}
                                             <h2 className='house-name'>{eachHouse.name}</h2>
                                             <h3 className='point-total'>{eachHouse.points}</h3>
                                             <h2 className='points-txt'>Points</h2>
