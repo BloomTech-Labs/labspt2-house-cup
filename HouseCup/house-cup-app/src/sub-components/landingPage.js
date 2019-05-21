@@ -9,9 +9,9 @@ import { NavLink } from "react-router-dom";
 import auth from '../utils/Auth';
 
 class LandingPage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     signOut = () => {
         auth.logout();

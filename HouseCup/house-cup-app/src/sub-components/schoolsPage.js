@@ -51,6 +51,7 @@ class SchoolsPage extends Component {
             axios.post('http://localhost:5000/schools', newSchool, { headers })
                 .then(school => {
                     this.props.fetchSchools();
+                    this.getUser();
                 }).catch(err => {
                     console.log(err);
                 });
