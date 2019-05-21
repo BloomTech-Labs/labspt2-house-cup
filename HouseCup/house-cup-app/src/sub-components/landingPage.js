@@ -5,39 +5,13 @@ import { ReactComponent as IconPhone } from '../images/icon-phone.svg';
 import { ReactComponent as IconChart } from '../images/icon-chart.svg';
 import { ReactComponent as IconTeacher } from '../images/icon-teacher.svg';
 import { ReactComponent as IconCastle } from '../images/castle.svg';
-
-
-import schoolsTestData from '../mock data/schools';
+import { NavLink } from "react-router-dom";
 import auth from '../utils/Auth';
 
 class LandingPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: "",
-            password: "",
-            schoolsList: [],
-        };
-        this.myElements = [];
-    }
-
-    componentDidMount() {
-        this.setState({
-            schoolsList: schoolsTestData
-        });
-        // TweenMax.fromTo(this.myElements, 2, { x: -200 }, { x: 800, ease: Linear.easeNone, repeat: -1 });
-    }
-
-    handleInput = e => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
-    };
-
-    handleSubmit = e => {
-        localStorage.setItem('username', this.state.username)
-        window.location.reload();
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     signOut = () => {
         auth.logout();
@@ -59,7 +33,6 @@ class LandingPage extends React.Component {
                         {
                             auth.isAuthenticated() &&
                             <div>
-                                <label className="mr-2 text-white">{auth.getProfile().name}</label>
                                 <button
                                     className="button logout-button"
                                     onClick={() => { this.signOut() }}>
@@ -96,14 +69,15 @@ class LandingPage extends React.Component {
                     <div className='schools-list' >
                         {this.props.schoolsSelected.map((school) => {
                             return (
-                                <div
-                                    key={school.id}
-                                    className={`school-box school-box-${school.id}`}
-                                    ref={div => this.myElements[school.id - 1] = div}
-                                >
-                                    <IconCastle className='castle' />
-                                    <h2 className='school' >{school.name}</h2>
-                                </div>
+                                <NavLink to={`/public/${school.id}`} className='menu-button' activeClassName="activeMenu" style={{ textDecoration: "none", color: "inherit" }}>
+                                    <div
+                                        key={school.id}
+                                        className={`school-box school-box-${school.id}`}
+                                    >
+                                        <IconCastle className='castle' />
+                                        <h2 className='school' >{school.name}</h2>
+                                    </div>
+                                </NavLink>
                             )
                         })}
                     </div>
