@@ -1,3 +1,4 @@
+// **Remember the most of the middleware is written for passport.js implementation and they are not being use
 const { User } = require('../Models');
 const bcrypt = require('bcryptjs');
 const { generateToken } = require('../auth/jwt');
@@ -158,14 +159,5 @@ function getTokenFromAuth0(req,res,next) {
   });
 }
 
-module.exports = {
-  inputValidation,
-  isUserRegistered,
-  hashPassword,
-  loginValidation,
-  findUser,
-  checkPassword,
-  provideAccess,
-  getTokenFromAuth0
-  
-  };
+module.exports = {getTokenFromAuth0};
+// **Remember the most of the middleware is written for passport.js implementation and they are not being use

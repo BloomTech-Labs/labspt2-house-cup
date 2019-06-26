@@ -4,15 +4,7 @@ const router = express.Router();
 const request = require('superagent');
 
 const sequelize = require("../../sequelize");
-const { inputValidation,
-  isUserRegistered,
-  hashPassword,
-  loginValidation,
-  findUser,
-  checkPassword,
-  provideAccess,
-  getTokenFromAuth0
-} = require("../../middleware/user_middleware");
+const {getTokenFromAuth0} = require("../../middleware/user_middleware");
 
 const { jwtCheck } = require('../../auth/Express-jwt');
 
@@ -133,7 +125,7 @@ router.patch('/update',
     const update = req.body;
     console.log(`user id`, user_id);
     console.log(`Update`, update)
-    const headers = { Authorization: `Bearer ${req.access_token}` };
+    // const headers = { Authorization: `Bearer ${req.access_token}` };
 
     request.patch(`https://venky-yagatilee.auth0.com/api/v2/users/${user_id}`)
       .set('Authorization', 'Bearer ' + req.access_token)
