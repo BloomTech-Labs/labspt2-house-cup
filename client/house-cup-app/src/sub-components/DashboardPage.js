@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import schoolsTestData from '../mock data/schools';
+import schoolsTestData from '../mockdata/schools';
 
 class DashboardPage extends Component {
     constructor(props) {

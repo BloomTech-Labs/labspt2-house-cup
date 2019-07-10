@@ -27,7 +27,4 @@ const stripeChargeCallback = res => (stripeErr, stripeRes) => {
     };
     stripe.charges.create(body, stripeChargeCallback(res));
   });
-
-  
-
 module.exports = router;
